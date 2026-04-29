@@ -2663,3 +2663,758 @@
     }
   ]
 }
+{
+  "category": "신장",
+  "diseases": [
+    {
+      "id": "hyponatremia",
+      "name": "저나트륨혈증",
+      "guideline": "2022 저나트륨혈증 진료지침 / 2010 내과 전공의를 위한 진료지침",
+      "tags": ["전해질", "나트륨", "SIADH", "저나트륨"],
+      "overview": "혈청 소듐 농도가 135 mmol/L 미만인 상태. 경증(130-134), 중등도(125-129), 중증(<125)으로 분류하며 삼투압에 따라 저장성·등장성·고장성으로 구분. 저장성 저나트륨혈증이 임상에서 가장 흔하며 체액량 평가에 따라 치료 방향이 달라짐.",
+      "criteria": [
+        {"label": "경증", "sbp": "130-134 mmol/L", "dbp": "경한 증상"},
+        {"label": "중등도", "sbp": "125-129 mmol/L", "dbp": "구역감, 혼돈, 두통, 졸음"},
+        {"label": "중증", "sbp": "<125 mmol/L", "dbp": "구토, 혼미, 발작, 혼수"}
+      ],
+      "guidelines": [
+        {
+          "title": "중증/급성 저나트륨혈증",
+          "items": [
+            "중등도 이상 증상 → 응급: 고장성 식염수 급속 간헐적 치료 시작",
+            "급성(48시간 이내) 증상 없어도 원인 치료 우선 + 고장성 식염수 주입"
+          ]
+        },
+        {
+          "title": "만성 저나트륨혈증 (체액량별 치료)",
+          "items": [
+            "체액량 감소: 등장성 수액(0.9% NaCl) 치료",
+            "체액량 정상(주로 SIADH): SIADH 유발 약물 중단 + 수분 제한(800-1000mL/일) ± 고리작용 이뇨제+경구 소듐제제 or Vaptan",
+            "체액량 증가(심부전, 간경변): 수분 제한 우선 + 고리작용 이뇨제 or Vaptan"
+          ]
+        },
+        {
+          "title": "SIADH 유발 약제",
+          "items": [
+            "Desmopressin, oxytocin, chlorpropamide, clofibrate",
+            "Carbamazepine(카마제핀), oxcarbazepine(옥사제핀), vincristine",
+            "Narcotics, 항정신병약, 항우울제, cyclophosphamide(알키록산)",
+            "NSAIDs, AAP(타이레놀), haloperidol(페리돌), fluphenazine",
+            "Amitriptyline(에나폰), thioridazine, fluoxetine(푸록틴), sertraline(졸로푸트)"
+          ]
+        }
+      ],
+      "firstLine": [
+        {
+          "name": "Tolvaptan",
+          "brand": "삼스카정 15mg, 30mg",
+          "mechanism": "바소프레신 V2 수용체 길항제(Vaptan) - ADH 수용체 차단으로 수분 배설 촉진",
+          "dosage": "초기 1일 1회 15mg → 최소 24시간 간격으로 30mg으로 증량 → 최대 1일 1회 60mg. 30일 초과 투여 금지. 주로 아침, 식사 무관, 씹지 말 것",
+          "notes": "투여 첫 24시간은 수분 제한 하지 않음. 갈증 시 수분 섭취 지속. 중단 시 수분 제한 재시작. 간손상 위험 주의"
+        }
+      ],
+      "secondLine": [
+        {
+          "name": "고리작용 이뇨제 + 경구 소듐제제",
+          "brand": "Furosemide 등",
+          "mechanism": "신장의 수분 및 나트륨 배설 조절",
+          "dosage": "체액량 상태에 따라 용량 조절",
+          "notes": "SIADH 또는 체액 과다 시 Vaptan 대안으로 사용 가능"
+        }
+      ],
+      "sideEffects": [
+        "Tolvaptan: 간손상(30일 초과 시 위험 증가), 과도한 수분 손실, 고나트륨혈증",
+        "과교정 시 삼투성 탈수초 증후군 위험"
+      ],
+      "contraindications": [
+        "Tolvaptan: 간질환 환자 30일 초과 사용 금지",
+        "ACEI/ARB와 병용 시 고칼륨혈증 주의",
+        "수분 제한 첫 24시간은 Tolvaptan 사용 중 적용 금지"
+      ],
+      "combos": [
+        "고리작용 이뇨제 + 경구 소듐제제(SIADH 2차)",
+        "원인 약물 중단 + 수분 제한(SIADH 1차)"
+      ]
+    },
+    {
+      "id": "hypernatremia",
+      "name": "고나트륨혈증",
+      "guideline": "2010 내과 전공의를 위한 진료지침",
+      "tags": ["전해질", "나트륨", "요붕증", "고나트륨"],
+      "overview": "혈청 Na > 145 mEq/L. 대부분 저장성 수분 소실이나 수분 섭취 제한 시 발생. 뇌에 영향이 크고 사망률 높음. 원인: 요붕증, 위장관/피부 손실, 삼투성 이뇨, 루프 이뇨제 등.",
+      "criteria": [
+        {"label": "진단 기준", "sbp": "Na > 145 mEq/L", "dbp": ""}
+      ],
+      "guidelines": [
+        {
+          "title": "치료 원칙",
+          "items": [
+            "저혈량성: 0.9% NaCl로 치료",
+            "고혈량성: 나트륨 제한 + Loop/Thiazide 이뇨제",
+            "요붕증 동반 시: 중추성→ADH 유사체, 신성→Thiazide+Indomethacin, 리튬성→HCTZ+Indomethacin+Amiloride"
+          ]
+        },
+        {
+          "title": "신장성 요붕증 유발 약제",
+          "items": [
+            "리튬(리단정), demeclocycline, clozapine(클로자릴)",
+            "Gentamicin, amphotericin B, cimetidine(타가메트), foscarnet"
+          ]
+        }
+      ],
+      "firstLine": [
+        {
+          "name": "Desmopressin",
+          "brand": "미니린(중추성 요붕증)",
+          "mechanism": "ADH 유사체 - 신장 집합관에서 수분 재흡수 촉진",
+          "dosage": "중추성 요붕증에 사용",
+          "notes": "신장성 요붕증에는 효과 없음"
+        },
+        {
+          "name": "HCTZ(Hydrochlorothiazide)",
+          "brand": "다이크로짇정",
+          "mechanism": "Thiazide 이뇨제 - 역설적으로 신성 요붕증에서 소변량 감소",
+          "dosage": "리튬성 요붕증 및 신장성 요붕증에 사용",
+          "notes": "Indomethacin, Amiloride와 병용 가능(리튬성 요붕증)"
+        }
+      ],
+      "secondLine": [
+        {
+          "name": "Indomethacin",
+          "brand": "인도메타캡슐",
+          "mechanism": "COX 억제 → PG 감소 → 소변량 감소",
+          "dosage": "신장성/리튬성 요붕증 병용",
+          "notes": "신독성 주의"
+        },
+        {
+          "name": "Amiloride",
+          "brand": "아미로정",
+          "mechanism": "집합관 Na 통로 차단 → 리튬 세포 내 진입 억제",
+          "dosage": "리튬성 요붕증",
+          "notes": "리튬 중단 어려운 경우 사용"
+        }
+      ],
+      "sideEffects": [
+        "Thiazide: 저칼륨혈증, 저나트륨혈증",
+        "Indomethacin: 소화기 장애, 신독성",
+        "Amiloride: 고칼륨혈증"
+      ],
+      "contraindications": [
+        "신장성 요붕증에 Desmopressin 사용 금지",
+        "리튬 복용 중인 경우 Amiloride 병용 시 리튬 농도 모니터링 필요"
+      ],
+      "combos": [
+        "HCTZ + Indomethacin + Amiloride(리튬성 요붕증)",
+        "Thiazide + Indomethacin(신장성 요붕증)"
+      ]
+    },
+    {
+      "id": "hypokalemia",
+      "name": "저칼륨혈증",
+      "guideline": "약물치료학 교재",
+      "tags": ["전해질", "칼륨", "저칼륨", "이뇨제"],
+      "overview": "K+ < 3.5 mEq/L. 금식, 이뇨제(Loop/Thiazide), 대사성 알칼리증, 인슐린, β효능제 등 다양한 원인으로 발생. 심한 경우 부정맥, 근력 저하, 호흡마비 유발.",
+      "criteria": [
+        {"label": "경증", "sbp": "3.0-3.5 mEq/L", "dbp": "급하지 않은 경우 많음"},
+        {"label": "중등도", "sbp": "2.5-3.0 mEq/L", "dbp": "무력감, 근육통, 장마비, 하지 근력저하"},
+        {"label": "중증", "sbp": "< 2.5 mEq/L", "dbp": "이완성마비, 반사저하, 강축, 호흡마비, 횡문근융해증"}
+      ],
+      "guidelines": [
+        {
+          "title": "치료 적응증",
+          "items": [
+            "3.0-3.5 mEq/L: 응급 수술, 관상동맥질환, digitalis 복용, 급성 심근경색, 유의한 심실기외수축, 골격근력 저하로 호흡 부전 위험 시 치료",
+            "< 3.0 mEq/L: 치료 필요",
+            "EKG 변화 동반 시 즉각적 정맥 KCl 투여"
+          ]
+        },
+        {
+          "title": "저칼륨혈증 유발 약제",
+          "items": [
+            "Loop/Thiazide 이뇨제, 고용량 페니실린, 코르티코스테로이드",
+            "하제, Amphotericin B, Cisplatin, Foscarnet, Sodium bicarbonate"
+          ]
+        }
+      ],
+      "firstLine": [
+        {
+          "name": "경구 염화칼륨",
+          "brand": "케이콘틴 600mg(8 mEq/tab)",
+          "mechanism": "칼륨 보충",
+          "dosage": "치료: 1일 1,200-3,000mg 분복 / 예방: 1일 1회 600mg 식사 직후. (일반 치료용: 40-100 mEq/day, 예방: 20 mEq/day)",
+          "notes": "만성·경증 저칼륨혈증에 경구 우선"
+        }
+      ],
+      "secondLine": [
+        {
+          "name": "정맥 KCl",
+          "brand": "KCl 주사",
+          "mechanism": "칼륨 직접 보충",
+          "dosage": "중증 또는 EKG 변화 동반 시 정맥 투여",
+          "notes": "빠른 교정 필요 시 사용. 속도 주의(심독성)"
+        }
+      ],
+      "sideEffects": [
+        "경구 제제: 위장관 자극, 오심, 구토",
+        "정맥 투여 시 속도 초과 시 심독성 위험",
+        "과교정 시 고칼륨혈증"
+      ],
+      "contraindications": [
+        "신부전 환자에서 용량 주의",
+        "Digitalis 복용 중 저칼륨혈증 방치 금기(부정맥 위험 증가)"
+      ],
+      "combos": [
+        "저마그네슘혈증 교정 병행(저마그네슘혈증 있으면 칼륨 교정 어려움)",
+        "원인 이뇨제 용량 최소화 + 칼륨 보존 이뇨제 병용 고려"
+      ]
+    },
+    {
+      "id": "hyperkalemia",
+      "name": "고칼륨혈증",
+      "guideline": "약물치료학 교재 / 2022 만성콩팥병 임상진료지침",
+      "tags": ["전해질", "칼륨", "고칼륨", "신부전", "ACEI", "ARB"],
+      "overview": "K+ > 5.0 mEq/L. 신부전, 저알도스테론증, ACEI/ARB, NSAIDs, 칼륨 보존 이뇨제 등이 원인. 심근 억제, 부정맥, 이완성 마비 등 심각한 합병증 유발.",
+      "criteria": [
+        {"label": "경증", "sbp": "5.0-6.0 mEq/L", "dbp": "무증상 or 경미"},
+        {"label": "중등도", "sbp": "6.0-7.0 mEq/L", "dbp": "근력저하, ECG 변화"},
+        {"label": "중증", "sbp": "> 7.0 mEq/L or ECG 변화", "dbp": "즉각적 치료 필요"}
+      ],
+      "guidelines": [
+        {
+          "title": "급성 치료",
+          "items": [
+            "K+ > 7.0 or ECG 변화: 즉각 IV 칼슘(Calcium gluconate) 심근 보호",
+            "K+ > 6.5: Regular insulin ± 중탄산나트륨 ± Albuterol(MDI 가능) → 칼륨 세포내 이동",
+            "가장 효과적: 혈액투석"
+          ]
+        },
+        {
+          "title": "아급성/만성 치료",
+          "items": [
+            "K+ < 6 mEq/L, 증상 없고 ECG 변화 없을 때: Calcium polystyrene sulfonate 경구(1-2시간 후 작용)",
+            "만성: 원인 약제 중단, 저칼륨 식이(K+ < 60 mEq/day), 산증 교정",
+            "대사성 산증 동반(HCO3- < 22 mEq/L): 중탄산나트륨(타스나정) 사용 가능"
+          ]
+        },
+        {
+          "title": "고칼륨혈증 유발 약제",
+          "items": [
+            "ACEI, ARB, NSAIDs, Heparin",
+            "칼륨 보존 이뇨제(spironolactone, triamterene, amiloride)",
+            "Trimethoprim, pentamidine, cyclosporine, tacrolimus",
+            "BB, digitalis, lithium, cationic amino acids(arginine, lysine)"
+          ]
+        }
+      ],
+      "firstLine": [
+        {
+          "name": "Calcium gluconate",
+          "brand": "칼슘 글루코네이트 주사",
+          "mechanism": "심근 세포막 안정화(혈청 칼륨 농도는 변화 없음)",
+          "dosage": "K+ > 7.0 or ECG 변화 시 즉각 IV",
+          "notes": "가장 빠른 심근 보호 효과"
+        },
+        {
+          "name": "Regular insulin + 포도당",
+          "brand": "인슐린 주사",
+          "mechanism": "Na-K-ATPase 활성화로 칼륨 세포내 이동",
+          "dosage": "K+ > 6.5 mEq/L 시 사용",
+          "notes": "저혈당 주의, 포도당과 함께 투여"
+        }
+      ],
+      "secondLine": [
+        {
+          "name": "Calcium polystyrene sulfonate",
+          "brand": "아가메이트 젤리, 휴온스카로스현탁액, 로포타현탁액, 카리메트과립",
+          "mechanism": "장관에서 칼륨-칼슘 이온교환으로 칼륨 체외 배출",
+          "dosage": "경구 투여, 1-2시간 후 작용. K+ < 6 mEq/L, 무증상, ECG 변화 없을 때",
+          "notes": "저마그네슘혈증, 고칼슘혈증 주의"
+        },
+        {
+          "name": "중탄산나트륨",
+          "brand": "타스나정",
+          "mechanism": "알칼리화로 칼륨 세포내 이동 촉진",
+          "dosage": "심각한 대사성 산증(HCO3- < 22 mEq/L) 동반 시",
+          "notes": "산증 없는 경우 효과 미미"
+        },
+        {
+          "name": "Furosemide",
+          "brand": "Furosemide 주사",
+          "mechanism": "Loop 이뇨제 - 신장을 통한 칼륨 직접 제거",
+          "dosage": "IV 투여",
+          "notes": "체내 칼륨 직접 제거 가능한 방법"
+        }
+      ],
+      "sideEffects": [
+        "Calcium polystyrene sulfonate: 변비, 저마그네슘혈증, 고칼슘혈증",
+        "Insulin: 저혈당",
+        "중탄산나트륨: 대사성 알칼리증, 나트륨 부하"
+      ],
+      "contraindications": [
+        "중탄산나트륨: 산증 없는 환자에서 단독 사용 효과 미미",
+        "ACEI+ARB 2제 병용: 고칼륨혈증 위험 증가로 권고하지 않음"
+      ],
+      "combos": [
+        "Calcium gluconate + Insulin(즉각적 응급 병용)",
+        "혈액투석(가장 효과적, 즉각적 제거 필요 시)"
+      ]
+    },
+    {
+      "id": "drug-induced-nephropathy",
+      "name": "약물유발성 신장질환",
+      "guideline": "약물치료학 교재",
+      "tags": ["신독성", "AKI", "세뇨관", "조영제", "aminoglycoside"],
+      "overview": "약물에 의해 유발되는 다양한 형태의 신장 손상. 급성 세뇨관 괴사, 삼투성 신장증, 혈류역학적 신손상, 세뇨관 내 폐쇄, 신결석, 사구체 질환, 간질성 신염 등으로 분류. 48시간 내 SCr 0.3 mg/dL 이상 증가 또는 기저치 1.5배 이상 시 진단.",
+      "criteria": [
+        {"label": "AKI 진단 ①", "sbp": "48시간 내 SCr ≥ 0.3 mg/dL 상승", "dbp": ""},
+        {"label": "AKI 진단 ②", "sbp": "기저치 대비 SCr 1.5배 이상 상승", "dbp": ""},
+        {"label": "AKI 진단 ③", "sbp": "소변량 < 0.5 mL/kg/h (6시간)", "dbp": ""}
+      ],
+      "guidelines": [
+        {
+          "title": "원인 약물별 분류",
+          "items": [
+            "급성 세뇨관 괴사: Aminoglycoside, Cisplatin, Amphotericin B, Cyclosporine, Tacrolimus, Foscarnet, Adefovir, Cidofovir, Tenofovir, 혈관조영제",
+            "혈류역학적 신손상: ACEI, ARB, NSAIDs, Cyclosporine, Tacrolimus",
+            "세뇨관 내 폐쇄: Acyclovir, Foscarnet, Indinavir, MTX, Sulfonamides",
+            "신결석: Indinavir, Sulfonamides, Triamterene, Ciprofloxacin",
+            "사구체 질환: Gold, Lithium, NSAIDs, COX-2 억제제, Pamidronate",
+            "급성 알레르기성 간질성 신염: β-lactams, NSAIDs, Ciprofloxacin, Loop 이뇨제, PPI",
+            "만성 간질성 신염: Cyclosporine, Lithium"
+          ]
+        },
+        {
+          "title": "조영제 신독성 예방",
+          "items": [
+            "삼투압 적은 조영제 사용",
+            "등장성 용액 수액 공급(조영제 투여 전후)",
+            "N-acetylcysteine(NAC, 뮤테란캡슐 200mg): 600-1200mg PO 12시간마다 총 4회(전1후3)"
+          ]
+        },
+        {
+          "title": "Aminoglycoside 신독성 예방",
+          "items": [
+            "하루 한번 고용량 요법으로 신독성 감소",
+            "저칼륨혈증 및 저마그네슘혈증 교정",
+            "신독성 위험 약물 병용 최소화(amphotericin B, cyclosporine, vancomycin)"
+          ]
+        },
+        {
+          "title": "세뇨관 폐쇄 예방",
+          "items": [
+            "생리식염수 충분한 수액 공급",
+            "항암화학요법 시작 전 Allopurinol(자이로릭정) 투여",
+            "소변 알칼리화"
+          ]
+        }
+      ],
+      "firstLine": [
+        {
+          "name": "N-acetylcysteine (NAC)",
+          "brand": "뮤테란캡슐 200mg",
+          "mechanism": "항산화 작용으로 조영제에 의한 산화적 세뇨관 손상 예방",
+          "dosage": "600-1200mg(3-6캡슐) PO 12시간마다 총 4회. 첫 용량은 조영제 투여 전, 이후 3회는 조영제 투여 후(전1후3)",
+          "notes": "조영제 신독성 예방 목적. 등장성 수액 공급과 병용"
+        }
+      ],
+      "secondLine": [
+        {
+          "name": "Allopurinol",
+          "brand": "자이로릭정",
+          "mechanism": "잔틴산화효소 억제 → 요산 생성 억제 → 세뇨관 내 요산 결정 침전 예방",
+          "dosage": "항암화학요법 시작 전 투여(종양용해증후군 예방)",
+          "notes": "소변 알칼리화 병행 시 효과적"
+        },
+        {
+          "name": "Prednisone",
+          "brand": "프레드니솔론",
+          "mechanism": "면역 억제 → 급성 알레르기성 간질성 신염 치료",
+          "dosage": "1 mg/kg/day",
+          "notes": "원인 약물 중단 + 스테로이드 치료"
+        }
+      ],
+      "sideEffects": [
+        "NAC: 오심, 구토(고용량 시), 아나필락시스(드물게)",
+        "Allopurinol: 피부발진, Stevens-Johnson 증후군(드물게), 간독성"
+      ],
+      "contraindications": [
+        "Aminoglycoside: 기존 신부전, 당뇨, 패혈증 환자에서 고위험 → 대안 항생제 고려",
+        "NSAIDs: 신기능 저하 환자에서 가급적 AAP, tramadol 등 대체 사용",
+        "진통제 만성 복합 투여 금기(AAP+aspirin 또는 aspirin+NSAIDs 병용 시 유두 괴사 위험)"
+      ],
+      "combos": [
+        "NAC + 등장성 수액(조영제 신독성 예방)",
+        "수액 + Allopurinol + 소변 알칼리화(항암요법 전 종양용해증후군 예방)"
+      ]
+    },
+    {
+      "id": "aki",
+      "name": "급성 신손상 (AKI)",
+      "guideline": "2015 대한내과학회 임상 진료 지침 / 약물치료학",
+      "tags": ["AKI", "급성신손상", "신전성", "신성", "신후성"],
+      "overview": "48시간 내 SCr 0.3 mg/dL 이상 상승 또는 기저치 1.5배 이상 상승 또는 6시간 동안 소변량 0.5 mL/kg/h 미만. 신전성(체액량 감소/유효동맥혈류량 감소/기능적 이상), 신성(세뇨관 괴사/간질성 신염 등), 신후성(방광/요관 폐쇄)으로 분류.",
+      "criteria": [
+        {"label": "진단 ①", "sbp": "48시간 내 SCr ≥ 0.3 mg/dL 상승", "dbp": ""},
+        {"label": "진단 ②", "sbp": "기저치 대비 SCr ≥ 1.5배(≥50%) 상승", "dbp": ""},
+        {"label": "진단 ③", "sbp": "소변량 < 0.5 mL/kg/h(6시간 이상)", "dbp": ""}
+      ],
+      "guidelines": [
+        {
+          "title": "원인별 분류",
+          "items": [
+            "신전성: 출혈/위장관 손실, NSAIDs(수입세동맥 수축), ACEI/ARB(수출세동맥 저항 감소), 심부전, 패혈증",
+            "신성(세뇨관 괴사): 허혈, 신독성 약물(aminoglycoside, 조영제, cisplatin, amphotericin B)",
+            "신성(간질성 신염): NSAIDs, 항생제(β-lactam, 설파계, trimethoprim, rifampicin), captopril",
+            "신후성: BPH, 항콜린제, 신장결석, 종양"
+          ]
+        },
+        {
+          "title": "비약물 요법",
+          "items": [
+            "등장성 수액 공급(예방 및 치료 목적 사용 O)",
+            "전해질 조절: 고나트륨, 고칼륨, 고인산, 저칼슘 교정"
+          ]
+        },
+        {
+          "title": "약물 요법(사용 가능/불가 구분)",
+          "items": [
+            "혈관 수축제(노르에피네프린, 바소프레신): 예방/치료 목적 O",
+            "항산화제 NAC: 조영제 투여 전 예방 목적 O",
+            "루프 이뇨제(furosemide 등): 예방/치료 목적 X",
+            "혈관 확장제(dopamine, fenoldopam): 예방/치료 목적 X",
+            "혈액투석: 치료 목적으로 가장 효과적"
+          ]
+        }
+      ],
+      "firstLine": [
+        {
+          "name": "등장성 수액(0.9% NaCl 또는 LR)",
+          "brand": "생리식염수",
+          "mechanism": "체내 순환 혈액량 회복 → 신장 관류 개선",
+          "dosage": "신전성 AKI 교정 및 예방 목적",
+          "notes": "과도한 수액 공급은 폐부종 위험"
+        },
+        {
+          "name": "Norepinephrine / Vasopressin",
+          "brand": "혈관 수축제",
+          "mechanism": "전신 혈관 저항 증가 → 신장 관류 개선",
+          "dosage": "패혈성 쇼크 동반 AKI에 사용",
+          "notes": "예방 및 치료 목적 모두 사용 가능"
+        }
+      ],
+      "secondLine": [
+        {
+          "name": "혈액투석",
+          "brand": "신대체요법",
+          "mechanism": "요독소, 전해질, 수분 직접 제거",
+          "dosage": "중증 AKI, 이뇨제 무반응 시",
+          "notes": "가장 효과적인 AKI 치료"
+        }
+      ],
+      "sideEffects": [
+        "과수액 공급: 폐부종, 전신 부종",
+        "혈관 수축제: 고혈압, 말초 허혈",
+        "루프 이뇨제: AKI 예방/치료 효과 없음, 소변량 증가로 착각 주의"
+      ],
+      "contraindications": [
+        "루프 이뇨제: AKI 예방/치료 목적 사용 금지",
+        "Dopamine(신장보호 목적): 임상 근거 불충분으로 사용 금지",
+        "NSAIDs: AKI 환자에서 금기(PG 억제로 사구체 관류 감소)"
+      ],
+      "combos": [
+        "등장성 수액 + NAC(조영제 투여 전후)",
+        "혈관 수축제 + 등장성 수액(패혈성 AKI)"
+      ]
+    },
+    {
+      "id": "ckd",
+      "name": "만성 신장병 (CKD)",
+      "guideline": "2022 만성콩팥병 임상진료지침 / KDIGO 2024",
+      "tags": ["CKD", "만성신장병", "콩팥병", "단백뇨", "GFR", "ACEI", "ARB", "SGLT2"],
+      "overview": "콩팥 손상 또는 기능 감소(eGFR < 60 mL/min)가 3개월 이상 지속. 주요 원인은 당뇨병과 고혈압. G1-G5, A1-A3로 병기 분류. 합병증으로 빈혈, 미네랄-골대사질환, 대사성 산증, 고칼륨혈증, 요독증 등 발생.",
+      "criteria": [
+        {"label": "G1 정상/높음", "sbp": "eGFR ≥ 90", "dbp": "콩팥 손상 지표 있음"},
+        {"label": "G2 경도 감소", "sbp": "eGFR 60-89", "dbp": ""},
+        {"label": "G3a 경도-중등도", "sbp": "eGFR 45-59", "dbp": ""},
+        {"label": "G3b 중등도-중증", "sbp": "eGFR 30-44", "dbp": ""},
+        {"label": "G4 중증 감소", "sbp": "eGFR 15-29", "dbp": ""},
+        {"label": "G5 신부전", "sbp": "eGFR < 15", "dbp": "투석 또는 이식 필요"}
+      ],
+      "guidelines": [
+        {
+          "title": "비약물 요법",
+          "items": [
+            "금연(매우 중요), 규칙적인 신체활동, BMI 18.5-25 유지",
+            "단백질 섭취 0.8 g/kg/일 권고",
+            "소금 하루 5-6g(나트륨 2.0-2.3g) 미만 제한",
+            "중강도 유산소운동 주 2시간 30분 이상(하루 30-50분, 주 5일)"
+          ]
+        },
+        {
+          "title": "주요 약물 치료 원칙",
+          "items": [
+            "알부민뇨 동반 CKD 1-4단계: ACEI 또는 ARB 1차 권고(단, 2제 병합 금기)",
+            "SCr 기저치보다 30% 이상 증가하지 않는 이상 ACEI/ARB 유지",
+            "ACEI/ARB + SCr ≥ 3.0 mg/dL: 고칼륨혈증 주의",
+            "대사성 산증 교정: 경구 중탄산염(타스나정)",
+            "CKD 1-3단계 고혈압: thiazide/loop/칼륨보존 이뇨제 사용 가능",
+            "CKD 4-5단계 고혈압: loop 이뇨제(furosemide, torsemide) 우선"
+          ]
+        },
+        {
+          "title": "당뇨 동반 CKD",
+          "items": [
+            "혈당 목표: HbA1c < 6.5%(또는 7.0%), 개별화 필요",
+            "알부민뇨 동반 고혈압 당뇨: ACEI 또는 ARB 권고",
+            "알부민뇨 동반 2형 당뇨: SGLT2 억제제 권고(단 eGFR ≥ 30)",
+            "심혈관 고위험 CKD 2형 당뇨: GLP-1 수용체 작용제(-glutide) 고려",
+            "혈압 정상+알부민뇨 없는 당뇨: 예방 목적 ACEI/ARB 사용 권고하지 않음"
+          ]
+        },
+        {
+          "title": "고혈압 동반 CKD",
+          "items": [
+            "알부민뇨 없는 CKD: 혈압 < 140/90 mmHg 목표",
+            "알부민뇨 동반 CKD: 혈압 < 130/80 mmHg 목표"
+          ]
+        },
+        {
+          "title": "이상지질혈증 동반 CKD",
+          "items": [
+            "CKD 1-3단계: statin 또는 statin+ezetimibe 병용 권고",
+            "Fenofibrate(페노시드): SCr 상승 보고 있어 주의",
+            "고중성지방혈증: 일차적으로 치료적 생활습관 변화"
+          ]
+        },
+        {
+          "title": "빈혈 동반 CKD",
+          "items": [
+            "철결핍성 빈혈 확인 시 경구 철분제(훼로바유) 시작 고려",
+            "주사 철분제: 흡수율·혈색소 상승 우월 but 아나필락시스, 혈관확보 문제",
+            "경구 철분제: 경제적 이점 but 소화기계 부작용, 낮은 흡수율",
+            "제산제와 동시 복용 시 철분 흡수율 저하",
+            "비약물요법: 엽산(Vit B9), Vit B12(메코발라민)"
+          ]
+        },
+        {
+          "title": "미네랄-골대사질환(MBD) 동반 CKD",
+          "items": [
+            "CKD 3단계 이상: 칼슘, 인, PTH, ALP, 비타민 D 정기 모니터링",
+            "고인산혈증 발생 시 인산 제한 식이 + 인산결합제 사용",
+            "칼슘인결합제: Calcium carbonate(태극탄산칼슘), Calcium acetate(네프로, 포슬로) - 식사와 함께, 항생제(FQ, tetracycline)와 2-4시간 간격",
+            "비칼슘인결합제: Sevelamer carbonate(인벨라), Lanthanum(란타눔 츄정) - 골외 석회화, 고칼슘혈증 위험 시 추천",
+            "Calcitriol(칼시오): Ca > 9.5 or P > 4.6이면 중단",
+            "Cinacalcet(레그파라): 칼슘과 PTH 모두 낮춤(이차성 부갑상선항진증), 식 직후 투여"
+          ]
+        }
+      ],
+      "firstLine": [
+        {
+          "name": "ACEI 또는 ARB",
+          "brand": "다양한 제품",
+          "mechanism": "RAAS 억제 → 수출세동맥 확장 → 사구체 내압 감소 → 단백뇨 감소 → 신장 보호",
+          "dosage": "저용량 시작 후 점진적 증량. SCr 기저치 30% 이상 증가 시 중단 고려",
+          "notes": "알부민뇨 동반 CKD 1-4단계 1차 권고. 2제 병합 금기. SCr ≥ 3.0에서 고칼륨혈증 주의"
+        },
+        {
+          "name": "SGLT2 억제제",
+          "brand": "다파글리플로진(포시가), 엠파글리플로진(자디앙) 등",
+          "mechanism": "신장 포도당 재흡수 억제 → 혈당 강하 + 사구체 내압 감소 → CKD 진행 억제",
+          "dosage": "eGFR ≥ 30에서 사용",
+          "notes": "알부민뇨 동반 2형 당뇨 CKD에서 진행 억제 목적 권고"
+        }
+      ],
+      "secondLine": [
+        {
+          "name": "GLP-1 수용체 작용제",
+          "brand": "-glutide 계열(semaglutide, liraglutide 등)",
+          "mechanism": "인크레틴 효과 → 혈당 강하 + 심혈관 보호",
+          "dosage": "심혈관 고위험 CKD 2형 당뇨 환자",
+          "notes": "심혈관질환 발생 및 알부민뇨 진행 억제 목적"
+        },
+        {
+          "name": "Finerenone",
+          "brand": "케렌디아",
+          "mechanism": "비스테로이드성 무기질코르티코이드 수용체 길항제(ns-MRA) - 신장·심혈관계 염증/섬유화 억제",
+          "dosage": "ACEI/ARB 최대 복용 중에도 알부민뇨 지속 시 추가",
+          "notes": "2형 당뇨 동반 CKD. 기존 스테로이드성 MRA보다 부작용 적고 선택성 높음"
+        },
+        {
+          "name": "중탄산나트륨",
+          "brand": "타스나정",
+          "mechanism": "혈중 중탄산 농도 보충 → 대사성 산증 교정",
+          "dosage": "대사성 산증 교정 목적으로 경구 투여",
+          "notes": "가스성 팽창, 위고창 등 위장관 부작용 주의"
+        },
+        {
+          "name": "구형흡착탄",
+          "brand": "레나메진",
+          "mechanism": "고순도 다공질 탄소 - 장내 요독소 흡착 후 변으로 배설",
+          "dosage": "CKD 초기부터 사용할수록 투석 지연 효과",
+          "notes": "생체 내 흡수되지 않고 배출. 요독증 관리"
+        }
+      ],
+      "sideEffects": [
+        "ACEI/ARB: 고칼륨혈증(특히 SCr ≥ 3.0), 기침(ACEI), 혈관부종",
+        "SGLT2 억제제: 요로감염, 케톤산증, 성기 진균감염",
+        "Finerenone: 고칼륨혈증",
+        "중탄산나트륨: 가스성 팽창, 복통, 나트륨 부하",
+        "Cinacalcet: 저칼슘혈증, 오심, 구토",
+        "Calcitriol: 고칼슘혈증(Ca > 9.5 또는 P > 4.6 시 중단)"
+      ],
+      "contraindications": [
+        "ACEI + ARB 2제 병합 금기",
+        "Metformin: 신부전 환자에서 젖산증 위험으로 사용 피함(신장이식 후 당뇨 포함)",
+        "SGLT2 억제제: eGFR < 30 시 사용 금기",
+        "Fenofibrate: CKD에서 SCr 상승 보고로 주의",
+        "신독성 미확인 약제/식품 섭취 금지"
+      ],
+      "combos": [
+        "ACEI/ARB + SGLT2 억제제(알부민뇨 동반 2형 당뇨 CKD)",
+        "ACEI/ARB + Finerenone(알부민뇨 지속 시)",
+        "인산결합제 + Cinacalcet(MBD 동반)",
+        "경구 철분제 + 엽산 + Vit B12(빈혈 동반)"
+      ]
+    },
+    {
+      "id": "kidney-transplant",
+      "name": "신장이식",
+      "guideline": "약물치료학 교재",
+      "tags": ["이식", "면역억제", "tacrolimus", "cyclosporine", "거부반응", "CNI"],
+      "overview": "신장이식 후 면역억제 요법으로 급성·만성 거부반응 예방이 핵심. CNI계열(tacrolimus, cyclosporine) + 항대사제(mycophenolate) + corticosteroid 삼중요법이 기본. 유도요법(basiliximab 또는 RATG)으로 이식 초기 급성거부반응 예방.",
+      "criteria": [
+        {"label": "급성거부반응 의심", "sbp": "SCr 기저치 대비 30% 이상 갑자기 상승", "dbp": "요배설량 감소, 이식신 팽창, 부종, 고혈압"}
+      ],
+      "guidelines": [
+        {
+          "title": "유도 면역억제요법",
+          "items": [
+            "저위험군: Basiliximab(주사) 1차 - 전처치 불필요",
+            "고위험군: RATG(thymoglobulin)(주사) 1차 - 과민반응 전처치(AAP+steroid+항히스타민제)"
+          ]
+        },
+        {
+          "title": "유지 면역억제요법(삼중요법)",
+          "items": [
+            "CNI(tacrolimus 우선) + 항대사제(mycophenolate 우선) + corticosteroid",
+            "이식 초기 6개월까지 고용량, 이후 점진적 감량",
+            "서로 다른 기전의 조합으로 각 약물 부작용 최소화"
+          ]
+        },
+        {
+          "title": "Tacrolimus 주요 정보",
+          "items": [
+            "CNI 1차 선택(cyclosporine보다 100배 강력)",
+            "공복 투여(음식에 의해 흡수 감소), 1일 2회 12시간 간격",
+            "신독성(초기 가역적, 지속 시 CKD 유발), 고칼륨혈증, 두통/손떨림/불면증",
+            "당뇨, 림프종, 피부악성종양 발생률 증가",
+            "상호작용: aminoglycoside/amphotericin B/ACEI/ARB/NSAIDs(신독성 악화), spironolactone(고칼륨혈증 악화), 스타틴(근육독성 증가)"
+          ]
+        },
+        {
+          "title": "Cyclosporine 주요 정보",
+          "items": [
+            "공복 투여(고지방 식이로 흡수 증가하므로 주의), 1일 2회 12시간 간격",
+            "신독성(가장 큰 부작용), 다모증, 고칼륨혈증, 치은비대",
+            "Cyclosporine과 MMF 병용 시 MPA 농도 감소(장간순환 저해) → 용량 조절 필요"
+          ]
+        },
+        {
+          "title": "Mycophenolate(MMF/MPS) 주요 정보",
+          "items": [
+            "가임기/임신 여성 제외하고 azathioprine보다 선호",
+            "MMF(마이렙트, 셀셉트): 250-750mg 1일 2회, 최대 3.5g/day",
+            "위장관 부작용 심한 경우 장용정 MPS(마이폴틱)로 전환 또는 음식과 함께 투여",
+            "골수억제(백혈구 감소, 혈소판 감소, 빈혈)",
+            "제산제(Al, Mg) 병용 시 흡수 저해",
+            "Azathioprine + allopurinol 병용 금기(과도한 독성)"
+          ]
+        },
+        {
+          "title": "거부반응 치료",
+          "items": [
+            "TCMR: Methylprednisolone 고용량 단기간(pulse therapy) → 반응 없거나 재발 시 RATG",
+            "ABMR: 혈장교환술(가장 효과적), IVIG, Rituximab(항CD20), Bortezomib(프로테아좀 억제제)"
+          ]
+        },
+        {
+          "title": "이식 후 감염 예방 및 치료",
+          "items": [
+            "CMV: Ganciclovir 또는 Valganciclovir(발싸이트정)",
+            "HSV/VZV: Acyclovir(조이렉스정, 신독성 주의), Famciclovir(팜비어정)",
+            "사람폐포자충: Sulfamethoxazole+Trimethoprim(셉트린정)",
+            "칸디다: 예방-nystatin / 치료-azole계(상호작용 주의), amphotericin B(신독성)"
+          ]
+        },
+        {
+          "title": "이식 후 합병증 관리",
+          "items": [
+            "고혈압: CCB 우선(신장 혈류역학 개선), 요단백 있는 경우 ACEI/ARB 추가",
+            "당뇨: CNI+steroid 용량 최소화, Metformin 사용 피함, Pioglitazone/nateglinide/sitagliptin 저용량 시작 가능",
+            "mTOR 억제제(sirolimus, everolimus): 혈액응고 지연+신독성으로 이식 직후 즉각 사용 제한"
+          ]
+        }
+      ],
+      "firstLine": [
+        {
+          "name": "Tacrolimus",
+          "brand": "타크로벨 등",
+          "mechanism": "칼시뉴린 억제 → IL-2 및 사이토카인 분비 억제 → T세포 활성화 차단",
+          "dosage": "1일 2회 12시간 간격, 공복 투여. 혈중 농도 모니터링 필수",
+          "notes": "CNI 1차 선택. 신독성, 당뇨, 신경학적 부작용 주의. 약물상호작용 다수"
+        },
+        {
+          "name": "Mycophenolate mofetil (MMF)",
+          "brand": "마이렙트정/캡슐, 셀셉트캡슐",
+          "mechanism": "IMPDH 억제 → 새로운 DNA 합성 억제 → T/B 림프구 증식 억제(G1-S 차단)",
+          "dosage": "250-750mg 1일 2회 12시간 간격, 최대 3.5g/day",
+          "notes": "위장관 부작용 시 MPS(마이폴틱) 전환. 가임기 여성 주의"
+        },
+        {
+          "name": "Prednisolone",
+          "brand": "프레드니솔론",
+          "mechanism": "비특이적 면역 억제",
+          "dosage": "수술 후 Methylprednisolone IV → 7-14일 후 경구 prednisolone 전환. 오전(7-8시) 투여",
+          "notes": "장기 사용: 고혈당, 고혈압, 이상지질혈증, 골다공증, 백내장, 소아 성장 지연"
+        }
+      ],
+      "secondLine": [
+        {
+          "name": "Cyclosporine",
+          "brand": "사이폴엔, 사이크린",
+          "mechanism": "칼시뉴린 억제 → IL-2 분비 억제 → T세포 활성 차단",
+          "dosage": "1일 2회 12시간 간격, 공복 투여",
+          "notes": "Tacrolimus 사용 불가 시 대안. 다모증, 치은비대, 신독성"
+        },
+        {
+          "name": "Basiliximab",
+          "brand": "시뮬렉트 주사",
+          "mechanism": "IL-2 수용체(CD25) 차단 → T림프구 클론 증식 억제",
+          "dosage": "유도요법, 저위험군 1차. 전처치 불필요",
+          "notes": "이식 초기 급성거부반응 예방"
+        }
+      ],
+      "sideEffects": [
+        "Tacrolimus: 신독성, 고칼륨혈증, 당뇨, 손떨림, 두통, 불면증, 탈모, 간독성, 림프종",
+        "Cyclosporine: 신독성, 다모증, 고칼륨혈증, 치은비대, 이상지질혈증",
+        "MMF: 위장관 부작용(오심/구토/설사), 골수억제(백혈구 감소, 혈소판 감소, 빈혈)",
+        "Corticosteroid(장기): 고혈당, 고혈압, 이상지질혈증, 비만, 골다공증, 백내장, 정신질환",
+        "mTOR 억제제: 골수억제, 이상지질혈증, 구내염, 폐독성, 상처 치유 지연"
+      ],
+      "contraindications": [
+        "Tacrolimus + spironolactone: 고칼륨혈증 악화",
+        "Tacrolimus + aminoglycoside/amphotericin B: 신독성 악화",
+        "Tacrolimus/Cyclosporine + 스타틴(atorvastatin, lovastatin, simvastatin): 근육독성 증가",
+        "MMF(azathioprine) + allopurinol: 과도한 독성으로 병용 금기",
+        "Sirolimus + voriconazole/posaconazole: 금기",
+        "Metformin: 이식 후 당뇨에서 젖산증 위험으로 사용 회피",
+        "Cyclosporine + MMF 병용: MPA 농도 감소(장간순환 저해) → 용량 조절 또는 tacrolimus로 전환"
+      ],
+      "combos": [
+        "Tacrolimus + MMF + Prednisolone(삼중요법, 표준)",
+        "RATG + Steroid + 항히스타민제(고위험군 유도요법 전처치)",
+        "혈장교환술 + IVIG + Rituximab(ABMR 치료)"
+      ]
+    }
+  ]
+}
