@@ -8867,6 +8867,498 @@
           ]
         }
       ]
+    },
+    {
+      "id": "dermatology",
+      "name": "피부",
+      "icon": "🧴",
+      "color": "#F97316",
+      "diseases": [
+        {
+          "id": "atopic-dermatitis",
+          "name": "아토피 피부염",
+          "guideline": "약물치료학 교재",
+          "tags": [
+            "외용스테로이드",
+            "Tacrolimus",
+            "Dupilumab",
+            "Cyclosporine",
+            "JAK억제제",
+            "Calcineurin억제제"
+          ],
+          "overview": "유전적 요인으로 알레르기 항원에 피부·점막이 과민반응하는 만성재발성 습진 질환. IgE 증가. 환자 90%에서 황색포도상구균 발견 → 2차 감염 시 급성 악화. 증상: 발작적 가려움증·홍반·습진·태선화가 반복. 치료 목표: 가려움증 해소·피부염 완화·보습·악화인자 제거.",
+          "criteria": [
+            {
+              "label": "필수 증상",
+              "sbp": "가려움증 + 습진 모두 있어야 함",
+              "dbp": ""
+            },
+            {
+              "label": "주요 증상",
+              "sbp": "어린 나이 발병 / 아토피 개인력·가족력·IgE 반응 / 건조증",
+              "dbp": ""
+            },
+            {
+              "label": "자가치료 부적절",
+              "sbp": "감염 소견·피부 접힘 부위·2세 미만·체표 5% 초과·얼굴 병변",
+              "dbp": "전문의 치료 필요"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "📋 외용 스테로이드 역가 분류",
+              "items": [
+                "Class 1 (초강력): Clobetasol propionate 0.05% — 더모베이트, 클로벡스액",
+                "Class 2 (강력): Betamethasone dipropionate 0.05% — 라벤다크림 / Mometasone furoate 0.1% 연고",
+                "Class 4 (중등): Methylprednisolone aceponate — 아드반탄 / Mometasone furoate 0.1% 크림 — 더모타손",
+                "Class 5 (중등 이하): Fluticasone propionate 0.05% — 큐티베이트 / Prednisolone valeroacetate — 리도멕스",
+                "Class 6 (약): Desonide 0.05% — 데스오웬 로션",
+                "Class 7 (가장 약): Hydrocortisone 2.5% — 락티케어에취씨, 순앤로션"
+              ]
+            },
+            {
+              "title": "💊 외용 스테로이드 사용 원칙",
+              "items": [
+                "염증 가라앉을 때까지 매일 도포 → 호전 후 중단",
+                "저강도 Hydrocortisone: 신체 어디에나 사용 가능. 소아도 안전",
+                "고강도: 얼굴·피부 접히는 부위·점막 사용 금지",
+                "역가: 연고 > 크림 > 로션. 체모 많거나 지성인 부위: 겔 사용",
+                "진물이 나올 때: 연고형 피하기",
+                "감염된 피부: 모든 스테로이드 금기 (감염 악화·치유 지연)",
+                "보습제와 병용 권고 — 외용 스테로이드를 먼저 도포",
+                "지속 사용 시 속성 내성 → 간헐적 사용"
+              ]
+            },
+            {
+              "title": "💊 외용 Calcineurin 억제제",
+              "items": [
+                "Tacrolimus 연고(토피크로)·Pimecrolimus 크림(엘리델)",
+                "T세포 증식·사이토카인 유전자 전사·수지상세포·비만세포·각질세포 활성화 억제",
+                "2차 선택 치료제 (피부암·감염 위험 우려)",
+                "사용 시 자외선 차단크림 꼼꼼히 도포 필수",
+                "부작용: 도포 시 일시적 작열감"
+              ]
+            },
+            {
+              "title": "💊 전신성 면역억제제",
+              "items": [
+                "경구 Prednisolone: 중증 만성 아토피 단기 사용. 중단 시 점진적 감량 필수 (반동성 악화 예방)",
+                "Cyclosporine(사이폴엔): 신독성 주의",
+                "Azathioprine(이뮤란): 골수억제 주의",
+                "MTX: 간독성 주의",
+                "Mycophenolate mofetil: 위장관·혈액학적 부작용",
+                "JAK 억제제: Abrocitinib(시빈코, 아토피 허가)·Baricitinib(올루미언트)·Upadacitinib(린버크)·Tofacitinib(젤잔즈)"
+              ]
+            },
+            {
+              "title": "💊 전신 스테로이드 등가 용량 비교",
+              "items": [
+                "Hydrocortisone 20mg = Prednisolone 5mg = Methylprednisolone 4mg = Triamcinolone 4mg = Dexamethasone 0.75mg",
+                "소염 효과: Dexamethasone(30) > Methylprednisolone(5) > Prednisolone(4) > Hydrocortisone(1)",
+                "작용 시간: Hydrocortisone·Prednisolone 8~12h / Methylprednisolone 12~36h / Dexamethasone 36~72h"
+              ]
+            },
+            {
+              "title": "🏃 비약물요법",
+              "items": [
+                "목욕 3~5분 제한. 물기 두드려 제거. 목욕 후 3분 이내 보습제 도포",
+                "무향 세제 사용. 섬유유연제 피하기. 면섬유 착용",
+                "손톱 짧고 청결하게. 에어컨·가습기 적절히 사용",
+                "활성성분 낮은 선크림 사용"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "외용 스테로이드 (중등도, Class 4~5)",
+              "brand": "아드반탄크림(Methylprednisolone aceponate) / 큐티베이트크림(Fluticasone) / 리도멕스크림",
+              "mechanism": "염증·가려움증 유발 사이토카인 억제",
+              "dosage": "염증 부위에 1일1~2회 도포. 호전 후 중단",
+              "notes": "보습제와 병용 (스테로이드 먼저 도포). 감염 피부에 사용 금지"
+            },
+            {
+              "name": "Tacrolimus 연고 (Calcineurin 억제제)",
+              "brand": "토피크로 연고 0.03%·0.1%",
+              "mechanism": "T세포 증식·사이토카인 억제 → 면역조절",
+              "dosage": "1일2회 도포",
+              "notes": "2차 선택. 자외선 차단 필수. 작열감 부작용. 피부암 위험 우려"
+            },
+            {
+              "name": "Dupilumab (생물학적 제제)",
+              "brand": "듀피젠트 주사",
+              "mechanism": "IL-4·IL-13 수용체 억제 → Th2 면역반응 억제",
+              "dosage": "격주 피하주사",
+              "notes": "심각한 부작용 적음. 비인두염·두통 주요 부작용. 중등도~중증 성인"
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Abrocitinib (JAK1 억제제)",
+              "brand": "시빈코정 100·200mg",
+              "mechanism": "JAK1 억제 → 염증성 사이토카인 신호 차단",
+              "dosage": "100~200mg 1일1회",
+              "notes": "아토피 피부염 허가. 감염·혈전 위험 모니터링"
+            },
+            {
+              "name": "Cyclosporine",
+              "brand": "사이폴엔캡슐",
+              "mechanism": "T세포 활성화 억제 → 면역억제",
+              "dosage": "2.5~5mg/kg/day 분할 투여. 단기 사용",
+              "notes": "신독성·고혈압 주의. 혈압·신기능 모니터링"
+            },
+            {
+              "name": "Crisaborole (비스테로이드 PDE-4 억제제)",
+              "brand": "에우크리사 연고 2%",
+              "mechanism": "PDE-4 억제 → cAMP 증가 → 염증성 사이토카인 억제",
+              "dosage": "1일2회 도포",
+              "notes": "경증~중등도. 스테로이드 대안. 작열감 부작용"
+            }
+          ],
+          "sideEffects": [
+            "외용 스테로이드: 피부위축·여드름·팽창선조·부신억제·성장억제·골다공증 (고강도 장기 시)",
+            "Calcineurin 억제제: 도포 부위 작열감. 장기 시 피부암·감염 위험",
+            "Cyclosporine: 신독성·고혈압·면역억제",
+            "MTX: 간독성·골수억제",
+            "JAK 억제제: 감염·혈전·악성 종양 위험"
+          ],
+          "contraindications": [
+            "모든 스테로이드: 감염된 피부에 사용 금지",
+            "고강도 스테로이드: 얼굴·피부 접히는 부위·점막 사용 금지",
+            "Calcineurin 억제제: 피부암 위험 우려 → 2차 선택만",
+            "경구 스테로이드: 장기 사용 금지. 중단 시 점진적 감량 필수",
+            "Cyclosporine: 신부전·조절되지 않는 고혈압 주의"
+          ],
+          "combos": [
+            "외용 스테로이드 + 보습제 (스테로이드 먼저 도포)",
+            "Calcineurin 억제제 사용 시: 자외선 차단크림 필수 병용",
+            "중증 불응성: Dupilumab 또는 JAK 억제제",
+            "2차 감염 발생 시: 항생제 치료 후 스테로이드 재시작"
+          ]
+        },
+        {
+          "id": "psoriasis",
+          "name": "건선",
+          "guideline": "약물치료학 교재",
+          "tags": [
+            "외용스테로이드",
+            "Calcipotriol",
+            "MTX",
+            "Cyclosporine",
+            "Apremilast",
+            "생물학적제제",
+            "Acitretin"
+          ],
+          "overview": "T세포·수지상세포 활성화 → 사이토카인·케모카인 분비 → 피부각질형성세포 분화이상·증식 → 피부 비후·혈관 증식. 판상 건선이 80~90%로 가장 흔함. 악화 요인: 추운 날씨·피부외상·감염·건조·음주·흡연·Lithium·베타차단제·NSAIDs·ACE 억제제. 건선 관절염 동반 가능(관절 통증·부종·조조경직).",
+          "criteria": [
+            {
+              "label": "판상 건선",
+              "sbp": "가장 흔함 (80~90%). 무릎·팔꿈치 초발 → 확산",
+              "dbp": ""
+            },
+            {
+              "label": "건선 관절염",
+              "sbp": "관절 통증·부종·강직·홍반·열감·조조경직",
+              "dbp": "아킬레스건염·손발가락염 진행 가능"
+            },
+            {
+              "label": "악화 약물",
+              "sbp": "Lithium·베타차단제·NSAIDs·ACE 억제제·Tetracycline·Interferon",
+              "dbp": ""
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "📋 치료 단계",
+              "items": [
+                "비약물치료 우선: 스트레스 경감·보습제·자외선 차단",
+                "국소 치료: 외용 스테로이드·Vitamin D3 유사체·Calcineurin 억제제",
+                "광치료: UVB(광치료)·PUVA(광화학요법, 성인 중등도 이상)",
+                "전신 치료: MTX·Cyclosporine·Acitretin·Apremilast",
+                "생물학적 제제: TNF-α 억제제·IL-12/23 억제제·IL-17A 억제제·IL-23 억제제"
+              ]
+            },
+            {
+              "title": "💊 외용 Vitamin D3 유사체",
+              "items": [
+                "Calcipotriol 50mcg/g 연고(다이보넥스): 경증~중등도. 1일1~2회",
+                "Calcipotriol + Betamethasone 연고(칼시베타): 판상 건선. 1일1회. 4주 권장",
+                "Calcipotriol + Betamethasone 겔(자미올겔): 12세↑ 두피 및 판상 건선. 1일1회. 두피 4주·두피 외 8주",
+                "Calcipotriol + Betamethasone 폼(엔스틸룸): 12세↑ 판상 건선. 1일1회. 사용 전 캔 흔들고 피부와 3cm 간격",
+                "금기: 고칼슘혈증·칼슘대사 장애·비타민D 독성·심한 건선·중증 신장애·간장애·소아·안면·눈가"
+              ]
+            },
+            {
+              "title": "💊 외용 스테로이드 FTU 가이드",
+              "items": [
+                "1 FTU = 한쪽 손",
+                "1.5 FTU = 한쪽 발 전체",
+                "2.5 FTU = 얼굴 + 목",
+                "3 FTU = 두피",
+                "4 FTU = 한쪽 손+팔 전체, 양쪽 엉덩이",
+                "8 FTU = 한쪽 다리 전체 또는 몸통 앞쪽(가슴+배) 또는 몸통 뒤쪽",
+                "초강력 제제: 2주 이상 사용 금지. 1주당 50g 이하 제한"
+              ]
+            },
+            {
+              "title": "💊 전신 약물 비교",
+              "items": [
+                "MTX: 1주 3정~최대 10정. 간독성·골수억제·폐독성 주의. 임산부·과음자 금기",
+                "Cyclosporine: 2.5mg/kg/day 1일2회 → 최대 5mg/kg/day. 신독성·고혈압·2년 이상 악성종양 위험",
+                "Acitretin(네오티가): 홍반성·농포성·플라크 건선. 최기형성 주의. 면역억제 효과 없음",
+                "Apremilast(압솔라): PDE4 억제. 1일차 10mg → 6일차 30mg q12h. 설사·구역·두통",
+                "Dimethyl fumarate(스킬라렌스): 1주 30mg qd → 5주에 걸쳐 120mg bid 증량. 홍조·위장관·림프구 감소"
+              ]
+            },
+            {
+              "title": "⚠️ 건선 악화 약물 주의",
+              "items": [
+                "Lithium carbonate: 건선 악화",
+                "베타차단제: 악화 가능",
+                "NSAIDs: 악화 가능",
+                "ACE 억제제: 악화 가능",
+                "Tetracycline·Interferon: 악화 가능"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "외용 스테로이드 + Calcipotriol 복합",
+              "brand": "칼시베타 연고 / 자미올겔 / 엔스틸룸폼",
+              "mechanism": "스테로이드(항염) + Calcipotriol(각질세포 증식·분화 억제) 이중 작용",
+              "dosage": "1일1회. 4~8주 권장",
+              "notes": "판상 건선 1차. 고칼슘혈증·칼슘대사 장애 금기"
+            },
+            {
+              "name": "Calcipotriol 단독 (다이보넥스)",
+              "brand": "다이보넥스 연고 50mcg/g",
+              "mechanism": "각질세포 분화·증식 억제 → 과각화 피부 치료",
+              "dosage": "1일1~2회 도포",
+              "notes": "스테로이드 부작용 우려 시. 경증~중등도. 고칼슘혈증 금기"
+            },
+            {
+              "name": "MTX",
+              "brand": "메토트렉세이트정 2.5mg",
+              "mechanism": "Dihydrofolate reductase 저해 → 세포 증식 억제",
+              "dosage": "1주 3정(7.5mg) ~ 최대 10정(25mg)",
+              "notes": "간독성 모니터링 필수. 임산부·자주 과음자 금기. 엽산 병용 권장"
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Cyclosporine",
+              "brand": "사이폴엔캡슐",
+              "mechanism": "T세포 활성화 1단계 억제",
+              "dosage": "2.5mg/kg/day 1일2회 → 최대 5mg/kg/day",
+              "notes": "신독성·고혈압·악성종양(2년↑) 위험. 단기 사용 권장"
+            },
+            {
+              "name": "Apremilast (압솔라)",
+              "brand": "압솔라정 30mg",
+              "mechanism": "PDE4 억제 → cAMP 증가 → 염증성 사이토카인 억제",
+              "dosage": "1일차 10mg부터 점진적 증량 → 6일차부터 30mg q12h",
+              "notes": "설사·구역·두통·불면. 면역억제 없음"
+            },
+            {
+              "name": "Acitretin (네오티가)",
+              "brand": "네오티가캡슐 10·25mg",
+              "mechanism": "Retinoid 수용체 작용 → 비정상 세포 분열 정상화",
+              "dosage": "홍반성·농포성·플라크성 건선에 주로 사용",
+              "notes": "최기형성(임부 절대 금기). 비타민A 과다증·간독성·고콜레스테롤혈증"
+            },
+            {
+              "name": "생물학적 제제",
+              "brand": "TNF-α: Etanercept(엠브렐)·Adalimumab(휴미라) / IL-17A: Secukinumab(코센틱스) / IL-23: Guselkumab(트렘피야)",
+              "mechanism": "염증 유발 사이토카인 표적 억제",
+              "dosage": "중등도~중증 판상 건선. 피하주사 또는 IV",
+              "notes": "감염 위험 모니터링. 투여 전 결핵 검사"
+            }
+          ],
+          "sideEffects": [
+            "외용 스테로이드: 피부위축·팽창선조·고혈당·쿠싱증후군·모세혈관 확장·빠른 내성",
+            "Calcipotriol: 피부 자극. 고칼슘혈증(대량 사용 시)",
+            "MTX: 간독성·골수억제·폐독성·구내염",
+            "Cyclosporine: 신독성·고혈압·다모·잇몸 과형성·악성종양(장기)",
+            "Acitretin: 비타민A 과다증(구순염·구강건조·탈모)·최기형성·간독성·고콜레스테롤",
+            "Apremilast: 설사·구역·두통·불면·상기도 감염"
+          ],
+          "contraindications": [
+            "Acitretin: 임부 절대 금기 (최기형성)",
+            "MTX: 임산부·자주 과음자·간질환·신부전·혈액질환",
+            "Calcipotriol 복합제: 고칼슘혈증·심한 건선·소아·안면·눈가",
+            "Cyclosporine: 신부전·조절되지 않는 고혈압",
+            "Dimethyl fumarate: 림프구 수치 모니터링 필요"
+          ],
+          "combos": [
+            "국소요법 + 광치료 병합",
+            "외용 스테로이드 + Calcipotriol 복합제 (칼시베타·자미올겔·엔스틸룸)",
+            "전신치료 + 국소요법 병합",
+            "MTX + 엽산 보충 (부작용 감소)",
+            "생물학적 제제: TNF-α 또는 IL-17A 또는 IL-23 억제제 단독"
+          ]
+        },
+        {
+          "id": "acne",
+          "name": "여드름",
+          "guideline": "약물치료학 교재",
+          "tags": [
+            "Benzoyl peroxide",
+            "Retinoid",
+            "Isotretinoin",
+            "Adapalene",
+            "Clindamycin",
+            "경구항생제"
+          ],
+          "overview": "털 피지샘 단위의 만성 염증성 질환. 병인: 안드로겐 분비·피지 과잉 분비·피부 각질화·P.acnes 세균 감염. 비염증성(면포) + 염증성(구진·농포·결절). 악화 약물: Phenytoin·Isoniazid·Phenobarbital·Lithium·Corticosteroid·Testosterone·Progesterone. 치료 목표: 피지 억제·배출 용이·세균 증식 차단.",
+          "criteria": [
+            {
+              "label": "경증 1차",
+              "sbp": "BP 단독 / 국소 Retinoid / BP + 항생제",
+              "dbp": ""
+            },
+            {
+              "label": "중등도 1차",
+              "sbp": "BP + 항생제 + Retinoid 복합 / 경구 항생제 + 국소 BP·retinoid",
+              "dbp": ""
+            },
+            {
+              "label": "중증 1차",
+              "sbp": "경구 항생제 + 국소 복합요법 / 경구 Isotretinoin",
+              "dbp": ""
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "📋 여드름 치료 알고리즘",
+              "items": [
+                "경증 1차: BP 단독 / 국소 Retinoid / BP + 국소 복합요법 / BP + 항생제",
+                "중등도 1차: 국소 복합요법(BP+항생제+retinoid) / 경구 항생제+국소 BP 또는 retinoid",
+                "중증 1차: 경구 항생제 + 국소 복합요법 / 경구 Isotretinoin",
+                "대체 요법: 국소 Retinoid 또는 dapsone 변경 / 호르몬제(여성) 추가 / 경구 isotretinoin"
+              ]
+            },
+            {
+              "title": "💊 OTC 국소 외용제",
+              "items": [
+                "Benzoyl peroxide(BP, 파티마겔 2.5%): P.acnes에 산소 방출 → 혐기성 항균. 1일1~2회. 밤에 도포 권장. 옷·머리카락 표백 주의. 내성 유발 없음",
+                "Azelaic acid(아젤라 크림): 피지형성·면포 각화·P.acnes 억제. 경증~중등도. 유지요법 주로 사용",
+                "Salicylic acid(클리어틴·에크린겔): 각질층 연화·박리. 약한 항균·항염. 20% 1일2회. 넓은 면적 고농도 시 독성 주의",
+                "애크논 크림: Ibuprofen pinokonol(항염) + Isopropylmethylphenol(항균). 화농성 여드름"
+              ]
+            },
+            {
+              "title": "💊 전문의약품 국소 Retinoid",
+              "items": [
+                "Tretinoin(멜라논·투엔티 크림): 1세대. 취침 시 사용. 처음 1~2주 격일 (자극 적응)",
+                "Adapalene(디페린겔·에피듀오겔): 3세대. 세수 후 매일 1회 얇게. 광자극성 → 자외선 차단 필수",
+                "밤에 사용. 처음 1~2주 격일 사용",
+                "임부·가임부 금기"
+              ]
+            },
+            {
+              "title": "💊 국소 항생제 & 경구 항생제",
+              "items": [
+                "국소 Clindamycin·Erythromycin: P.acnes 내성 우려 → 단독 사용 금지. 반드시 BP 또는 Retinoid 병용",
+                "듀악겔: Clindamycin + BP 복합제",
+                "경구 항생제: Doxycycline·Minocycline·Tetracycline·Lymecycline (중등도~중증)",
+                "Tetracycline 금기(임산부·8세↓): Erythromycin 또는 Azithromycin 사용",
+                "항생제 단일요법 금지 → 국소 BP 또는 Retinoid 반드시 병용"
+              ]
+            },
+            {
+              "title": "💊 Isotretinoin 주요 사항",
+              "items": [
+                "중증 난치성 결절낭포성 여드름·반복 재발성 여드름. 흉터 있으면 1차 가능",
+                "0.5mg/kg/day 시작 → 1.0 → 최대 2.0mg/kg/day",
+                "⚠️ 태아 기형 유발 → 임부 절대 금기. 복용 중·종료 후 1개월간 임신 금지",
+                "부작용: 구순염·피부건조·근육통·두통·우울증"
+              ]
+            },
+            {
+              "title": "💊 호르몬 치료 (여성에게만)",
+              "items": [
+                "Drospirenone/Ethinyl estradiol(야즈·안젤릭): 항안드로겐 효과",
+                "Cyproterone(항안드로겐제): 여성에게만",
+                "Spironolactone: 매우 심한 여드름. 여성에게만 사용. 남성 사용 금지"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Benzoyl peroxide (BP)",
+              "brand": "파티마겔 2.5%",
+              "mechanism": "산소 방출 → P.acnes 혐기성 항균. 내성 유발 없음",
+              "dosage": "1일1~2회. 밤에 도포 권장",
+              "notes": "경증~중증 모두 1차. 비염증성·염증성 모두 적용. 옷·머리카락 표백 주의"
+            },
+            {
+              "name": "Adapalene (Retinoid 3세대)",
+              "brand": "디페린겔 0.1% / 에피듀오겔(Adapalene+BP)",
+              "mechanism": "Retinoid 수용체 작용 → 상피세포 성장 조절 → 면포 형성 억제",
+              "dosage": "세수 후 매일 1회. 취침 전 도포. 처음 1~2주 격일",
+              "notes": "광자극성 → 자외선 차단 필수. 임부 금기"
+            },
+            {
+              "name": "Clindamycin + BP (복합제)",
+              "brand": "듀악겔",
+              "mechanism": "Clindamycin(P.acnes 억제) + BP(항균·내성 예방)",
+              "dosage": "1일1~2회",
+              "notes": "항생제 단독 사용 금지. BP 병용으로 내성 방지"
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Isotretinoin (경구)",
+              "brand": "이소티논·트레틴 캡슐 10·20mg",
+              "mechanism": "피지 생성 대폭 감소·P.acnes 성장 억제·모낭 분화 개선",
+              "dosage": "0.5mg/kg/day 시작 → 최대 2.0mg/kg/day",
+              "notes": "태아 기형 유발 → 임부 절대 금기. 구순염·피부건조·우울증 부작용"
+            },
+            {
+              "name": "Doxycycline (경구 항생제)",
+              "brand": "독시사이클린·독시크정 100mg",
+              "mechanism": "세균 단백질 합성 억제 → P.acnes 억제",
+              "dosage": "중등도~중증. 국소 BP 또는 Retinoid 반드시 병용",
+              "notes": "임산부·8세 미만 금기. 광과민성 주의"
+            },
+            {
+              "name": "Spironolactone (여성 호르몬 치료)",
+              "brand": "알닥톤정 25·100mg",
+              "mechanism": "항안드로겐 작용 → 피지 분비 억제",
+              "dosage": "매우 심한 여드름. 여성에게만 사용",
+              "notes": "남성에서 사용 금지. 고칼륨혈증 주의"
+            },
+            {
+              "name": "Azelaic acid (OTC 유지요법)",
+              "brand": "아젤라 크림 15·20%",
+              "mechanism": "피지형성·면포 각화·P.acnes 증식 억제",
+              "dosage": "경증~중등도. 유지요법",
+              "notes": "소양증·화끈거림 부작용. 임신 중에도 상대적으로 안전"
+            }
+          ],
+          "sideEffects": [
+            "Benzoyl peroxide: 홍반·작열감·가려움·피부건조. 옷·머리카락 표백",
+            "Retinoid(외용): 피부건조·홍반·박리·광과민성",
+            "Isotretinoin: 구순염·피부건조·근육통·두통·우울증·태아 기형",
+            "경구 Tetracycline계: 광과민성·위장관 부작용. 임산부·소아 금기",
+            "Salicylic acid(고농도·광범위): 살리실산 독성(구역·구토·이명·과호흡)"
+          ],
+          "contraindications": [
+            "Isotretinoin: 임부 절대 금기. 복용 중·종료 후 1개월간 피임 필수",
+            "Tetracycline계: 임산부·8세 미만 금기 (골격·치아 손상)",
+            "국소 항생제 단독: P.acnes 내성 우려 → BP 또는 Retinoid 병용 필수",
+            "Spironolactone: 남성 사용 금지",
+            "BP: 알람 항원 또는 약에 민감한 환자 주의"
+          ],
+          "combos": [
+            "경증: BP 단독 또는 BP + 국소 Retinoid",
+            "중등도: BP + 국소 항생제(Clindamycin) + 국소 Retinoid",
+            "중등도~중증: 경구 항생제 + 국소 BP 또는 Retinoid (항생제 단독 절대 금지)",
+            "중증 난치성: 경구 Isotretinoin 단독",
+            "여성 호르몬성 여드름: 야즈(Drospirenone/EE) 또는 Spironolactone",
+            "항생제 내성 예방: 국소 항생제 + BP 반드시 병용"
+          ]
+        }
+      ]
     }
   ]
 }
