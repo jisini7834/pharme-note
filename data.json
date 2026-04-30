@@ -1,0 +1,3290 @@
+{
+  "_comment": "=== 전문약 사전 데이터 구조 가이드 ===",
+  "_structure": {
+    "1depth": "계열 (예: 심혈관, 호흡기, 내분비)",
+    "2depth": "질환 (예: 고혈압, 심부전)",
+    "3depth": {
+      "overview": "질환 개요 및 진단 기준 (문자열 또는 배열)",
+      "criteria": "진단 기준 표 데이터 (배열 of 객체)",
+      "guidelines": "최신 임상 가이드라인 (배열 of 섹션)",
+      "firstLine": "1차 치료 약물 (배열 of 약물 객체)",
+      "secondLine": "2차 치료 약물 (배열 of 약물 객체)",
+      "sideEffects": "주요 부작용 (배열)",
+      "contraindications": "금기 및 주의사항 (배열)",
+      "combos": "병용요법 정보 (배열)"
+    }
+  },
+  "_howToAdd": [
+    "1. 새 계열 추가: categories 배열에 객체를 추가하세요",
+    "2. 새 질환 추가: 해당 계열의 diseases 배열에 객체를 추가하세요",
+    "3. 약물 객체 형식: { name: 성분명, brand: 상품명, mechanism: 작용기전, dosage: 용법용량, notes: 비고 }",
+    "4. 가이드라인 섹션 형식: { title: 제목, items: [내용 배열] }",
+    "5. id는 영문 소문자+하이픈으로 고유하게 설정하세요"
+  ],
+  "categories": [
+    {
+      "id": "cardiovascular",
+      "name": "심혈관",
+      "icon": "🫀",
+      "color": "#FF6B8A",
+      "diseases": [
+        {
+          "id": "hypertension",
+          "name": "고혈압",
+          "guideline": "2022 고혈압 진료지침",
+          "tags": [
+            "ACEI",
+            "ARB",
+            "CCB",
+            "베타차단제",
+            "이뇨제"
+          ],
+          "overview": "고혈압은 증상이 없으나 심뇌혈관질환의 발생 및 사망 위험을 크게 높이는 질환입니다. 수축기혈압이 20mmHg 높아질 때마다 허혈성뇌졸중·뇌내출혈·지주막하출혈 위험이 1.6~3.15배 높아집니다.",
+          "criteria": [
+            {
+              "label": "정상혈압",
+              "sbp": "< 120",
+              "dbp": "그리고 < 80"
+            },
+            {
+              "label": "주의혈압",
+              "sbp": "120~129",
+              "dbp": "그리고 < 80"
+            },
+            {
+              "label": "고혈압 전단계",
+              "sbp": "130~139",
+              "dbp": "또는 80~89"
+            },
+            {
+              "label": "고혈압 1기",
+              "sbp": "140~159",
+              "dbp": "또는 90~99"
+            },
+            {
+              "label": "고혈압 2기",
+              "sbp": "≥ 160",
+              "dbp": "또는 ≥ 100"
+            },
+            {
+              "label": "수축기단독고혈압",
+              "sbp": "≥ 140",
+              "dbp": "그리고 < 90"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🎯 치료 목표 혈압",
+              "items": [
+                "저위험군·중위험군 고혈압: 140/90 mmHg 미만",
+                "심혈관질환(관상동맥질환, 말초혈관질환 등) 동반: 130/80 mmHg 미만",
+                "심뇌혈관 위험도 고위험군: 130/80 mmHg 미만",
+                "⚠️ 치료 혈압 하한치: 수축기 110 / 이완기 70 mmHg 미만은 오히려 사망률·관상동맥질환 위험 증가"
+              ]
+            },
+            {
+              "title": "📊 심혈관질환 위험인자",
+              "items": [
+                "연령: 남성 ≥45세, 여성 ≥55세 (65세 이상은 위험인자 2개로 간주)",
+                "흡연",
+                "조기 심혈관계질환 가족력 (남성 <55세, 여성 <65세)",
+                "당뇨병 전단계 / 당뇨병",
+                "지질: TC≥220, LDL≥150, HDL<40, TG≥200",
+                "비만(BMI≥25) / 복부비만: 남성 허리 90cm 이상, 여성 80cm 이상"
+              ]
+            },
+            {
+              "title": "🏃 비약물치료 (생활요법)",
+              "items": [
+                "소금 섭취 하루 6g 미만",
+                "체중감량 (BMI 25 이하)",
+                "절주: 하루 소주 2잔 이하 (맥주 1병, 와인 1잔, 위스키 2샷)",
+                "운동: 하루 30~50분, 주 5일 이상 유산소 + 근력운동 주 2~3회",
+                "채식 위주 식사조절",
+                "금연"
+              ]
+            },
+            {
+              "title": "💊 저항성 고혈압",
+              "items": [
+                "정의: 이뇨제 포함 서로 다른 기전의 고혈압약 3가지 이상 최적 용량으로 투여해도 140/90 미만으로 조절 안 될 때",
+                "대응: 이뇨제 용량 증량 또는 교체 / 신기능 저하 시 thiazide 대신 loop 이뇨제",
+                "추가 처방 가능: spironolactone, amiloride 또는 doxazosin",
+                "ACEI/ARB + spironolactone/amiloride 병용 시 1~2주 내 혈청 칼륨 확인 필요"
+              ]
+            },
+            {
+              "title": "👶 특수 상황",
+              "items": [
+                "임신 고혈압: nifedipine, labetalol, hydralazine 주로 고려",
+                "발기부전: ARB가 오히려 이롭다는 보고 / CCB·ACEI는 중립 / BB·이뇨제는 악화 가능",
+                "PDE5 억제제는 비교적 안전 투여 가능 — 단, 질산염 제제와 병용 절대 금지",
+                "백의고혈압: 장기 추적 시 고혈압·심뇌혈관질환 위험 ↑ → 약물치료 전 배제 권장"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "ACEI (안지오텐신전환효소억제제)",
+              "brand": "리시노프릴(제스트릴), 페린도프릴(아서틸), 라미프릴(트리테이스)",
+              "mechanism": "안지오텐신 I → II 전환 억제 → 혈관 수축 억제, 알도스테론 분비 감소",
+              "dosage": "Lisinopril 2.5~5mg → 목표 20~40mg 1일1회 / Perindopril 2mg → 8~16mg 1일1회",
+              "notes": "마른기침(bradykinin 분해 억제) 부작용. 여성·비흡연자에서 더 흔함. 임신부 금기."
+            },
+            {
+              "name": "ARB (안지오텐신수용체차단제)",
+              "brand": "칸데사르탄(칸데칸), 발사르탄(디오반), 로사르탄(코자)",
+              "mechanism": "AT1 수용체 차단 → 혈관 수축·알도스테론 분비 억제",
+              "dosage": "Candesartan 4~8mg → 32mg 1일1회 / Valsartan 20~40mg bid → 160mg bid",
+              "notes": "마른기침 드뭄. 임신부 금기. 고칼륨혈증·AKI·혈관부종 주의."
+            },
+            {
+              "name": "CCB (칼슘채널차단제)",
+              "brand": "암로디핀(노바스크), 펠로디핀(무노발), 딜티아젬(푸로골서방), 베라파밀(이솝틴)",
+              "mechanism": "세포 내 칼슘 유입 차단 → 혈관 평활근·심근 이완",
+              "dosage": "암로디핀 5~10mg 1일1회 / 장시간 작용형 선호, 속효성 금지",
+              "notes": "DHP CCB 부작용: 빈맥·발목 부종·두통·안면홍조. NDHP(베라파밀·딜티아젬)는 BB와 병용 시 고령 주의."
+            },
+            {
+              "name": "베타차단제 (BB)",
+              "brand": "비소프롤롤(콩코르), 카르베딜롤(딜라트렌), 아테놀롤(테놀민)",
+              "mechanism": "베타-1 수용체 차단 → 심박수·심박출량 감소",
+              "dosage": "Bisoprolol 2.5~5mg → 10mg 1일1회",
+              "notes": "노인에서 치료 이득 논란 → 특별한 적응증 있을 때만 사용. Atenolol은 뇌졸중 예방 효과 열등 → 노인 일차 약제 X."
+            },
+            {
+              "name": "이뇨제",
+              "brand": "클로르탈리돈, 인다파미드, HCTZ(히드로클로로티아지드)",
+              "mechanism": "신세뇨관에서 나트륨 재흡수 억제 → 체액량 감소",
+              "dosage": "Chlorthalidone/Indapamide 선호 고려. HCTZ도 가능.",
+              "notes": "저나트륨혈증·저칼륨혈증 주의. 통풍·저칼륨혈증 금기. Loop 이뇨제는 심부전·CLCr<30 시 사용."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "알파 차단제",
+              "brand": "독사조신(카두라)",
+              "mechanism": "알파-1 수용체 차단 → 혈관 이완",
+              "dosage": "1~8mg 1일1회",
+              "notes": "BPH 환자의 배뇨 증상 개선 효과. 당·지질대사 개선."
+            },
+            {
+              "name": "Spironolactone (MRA)",
+              "brand": "스피락톤",
+              "mechanism": "알도스테론 수용체 차단 → 나트륨 배출·칼륨 보존",
+              "dosage": "저항성 고혈압에 추가 처방. CLCr<45에서 ACEI/ARB와 병용 시 고칼륨혈증·신기능 감소 주의.",
+              "notes": "저항성 고혈압에서 효과 입증."
+            },
+            {
+              "name": "Hydralazine (혈관확장제)",
+              "brand": "-",
+              "mechanism": "직접 혈관 평활근 이완",
+              "dosage": "임신부 고혈압에 비교적 안전 사용 가능",
+              "notes": "임신부 사용 가능한 약제 중 하나."
+            }
+          ],
+          "sideEffects": [
+            "ACEI: 마른기침(가장 흔함), 고칼륨혈증, AKI, 이상미각, 백혈구감소증, 혈관부종",
+            "ARB: 고칼륨혈증, AKI (기침은 드뭄)",
+            "CCB(DHP): 빈맥, 발목 부종, 두통, 안면홍조",
+            "베타차단제: 혈당·지질대사장애, 이형협심증 증상 악화, 발기부전",
+            "이뇨제: 저나트륨혈증, 저칼륨혈증, 통풍 악화",
+            "BB + 이뇨제 병용: 당뇨병 발생 위험 증가 → 당뇨 고위험군 주의"
+          ],
+          "contraindications": [
+            "ACEI/ARB: 임신부 절대 금기, 양측 신동맥 협착, 혈관부종 병력",
+            "이뇨제: 통풍, 저칼륨혈증",
+            "베타차단제: 천식·COPD, 2~3도 방실전도장애, 말초혈관질환, 이형협심증",
+            "NDHP CCB: 고령 환자에서 BB와 병용 시 주의 (서맥·심차단 위험)",
+            "MRA(Spironolactone): CLCr<45에서 ACEI/ARB 병용 시 고칼륨혈증 주의",
+            "PDE5 억제제: 질산염 제제와 절대 병용 금지"
+          ],
+          "combos": [
+            "우선 권장: ARB 또는 ACEI ↔ 칼슘차단제",
+            "우선 권장: ARB 또는 ACEI ↔ 이뇨제",
+            "권장: 칼슘차단제 ↔ 이뇨제",
+            "가능하나 주의: ARB/ACEI ↔ 베타차단제",
+            "권장하지 않음: 베타차단제 + 이뇨제 (당뇨 발생 위험 ↑)",
+            "금지: ACEI + ARB 동시 투여"
+          ]
+        },
+        {
+          "id": "heart-failure",
+          "name": "심부전",
+          "guideline": "2022 심부전 진료지침",
+          "tags": [
+            "ARNI",
+            "ACEI",
+            "ARB",
+            "BB",
+            "MRA",
+            "SGLT2억제제",
+            "이뇨제"
+          ],
+          "overview": "심장의 기능적·구조적 이상으로 심실의 혈액 박출 또는 충만에 이상이 생겨 호흡곤란, 다리 부종, 피로 등의 증상이 나타나는 임상 증후군. 심근경색에 의한 심근 이상이 가장 흔한 원인.",
+          "criteria": [
+            {
+              "label": "HFrEF (박출률 감소)",
+              "sbp": "LVEF ≤ 40%",
+              "dbp": "증상 ± 징후"
+            },
+            {
+              "label": "HFmrEF (박출률 경도 감소)",
+              "sbp": "LVEF 41~49%",
+              "dbp": "증상 ± 징후"
+            },
+            {
+              "label": "HFpEF (박출률 보존)",
+              "sbp": "LVEF ≥ 50%",
+              "dbp": "증상 ± 징후 + 나트륨이뇨펩타이드 상승 또는 이완기 장애"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🔬 진단 바이오마커 (나트륨이뇨펩타이드)",
+              "items": [
+                "만성 심부전 배제: BNP < 35 / NT-proBNP < 125 / MR-proANP < 40 pg/mL",
+                "급성 심부전 배제: BNP < 100 / NT-proBNP < 300 / MR-proANP < 120 pg/mL",
+                "⚠️ ARNI 복용 시 BNP 혈중 농도 증가 → NT-proBNP 사용 권장",
+                "비만·급성 폐부종·안정된 심부전에서는 수치가 낮게 나올 수 있음",
+                "고령·빈혈·신부전·COPD 등에서는 심부전 없어도 수치 높게 나올 수 있음"
+              ]
+            },
+            {
+              "title": "📋 심부전 분류",
+              "items": [
+                "만성 심부전: 안정적이나 서서히 진행",
+                "비대상성 심부전: 만성 심부전이 갑자기 또는 서서히 악화 → 이뇨제 정맥주사 필요",
+                "급성 심부전(de novo): 심근경색·심근염 등으로 처음 발생",
+                "대상성 심부전: 일정 기간 증상이 없거나 호전"
+              ]
+            },
+            {
+              "title": "🚫 임신 중 금기 약물",
+              "items": [
+                "ACE억제제, ARB, ARNI, MRA, Ivabradine, SGLT2 억제제 → 태아 독성으로 금기",
+                "임신 중에는 BB 사용"
+              ]
+            },
+            {
+              "title": "🫀 동반 질환 관리",
+              "items": [
+                "당뇨병: SGLT2 억제제 표준 치료 권고",
+                "심방세동: 심부전과 흔히 병발, 통합 치료 필요",
+                "철 결핍·빈혈: 만성 심부전에서 흔히 동반, 사망률과 연관",
+                "COPD: 심장 선택적 BB 저용량부터 시작 (면밀한 모니터링)",
+                "수면무호흡: 심부전 환자의 절반 이상에서 동반"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "ARNI (Sacubitril/Valsartan)",
+              "brand": "엔트레스토 필름코팅정",
+              "mechanism": "네프릴리신 억제(sacubitril) + AT1 차단(valsartan) → BNP 상승·혈관 이완",
+              "dosage": "시작: 48/51mg bid → 목표: 97/103mg bid",
+              "notes": "HFrEF 1차 표준 치료. ACEI 대체 or ARB 대체. ARNI 사용 중 BNP 수치 의미 해석 주의(NT-proBNP 사용)."
+            },
+            {
+              "name": "ACEI / ARB",
+              "brand": "리시노프릴(제스트릴), 캔데사르탄(칸데칸), 발사르탄(디오반)",
+              "mechanism": "RAAS 억제 → 심장 리모델링 억제, 혈압 감소",
+              "dosage": "Lisinopril 2.5~5mg → 20~40mg / Candesartan 4~8mg → 32mg",
+              "notes": "ARNI 투여 불가 시 사용. ACEI는 마른기침 주의."
+            },
+            {
+              "name": "베타차단제 (BB)",
+              "brand": "비소프롤롤(콩코르), 카르베딜롤(딜라트렌), 네비볼롤(네비레트)",
+              "mechanism": "교감신경 과활성 억제 → 심박수·심근산소소비 감소",
+              "dosage": "Bisoprolol 1.25mg → 10mg qd / Carvedilol 3.125mg → 25mg bid",
+              "notes": "주의 약물: Verapamil, Diltiazem, Digoxin, Amiodarone, Ivabradine. 피로 심하면 반용량."
+            },
+            {
+              "name": "MRA (Spironolactone)",
+              "brand": "스피락톤정",
+              "mechanism": "알도스테론 차단 → 심장 섬유화 억제, 나트륨 배출",
+              "dosage": "eGFR>50: 12.5~25mg → 25mg qd / eGFR<50: 12.5mg or 2일 1회",
+              "notes": "고칼륨혈증·신기능 장애 주의. Amiloride, ACEI/ARB/Aliskiren 병용 주의."
+            },
+            {
+              "name": "SGLT2 억제제",
+              "brand": "다파글리플로진(포시다파), 엠파글리플로진(자디앙), 이프라글리플로진(슈글렛)",
+              "mechanism": "신세뇨관 포도당 재흡수 억제 → 삼투성 이뇨, 심장 보호",
+              "dosage": "당뇨 여부 무관하게 사용 가능",
+              "notes": "HFrEF 표준 4제 치료의 하나. 임신 중 금기."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Ivabradine",
+              "brand": "프로코라란정 5mg",
+              "mechanism": "동결절 If channel 억제 → 맥박수 감소",
+              "dosage": "초회 5mg bid → 2.5~7.5mg bid (심박수에 따라 조절)",
+              "notes": "동율동이면서 안정 시 심박수 ≥70회/분인 환자. 간장애·만성 망막질환 주의."
+            },
+            {
+              "name": "Vericiguat",
+              "brand": "베르쿠보정 2.5mg, 10mg",
+              "mechanism": "가용성 구아닐산고리화효소(sGC) 자극 → cGMP 생성 증가·혈관 확장",
+              "dosage": "표준 치료에도 심부전 악화로 입원이 필요한 환자에게 추가",
+              "notes": "사망률 또는 심부전 재입원 감소."
+            },
+            {
+              "name": "Digoxin",
+              "brand": "디고신정 0.25mg",
+              "mechanism": "Na/K 펌프 차단 → 세포내 Ca²⁺ 증가 → 심수축력 ↑ / 부교감 항진 → 심박수 ↓",
+              "dosage": "0.125~0.25mg 1일 1회. 저용량 시작 or 2일 1회.",
+              "notes": "AF 심박수 조절 또는 동율동 증상 지속 시. 독성(소화기·신경계·부정맥) 주의. Macrolide, Itraconazole, Cyclosporine, Amiodarone 병용 시 독성 위험 ↑."
+            },
+            {
+              "name": "Tolvaptan (바소프레신 V2 수용체 길항제)",
+              "brand": "삼스카정",
+              "mechanism": "V2 수용체 차단 → 수분 선택적 배출 (전해질 배출 없음)",
+              "dosage": "15mg 1일 1회 → 최대 60mg. 30일 초과 투여 금지.",
+              "notes": "기존 치료로 교정 안 되는 저나트륨혈증 시 사용. 투여 후 첫 24시간 수분 제한 불필요. 중단 시 다시 수분 제한 시작."
+            },
+            {
+              "name": "Loop 이뇨제",
+              "brand": "푸로세미드(lasix), 토르세미드",
+              "mechanism": "헨레고리 상행각에서 Na/K/2Cl 공동수송체 억제 → 강력한 이뇨",
+              "dosage": "Furosemide 20~40mg → 최대 600mg / Torsemide 10~20mg → 최대 200mg",
+              "notes": "체액 과다 심부전의 일차치료. Torsemide가 더 안정적인 체내 이용률(대신 비용 ↑)."
+            }
+          ],
+          "sideEffects": [
+            "ARNI/ACEI/ARB: 저혈압, 고칼륨혈증, AKI, 혈관부종",
+            "ACEI: 마른기침 (bradykinin 분해 억제)",
+            "BB: 피로감, 서맥, 혈당·지질대사 장애",
+            "MRA: 고칼륨혈증, 여성형 유방(spironolactone)",
+            "SGLT2 억제제: 요로·생식기 감염, 케톤산증",
+            "Digoxin: 식욕부진·오심·구토, 시각장애, 부정맥 (독성 범위 좁음)",
+            "Tolvaptan: 간 손상 위험 (30일 초과 투여 금지)",
+            "Loop 이뇨제: 저칼륨혈증, 저나트륨혈증, 저혈압, 신기능 악화"
+          ],
+          "contraindications": [
+            "ACEI/ARB/ARNI/MRA/Ivabradine/SGLT2 억제제: 임신 중 금기",
+            "ACEI + ARB 동시 투여: 금기",
+            "NDHP CCB (베라파밀, 딜티아젬): HFrEF 환자 금기",
+            "Digoxin: 신기능 감소 시 용량 감량 필요 (배설 감소)"
+          ],
+          "combos": [
+            "HFrEF 표준 4제: ARNI(또는 ACEI/ARB) + BB + MRA + SGLT2 억제제",
+            "체액 과다: 위 4제 + Loop 이뇨제 추가",
+            "2차 추가 (심박수 ≥70, 동율동): Ivabradine 추가",
+            "2차 추가 (AF 심박수 조절): Digoxin 추가",
+            "주의: BB + Verapamil/Diltiazem 병용 시 서맥·심차단 위험"
+          ]
+        },
+        {
+          "id": "stable-angina",
+          "name": "안정형 협심증",
+          "guideline": "2013 안정형 협심증 표준진료 권고안",
+          "tags": [
+            "아스피린",
+            "BB",
+            "CCB",
+            "질산염",
+            "스타틴"
+          ],
+          "overview": "관상동맥 협착 등으로 혈류 공급이 감소하여 심근이 허혈 상태에 빠지는 질환. 노작 또는 정서적 스트레스로 악화되고 NTG로 완화되는 흉통이 특징.",
+          "criteria": [
+            {
+              "label": "전형적 흉통",
+              "sbp": "3가지 모두 해당",
+              "dbp": "① 흉골 하부 통증 ② 운동·스트레스 시 유발 ③ NTG로 호전"
+            },
+            {
+              "label": "비전형적 흉통",
+              "sbp": "2가지 해당",
+              "dbp": "휴식 시 통증, 상복부 동통, 소화불량 등"
+            },
+            {
+              "label": "심장외 요인 흉통",
+              "sbp": "0~1가지 해당",
+              "dbp": "비심인성 흉통"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🎯 치료 원칙 (ABCDE)",
+              "items": [
+                "A — Aspirin and Antianginal therapy",
+                "B — Beta-blocker and Blood pressure",
+                "C — Cigarette smoking and Cholesterol",
+                "D — Diet and Diabetes",
+                "E — Education and Exercise"
+              ]
+            },
+            {
+              "title": "📊 콜레스테롤 치료 목표",
+              "items": [
+                "LDL: 100 mg/dL 이하 목표",
+                "총콜레스테롤: 200 mg/dL 이하 목표",
+                "최고위험군(초고위험군): LDL 70 mg/dL 이하 권장"
+              ]
+            },
+            {
+              "title": "⚠️ 질산염 내성",
+              "items": [
+                "지속적 투여 시 24~48시간 후 질산염 내성 발생",
+                "하루 8~12시간의 nitrate-free interval 필요",
+                "NTG: 5분 간격 0.3mg, 15분 내 1.2mg 초과 금지",
+                "신체 활동 전 예방적 투여 시 약 40분간 협심증 예방 효과"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "아스피린",
+              "brand": "아스피린 100~200mg",
+              "mechanism": "혈소판 cyclooxygenase 억제 → Thromboxane A2 합성 차단",
+              "dosage": "100~200mg 1일 1회. 금기 없는 한 필수 투여.",
+              "notes": "금기: 소화성 궤양, 아스피린 천식, 혈우병, 출혈 경향, 심한 간/신/심부전, 임신 3기"
+            },
+            {
+              "name": "베타차단제 (BB)",
+              "brand": "프로프라놀롤(인데놀), 아테놀롤(테놀민), 비소프롤롤(콩코르)",
+              "mechanism": "심박수 감소 → 이완기 증가 → 관동맥 관류 개선, 심근 산소소비량 감소",
+              "dosage": "목표 심박수 50~60회/분. Bisoprolol 10mg 1일1회.",
+              "notes": "금기: 심한 서맥, 고도 방실차단, 동결절 기능부전, 중증 심부전, 기관지 천식, 이형협심증"
+            },
+            {
+              "name": "질산염 제제 (Nitrates)",
+              "brand": "NTG, Isosorbide dinitrate(엔지비드 40mg), Isosorbide 5-mononitrate(엘탄서방정 30mg)",
+              "mechanism": "정맥 확장 → 전부하 감소 → 심근 산소요구량 감소. 심외막 관동맥 확장.",
+              "dosage": "NTG 설하 0.3mg (5분 간격, 최대 3회) / Isosorbide 5-mononitrate 서방형 1일1회",
+              "notes": "내성 예방을 위해 8~12시간 nitrate-free interval 필요. 부작용: 두통·안면홍조·저혈압."
+            },
+            {
+              "name": "스타틴 (Statin)",
+              "brand": "아토르바스타틴(리피토), 로수바스타틴(크레스토)",
+              "mechanism": "HMG-CoA 환원효소 억제 → 간 콜레스테롤 합성 감소",
+              "dosage": "LDL 100 mg/dL 이하 목표 (최고위험군 70 이하)",
+              "notes": "허혈성 질환 발병 위험률·전체 사망률 감소. 중성지방 감량 효과도 있음."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "CCB (칼슘채널차단제)",
+              "brand": "니페디핀(아달라트오로스 30mg), 암로디핀(노바스크), 딜티아젬(푸로골서방), 베라파밀",
+              "mechanism": "심근 수축 억제 + 혈관 확장 → 심근 산소요구량 감소",
+              "dosage": "암로디핀 5~10mg 1일1회 / 딜티아젬 서방형 120~320mg 1일1회",
+              "notes": "변이형(이형)협심증에 매우 효과적. BB가 이형협심증에는 금기이므로 CCB 우선."
+            },
+            {
+              "name": "Clopidogrel (클로피도그렐)",
+              "brand": "플라빅스",
+              "mechanism": "ADP 수용체 차단 → 혈소판 활성화 비가역적 억제",
+              "dosage": "75mg 1일1회 (아스피린과 병용 권장)",
+              "notes": "아스피린 금기 환자 대체제. 아스피린 + 클로피도그렐 병용요법 일정 기간 권고."
+            },
+            {
+              "name": "Nicorandil",
+              "brand": "니코란정, 시그마트정 5mg",
+              "mechanism": "K-channel opener + nitrate 복합 기전 → 심외막·미세 관동맥 모두 확장",
+              "dosage": "10~30mg/일, 2~3회 분복",
+              "notes": "질산염 내성 없음. 근거는 아직 미흡 (2013 기준)."
+            },
+            {
+              "name": "Trimetazidine",
+              "brand": "바스티난 MR서방정 35mg",
+              "mechanism": "지방산 대사 억제 → 당 대사 활성화 → 허혈 심근 보호",
+              "dosage": "35mg bid (서방형). BB, CCB와 병용 가능.",
+              "notes": "대사성 항협심증 약물."
+            }
+          ],
+          "sideEffects": [
+            "아스피린: 소화성 궤양·위장 출혈, 아스피린 천식",
+            "BB: 서맥, 피로감, 이형협심증 악화, 혈당·지질 장애",
+            "질산염: 두통(매우 흔함), 안면홍조, 저혈압, 반사성 빈맥",
+            "CCB(DHP): 두통, 부종, 홍조, 심계항진",
+            "CCB(베라파밀): 저혈압, 심근 억제, 부종, 심부전, 서맥, 변비",
+            "스타틴: 근육통, 간독성 (드뭄), 소화장애"
+          ],
+          "contraindications": [
+            "BB: 이형협심증(관상동맥 연축)에서 금기 — 증상 악화 및 관상동맥 연축 유발 가능",
+            "속효성 CCB: 빈맥·심장 부담 유발 → 사용 금지",
+            "질산염 + PDE5 억제제: 절대 병용 금지 (심각한 저혈압)",
+            "ACEI/ARB: 임신부 금기",
+            "스타틴: 활동성·만성 간질환 절대 금기 / 임신·수유 중 금기"
+          ],
+          "combos": [
+            "표준: 아스피린 + BB + 스타틴 + ACEI/ARB",
+            "변이형 협심증: CCB (BB 대신), 질산염 병용",
+            "증상 조절 추가: BB + CCB (단, 베라파밀/딜티아젬 + BB 병용 시 서맥 주의)",
+            "항혈소판 이중요법: 아스피린 + 클로피도그렐 (일정 기간)"
+          ]
+        },
+        {
+          "id": "ami",
+          "name": "급성심근경색증",
+          "guideline": "2020 급성심근경색증 약물치료 전문가 합의문",
+          "tags": [
+            "항혈소판제",
+            "ACEI",
+            "BB",
+            "스타틴",
+            "DAPT"
+          ],
+          "overview": "관상동맥 플라크 파열 및 혈전 형성으로 관상동맥이 급성 폐색되어 심근이 괴사하는 응급 질환. STEMI(ST분절 상승)와 NSTEMI로 분류.",
+          "criteria": [
+            {
+              "label": "STEMI",
+              "sbp": "ST분절 상승",
+              "dbp": "즉각적 재관류 치료 필요"
+            },
+            {
+              "label": "NSTEMI",
+              "sbp": "ST분절 비상승",
+              "dbp": "심근 효소 상승"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "💊 항혈소판제 Loading Dose",
+              "items": [
+                "아스피린: 150~300mg 부하 → 75~100mg 유지",
+                "Clopidogrel: 300~600mg 부하 → 75mg 유지",
+                "Prasugrel: 60mg 부하 → 10mg 유지",
+                "Ticagrelor: 180mg 부하 → 90mg bid 유지"
+              ]
+            },
+            {
+              "title": "📅 DAPT 유지 기간",
+              "items": [
+                "중재술 후 기본: 12개월 DAPT 유지",
+                "출혈 고위험군: 6개월로 단축 가능",
+                "허혈 고위험군: 12개월 이상 연장 가능",
+                "저용량 리바록사반(자렐토 2.5mg bid) + 아스피린 + 클로피도그렐 삼제요법: 뇌졸중 과거력 없고 출혈 위험 낮은 고허혈 위험 환자에서 고려"
+              ]
+            },
+            {
+              "title": "🩺 콜레스테롤 치료 목표",
+              "items": [
+                "LDL 치료 목표: 기저 수치 50% 이상 감소 + 70 mg/dL 이하",
+                "고용량 스타틴 최대한 빨리 시작",
+                "최대 내약 스타틴에도 LDL ≥70: ezetimibe 추가",
+                "스타틴 + ezetimibe에도 LDL ≥70: PCSK9 억제제 고려"
+              ]
+            },
+            {
+              "title": "⚠️ 약제별 주의사항",
+              "items": [
+                "Prasugrel: 뇌졸중·TIA 과거력 환자 금기 / 75세 이상은 당뇨 또는 MI 과거력 있는 고위험군에서만 권장",
+                "Ticagrelor: 간 대사 불필요 → 더 빠른 작용 개시",
+                "위장관 출혈 위험 있거나 65세 이상·H.pylori 감염·NSAID 사용 등: PPI 투여 권고"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "아스피린 (Aspirin)",
+              "brand": "아스피린정",
+              "mechanism": "COX-1 비가역적 억제 → TXA2 합성 차단",
+              "dosage": "부하 150~300mg → 유지 75~100mg qd. 평생 복용.",
+              "notes": "특별한 금기 없는 한 필수."
+            },
+            {
+              "name": "Ticagrelor",
+              "brand": "브릴린타정 90mg",
+              "mechanism": "P2Y12 수용체 가역적 차단 (활성형, 간 대사 불필요)",
+              "dosage": "부하 180mg → 90mg bid 유지",
+              "notes": "허혈·출혈 사건 고위험군에서 clopidogrel보다 우선 권고. 호흡곤란 부작용 가능."
+            },
+            {
+              "name": "Prasugrel",
+              "brand": "에피언트정 5/10mg",
+              "mechanism": "P2Y12 수용체 비가역적 차단 (전구약물)",
+              "dosage": "부하 60mg → 10mg qd 유지",
+              "notes": "뇌졸중·TIA 과거력 금기. 75세 이상 고위험군에서만 사용."
+            },
+            {
+              "name": "베타차단제 (BB)",
+              "brand": "비소프롤롤(콩코르), 카르베딜롤(딜라트렌)",
+              "mechanism": "교감신경 차단 → 심박수·심근 산소소비 감소, 부정맥 예방",
+              "dosage": "금기 없는 한 조기에 투여 시작",
+              "notes": "심부전·당뇨 동반 LVEF≤40% 환자에서 MRA 병용 권고."
+            },
+            {
+              "name": "ACEI",
+              "brand": "리시노프릴, 라미프릴, 페린도프릴",
+              "mechanism": "RAAS 억제 → 심장 리모델링 방지",
+              "dosage": "강력 권고. ACEI 불가 시 ARB 대체.",
+              "notes": "LVEF 40% 이하 + 심부전 또는 당뇨 동반 + 신부전·고칼륨혈증 없는 경우 MRA 추가 권고."
+            },
+            {
+              "name": "고용량 스타틴",
+              "brand": "아토르바스타틴 40~80mg, 로수바스타틴 20mg",
+              "mechanism": "HMG-CoA 환원효소 억제 → LDL 강하·플라크 안정화",
+              "dosage": "가능한 빨리 시작. LDL 70 이하 + 기저치 50% 이상 감소 목표.",
+              "notes": "최대 내약 용량에서도 LDL≥70 시 ezetimibe, 이후 PCSK9 억제제 추가."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Clopidogrel",
+              "brand": "플라빅스정 75mg",
+              "mechanism": "P2Y12 수용체 비가역적 차단 (전구약물, 간 대사 필요)",
+              "dosage": "부하 300~600mg → 75mg qd 유지",
+              "notes": "Prasugrel/Ticagrelor 사용 불가 또는 금기 시 사용."
+            },
+            {
+              "name": "Rivaroxaban (저용량)",
+              "brand": "자렐토정 2.5mg",
+              "mechanism": "Factor Xa 직접 억제",
+              "dosage": "2.5mg bid + 아스피린 + 클로피도그렐 삼제요법",
+              "notes": "뇌졸중 과거력 없고 출혈 위험 낮은 고허혈 위험 환자에서 고려."
+            },
+            {
+              "name": "Ezetimibe",
+              "brand": "바이토린(ezetimibe/simvastatin)",
+              "mechanism": "소장 NPC1L1 단백 차단 → 콜레스테롤 흡수 억제",
+              "dosage": "10mg 1일 1회, 스타틴과 병용",
+              "notes": "최대 내약 스타틴에도 LDL≥70 시 추가."
+            },
+            {
+              "name": "PCSK9 억제제",
+              "brand": "에볼로쿠맙(레파타주), 알리로쿠맙(프랄런트주)",
+              "mechanism": "LDL 수용체 발현 증가 → LDL 세포 내 분해 촉진",
+              "dosage": "Evolocumab 2주 140mg or 월 420mg 피하주사",
+              "notes": "스타틴 + ezetimibe에도 LDL≥70 시 고려."
+            }
+          ],
+          "sideEffects": [
+            "아스피린: 위장 출혈, 소화성 궤양",
+            "Ticagrelor: 호흡곤란, 서맥, 출혈",
+            "Prasugrel: 출혈 (특히 두개내 출혈 — 고령·저체중 주의)",
+            "BB: 서맥, 피로감, 혈당·지질 장애",
+            "스타틴: 근육통, 간독성 (드뭄), CK 상승",
+            "PCSK9 억제제: 주사 부위 반응, 비인두염"
+          ],
+          "contraindications": [
+            "Prasugrel: 뇌졸중·TIA 과거력 환자 절대 금기",
+            "ACEI/ARB: 임신부 금기",
+            "스타틴: 활동성 간질환 금기 / 임신 금기",
+            "Rivaroxaban 삼제요법: 뇌졸중 과거력 있거나 출혈 고위험군에서는 사용 주의"
+          ],
+          "combos": [
+            "DAPT: 아스피린 + P2Y12 억제제 (Ticagrelor 또는 Prasugrel 우선)",
+            "표준 4제: DAPT + BB + ACEI + 고용량 스타틴",
+            "LVEF≤40 + 심부전·당뇨 (신부전·고칼륨혈증 없을 때): MRA 추가",
+            "PPI 추가 권고: 위장관 출혈 과거력, 65세 이상, H.pylori 감염, NSAID/Prasugrel/Ticagrelor 사용"
+          ]
+        },
+        {
+          "id": "af",
+          "name": "심방세동",
+          "guideline": "2021 심방세동 진료지침 / 2022 NOAC 사용지침",
+          "tags": [
+            "NOAC",
+            "Warfarin",
+            "항응고제",
+            "BB",
+            "CHA2DS2-VASc"
+          ],
+          "overview": "상심실성 빈맥의 일종으로 불규칙적이고 부조화된 심방의 전기적 활성화로 인해 비효율적인 심방 수축을 초래하는 질환. 임상에서 접하는 지속성 부정맥 중 가장 흔함. 뇌졸중 위험 5배 증가.",
+          "criteria": [
+            {
+              "label": "발작성 AF",
+              "sbp": "7일 이내 동율동 회복",
+              "dbp": "대부분 48시간 내 자발 종료"
+            },
+            {
+              "label": "지속성 AF",
+              "sbp": "7일 이상 지속",
+              "dbp": "-"
+            },
+            {
+              "label": "심전도 기준",
+              "sbp": "R-R 간격 불규칙",
+              "dbp": "뚜렷한 P파 없음, 30초 이상 지속"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🎯 CHA₂DS₂-VASc 뇌졸중 위험 평가",
+              "items": [
+                "C — 울혈성 심부전 (+1)",
+                "H — 고혈압 (+1)",
+                "A — 나이 75세 이상 (+2)",
+                "D — 당뇨 (+1)",
+                "S — 뇌졸중·TIA·혈전색전증 과거력 (+2)",
+                "V — 혈관질환 (MI, 말초동맥질환, 대동맥 플라크) (+1)",
+                "A — 나이 65~74세 (+1)",
+                "Sc — 성별 (여성) (+1)",
+                "남성 0점, 여성 1점: 항혈전제 투여 불필요",
+                "남성 ≥2점, 여성 ≥3점: 항응고제 투여 추천",
+                "그 사이: 개별화 판단"
+              ]
+            },
+            {
+              "title": "🩸 HAS-BLED 출혈 위험 평가",
+              "items": [
+                "H — 조절 안 되는 고혈압 (SBP>160)",
+                "A — 비정상 신/간기능",
+                "S — 뇌졸중 과거력",
+                "B — 출혈 과거력 또는 출혈 경향",
+                "L — INR 조절 불안정",
+                "E — 노인 (65세 이상)",
+                "D — 약제(항혈소판제·NSAID) 또는 과도한 음주",
+                "3점 이상: 더 자주 추적 관찰 필요"
+              ]
+            },
+            {
+              "title": "💊 심박수 vs 리듬 조절",
+              "items": [
+                "심박수 조절 목표: 맥박수 110회 미만 유지",
+                "증상 있거나 좌심실 기능 악화 시: 80회 미만으로 강화",
+                "리듬 조절: 삶의 질 개선 목적. 심방세동을 제거하는 것보다 줄이는 것도 성공으로 봄.",
+                "초기 AF: 구조적 심질환 없으면 Flecainide, Propafenone 추천",
+                "구조적 심질환 있으면: Amiodarone IV"
+              ]
+            },
+            {
+              "title": "🔄 NOAC ↔ Warfarin 전환",
+              "items": [
+                "NOAC → Warfarin: Warfarin 즉시 시작, INR<2이면 NOAC 계속 유지, INR≥2이면 NOAC 중단",
+                "Warfarin → NOAC: INR≤2이면 즉시 NOAC 시작 / INR 2~2.5이면 즉시 or 다음날 / INR 2.5~3이면 1~3일 내 INR 재확인 / INR≥3이면 보류",
+                "NOAC은 마지막 복용 후 12~24시간 내에 항응고 효과 감소 → 복약순응도 매우 중요"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Apixaban",
+              "brand": "엘리퀴스/리퀴시아정 2.5mg, 5mg",
+              "mechanism": "Factor Xa 직접 억제 → 트롬빈 생성 억제",
+              "dosage": "표준 5mg bid / 감량(2.5mg bid): 나이≥80세, 체중≤60kg, 혈청 Cr≥1.5mg/dL 중 2가지 이상",
+              "notes": "60kg 이하 저체중·고령 환자에서 선호. 음식 영향 최소."
+            },
+            {
+              "name": "Rivaroxaban",
+              "brand": "자렐토정 10/15/20mg",
+              "mechanism": "Factor Xa 직접 억제",
+              "dosage": "표준 20mg qd (저녁 식사와 함께) / 감량 15mg qd: CrCl 15~49 mL/min",
+              "notes": "15mg, 20mg은 반드시 식사와 함께 복용."
+            },
+            {
+              "name": "Dabigatran",
+              "brand": "프라닥사캡슐 110mg, 150mg",
+              "mechanism": "트롬빈 직접 억제 (응고 최종 단계 차단)",
+              "dosage": "표준 150mg bid / 감량 110mg bid: CrCl 30~50, 나이≥75세, Verapamil 사용, 출혈 위험",
+              "notes": "캡슐 개봉 금지 (출혈 위험 ↑). 음식 영향 없음."
+            },
+            {
+              "name": "Edoxaban",
+              "brand": "릭시아나정 15/30/60mg",
+              "mechanism": "Factor Xa 직접 억제",
+              "dosage": "표준 60mg qd / 감량 30mg qd: CrCl 15~50, 체중≤60kg, Dronedarone·Cyclosporine·Erythromycin·Ketoconazole 동시 사용",
+              "notes": "음식에 의한 흡수 39% 증가. 식사와 상관없이 복용 가능."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Warfarin (VKA)",
+              "brand": "쿠마딘정",
+              "mechanism": "비타민 K 의존성 응고인자(II, VII, IX, X) 합성 억제",
+              "dosage": "목표 INR 2.0~3.0. 초기 2.5~5mg 후 INR에 따라 조절.",
+              "notes": "INR 정기 모니터링 필수. Vitamin K 많은 음식 주의. NOAC 불가 시 사용."
+            },
+            {
+              "name": "Bisoprolol (심박수 조절 BB)",
+              "brand": "콩코르정",
+              "mechanism": "베타-1 차단 → 심박수 감소",
+              "dosage": "1.25~10mg qd",
+              "notes": "심박수 조절 일차 선택. 천식·기관지 경련·급성 심부전 금기."
+            },
+            {
+              "name": "Diltiazem / Verapamil (심박수 조절 CCB)",
+              "brand": "헤르벤(딜티아젬), 이솝틴(베라파밀)",
+              "mechanism": "방실결절 전도 억제 → 심실 반응률 감소",
+              "dosage": "Diltiazem 서방형 90~360mg qd / Verapamil 서방형 120~480mg qd",
+              "notes": "HFrEF 환자에서 금기."
+            },
+            {
+              "name": "Amiodarone (리듬 조절)",
+              "brand": "코다론정 200mg",
+              "mechanism": "칼륨채널 주 억제(K-channel) + 나트륨·칼슘채널·베타 차단 복합 작용",
+              "dosage": "4주간 600mg/일 → 4주간 400mg/일 → 200mg/일 유지",
+              "notes": "다른 대안 없을 때만 고려 (다양한 심장외 부작용). 갑상선 질환 환자 피하기. QT 간격 연장 주의."
+            }
+          ],
+          "sideEffects": [
+            "NOAC 공통: 출혈 (두개내 출혈은 VKA보다 낮음), 소화장애",
+            "Dabigatran: 소화기 증상 (다른 NOAC보다 흔함)",
+            "Warfarin: 출혈, 피부괴사 (초기), 자색 발가락 증후군, 음식·약물 상호작용 많음",
+            "Amiodarone: 갑상선 기능 이상, 폐 독성, 간 독성, 광과민성, 각막 침착, QT 연장",
+            "Flecainide/Propafenone: 어지럼증, 시야 장애. Propafenone은 미각 이상.",
+            "Dronedarone: 혈중 크레아티닌 0.1~0.2mg/dL 상승 (신기능 악화 아님), 간질환 주의"
+          ],
+          "contraindications": [
+            "NOAC: 임신 중 사용 불가 (임신 중에는 저분자량 헤파린)",
+            "Flecainide/Propafenone: 허혈성 심질환, 좌심실 구혈률 저하 금기",
+            "Dronedarone: 불안정한 심부전, CrCl<30, QT 연장 약제 병용 금기",
+            "Verapamil/Diltiazem: HFrEF 환자 금기",
+            "항응고치료 절대 금기: 현재 진행 중인 중증 출혈, 중증 혈소판 감소증, 최근 고위험 출혈 사건(뇌출혈 등)",
+            "항혈소판제 단독요법(아스피린/클로피도그렐): 뇌졸중 예방 목적으로 단독 사용은 부적절"
+          ],
+          "combos": [
+            "항응고 + 심박수 조절: NOAC + BB 또는 CCB(NDHP)",
+            "항응고 + 리듬 조절: NOAC + Amiodarone 또는 Flecainide/Propafenone",
+            "주의: Amiodarone + Warfarin → Warfarin 용량 감량 필요",
+            "주의: Amiodarone + Statin → 근육병 위험 증가",
+            "주의: Dronedarone + Verapamil/Diltiazem/항진균제(-azole) 병용 금기",
+            "주의: 항응고치료 중 항혈소판제·NSAIDs 정기 투여 피하기"
+          ]
+        },
+        {
+          "id": "dyslipidemia",
+          "name": "이상지질혈증",
+          "guideline": "2022 이상지질혈증 치료지침 5판",
+          "tags": [
+            "스타틴",
+            "Ezetimibe",
+            "PCSK9억제제",
+            "피브린산",
+            "오메가3"
+          ],
+          "overview": "혈중 LDL, 중성지방의 증가 또는 HDL 감소로 죽상경화성 심혈관질환(ASCVD) 위험을 높이는 대사 질환. 심혈관질환 사망률과 매우 높은 상관관계를 가짐.",
+          "criteria": [
+            {
+              "label": "LDL 매우 높음",
+              "sbp": "≥ 190 mg/dL",
+              "dbp": "-"
+            },
+            {
+              "label": "LDL 높음",
+              "sbp": "160~189 mg/dL",
+              "dbp": "-"
+            },
+            {
+              "label": "LDL 경계",
+              "sbp": "130~159 mg/dL",
+              "dbp": "-"
+            },
+            {
+              "label": "LDL 정상",
+              "sbp": "100~129 mg/dL",
+              "dbp": "-"
+            },
+            {
+              "label": "LDL 적정",
+              "sbp": "< 100 mg/dL",
+              "dbp": "-"
+            },
+            {
+              "label": "TG 매우 높음 (췌장염 위험)",
+              "sbp": "≥ 500 mg/dL",
+              "dbp": "약물치료 필수"
+            },
+            {
+              "label": "HDL 낮음 (위험)",
+              "sbp": "< 40 mg/dL",
+              "dbp": "-"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🎯 위험도별 LDL 치료 목표",
+              "items": [
+                "초고위험군 (관상동맥질환): LDL < 55 mg/dL",
+                "고위험군 (허혈뇌졸중·TIA·경동맥질환·말초동맥질환·복부대동맥류·장기합병 당뇨): LDL < 70 mg/dL",
+                "당뇨병 (10년 미만, 위험인자 없음): LDL < 100 mg/dL",
+                "중등도 위험군 (주요 위험인자 ≥2개): LDL < 130 mg/dL",
+                "저위험군 (주요 위험인자 ≤1개): LDL < 160 mg/dL"
+              ]
+            },
+            {
+              "title": "🏃 생활요법",
+              "items": [
+                "포화지방산: 에너지 섭취량의 7% 미만",
+                "총지방: 에너지 섭취량의 30% 이내",
+                "트랜스지방산: 섭취 금지",
+                "식이섬유: 하루 25g 이상",
+                "운동: 주당 150~300분 중강도 유산소 (또는 75~150분 고강도)",
+                "알코올: 하루 1~2잔 이내, 가급적 금주",
+                "금연 (간접흡연 포함)"
+              ]
+            },
+            {
+              "title": "📊 스타틴 강도 분류",
+              "items": [
+                "고강도 (LDL 50% 이상 감소): Rosuvastatin 20mg, Atorvastatin 40~80mg",
+                "중등강도 (LDL 30~50% 감소): Rosuvastatin 5~10mg, Atorvastatin 10~20mg, Simvastatin 20~40mg, Pitavastatin 2~4mg",
+                "Rosuvastatin·Atorvastatin·Pitavastatin: 복용 시간 무관",
+                "Simvastatin·Pravastatin·Fluvastatin: 저녁 복용이 더 효과적",
+                "Lovastatin: 저녁 식사와 함께"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Rosuvastatin",
+              "brand": "크레스토, 뉴스타틴알, 로베틴",
+              "mechanism": "HMG-CoA 환원효소 경쟁적 억제 → 간 콜레스테롤 합성 감소",
+              "dosage": "고강도 20mg / 중등강도 5~10mg. 복용 시간 무관.",
+              "notes": "CYP2C9 대사. 가장 강력한 스타틴 중 하나."
+            },
+            {
+              "name": "Atorvastatin",
+              "brand": "리피토, 리피로우, 뉴바스트, 뉴스타틴에이",
+              "mechanism": "HMG-CoA 환원효소 억제",
+              "dosage": "고강도 40~80mg / 중등강도 10~20mg. 복용 시간 무관.",
+              "notes": "CYP3A4 대사. 자몽주스 등 CYP3A4 억제제 주의."
+            },
+            {
+              "name": "Pitavastatin",
+              "brand": "리바로, 피타듀스",
+              "mechanism": "HMG-CoA 환원효소 억제",
+              "dosage": "2~4mg 1일 1회. 복용 시간 무관.",
+              "notes": "Glucuronidation 대사 (일부 CYP2C9). 신기능 저하 환자에서 비교적 안전."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Ezetimibe",
+              "brand": "에제티미브 10mg",
+              "mechanism": "소장 NPC1L1 단백 차단 → 콜레스테롤 흡수 억제",
+              "dosage": "10mg 1일 1회 (시간 무관). 스타틴과 병용 자주 사용.",
+              "notes": "심한 간기능 저하 금기. 임신부·수유부 금기. 부작용: 위장관계(복통·설사·고창)."
+            },
+            {
+              "name": "PCSK9 억제제",
+              "brand": "에볼로쿠맙(레파타주), 알리로쿠맙(프랄런트주)",
+              "mechanism": "LDL 수용체 분해 효소(PCSK9) 억제 → LDL 수용체 발현 증가",
+              "dosage": "Evolocumab: 2주 140mg 또는 월 420mg 피하주사",
+              "notes": "간독성·약물 상호작용 알려진 바 없음. 주사 부위 반응."
+            },
+            {
+              "name": "Fenofibrate (피브린산 유도체)",
+              "brand": "리피딜 슈프라, 페노시드",
+              "mechanism": "PPAR-α 활성화 → 지단백 대사 조절. TG 강하에 가장 효과적.",
+              "dosage": "160~200mg 1일 1회, 식후 즉시",
+              "notes": "고중성지방혈증 1차 선택. Warfarin 병용 시 출혈 주의 (알부민 경쟁). 신기능 감소 주의."
+            },
+            {
+              "name": "오메가-3 지방산",
+              "brand": "오마코 등",
+              "mechanism": "간 VLDL·TG 합성 억제, 지방산 분해 촉진",
+              "dosage": "2~4g 1일 1~2회 분복",
+              "notes": "TG 높은 환자에서 LDL 수치 다소 증가 가능. 임신부 과량 섭취 주의(중금속)."
+            }
+          ],
+          "sideEffects": [
+            "스타틴: 근육통(가장 흔함), 간독성(드뭄), 당뇨병 발생 증가(소수)",
+            "스타틴 CK 상승 시: Cyclosporin·Macrolide·항진균제 병용 여부 확인",
+            "Ezetimibe: 복통·설사·고창, 관절통·근육 연축(비교적 드뭄)",
+            "Fenofibrate: 소화장애(가장 흔함), 근육병증(빈도 낮음), 신기능 감소",
+            "오메가-3: 생선 냄새 트림, 구역·구토, 간수치 상승, 두통"
+          ],
+          "contraindications": [
+            "스타틴: 활동성·만성 간질환 절대 금기 / 임신·수유 중 금기",
+            "스타틴 + Cyclosporin·Macrolide·항진균제: 근육독성 위험 상대적 금기",
+            "Ezetimibe: 심한 간기능 저하, 임신부·수유부 금기",
+            "Fenofibrate + Warfarin: 출혈 위험 증가 → INR 모니터링 강화",
+            "오메가-3: 임신부 과량 섭취 자제"
+          ],
+          "combos": [
+            "1차: 스타틴 단독",
+            "2차: 스타틴 + Ezetimibe (LDL 목표 미달 시)",
+            "3차: 스타틴 + Ezetimibe + PCSK9 억제제 (초고위험군 LDL 목표 미달 시)",
+            "고TG 치료: Fenofibrate 또는 오메가-3 (TG 200~499 + LDL도 높으면 스타틴 우선)",
+            "TG ≥500: 급성 췌장염 예방 목적으로 Fibrate·니코틴산·오메가-3 즉시 시작",
+            "스타틴 + Amiodarone: 근육병 위험 증가 주의"
+          ]
+        },
+        {
+          "id": "stroke",
+          "name": "뇌졸중",
+          "guideline": "2023 뇌졸중 진료지침",
+          "tags": [
+            "항혈소판제",
+            "항응고제",
+            "스타틴",
+            "혈압조절"
+          ],
+          "overview": "뇌혈관 이상으로 인한 신경학적 결손. 허혈성(뇌경색)과 출혈성(뇌출혈)으로 분류. 고혈압·당뇨·심방세동·이상지질혈증이 주요 위험인자.",
+          "criteria": [
+            {
+              "label": "허혈성 뇌졸중 (뇌경색)",
+              "sbp": "혈관 폐색·협착",
+              "dbp": "항혈소판제·항응고제 치료"
+            },
+            {
+              "label": "출혈성 뇌졸중 (뇌출혈)",
+              "sbp": "혈관 파열·출혈",
+              "dbp": "혈압 조절·항응고제 금기"
+            },
+            {
+              "label": "TIA (일과성 뇌허혈발작)",
+              "sbp": "24시간 내 회복",
+              "dbp": "이차예방 필수"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🎯 이차예방 목표",
+              "items": [
+                "혈압: 수축기 130 mmHg 미만 목표 (Thiazide 이뇨제 + ACEI 병용 권장)",
+                "당뇨: HbA1c 7% 미만",
+                "고지혈증: LDL 100 mg/dL 미만",
+                "흡연·음주·비만 교정, 과일·채소 충분 섭취",
+                "나트륨: 하루 2.3g(소금 6g) 이하, 칼륨 4.7g 이상"
+              ]
+            },
+            {
+              "title": "💊 아스피린 일차예방",
+              "items": [
+                "남성: 허혈뇌졸중 일차예방으로 아스피린 추천 X (단, 허혈성 심장질환 일차예방은 추천 O)",
+                "여성: 허혈뇌졸중 일차예방으로 아스피린 추천 O (단, 허혈성 심장질환 일차예방 효과 없음)"
+              ]
+            },
+            {
+              "title": "🏥 급성기 처치",
+              "items": [
+                "혈압·혈당 교정",
+                "VTE 예방: 헤파린 피하주사",
+                "욕창·흡인성 폐렴·비뇨기계 감염 예방",
+                "뇌출혈 후 경련 발작: 항경련제 사용"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "아스피린",
+              "brand": "아스피린 100mg",
+              "mechanism": "COX-1 억제 → TXA2 차단 → 혈소판 응집 억제",
+              "dosage": "100~300mg, 허혈 뇌졸중·TIA 이차예방",
+              "notes": "심장탓 뇌색전증 제외한 허혈 뇌졸중·TIA: 항응고제보다 항혈소판제 권고"
+            },
+            {
+              "name": "Cilostazol",
+              "brand": "프레탈, 실로스탄, 리넥신",
+              "mechanism": "PDE3 억제 → cAMP 증가 → 혈소판 응집·혈관 수축 억제",
+              "dosage": "100mg bid",
+              "notes": "뇌졸중 이차예방 항혈소판제 중 하나. 출혈 위험 비교적 낮음."
+            },
+            {
+              "name": "스타틴",
+              "brand": "아토르바스타틴, 로수바스타틴",
+              "mechanism": "LDL 강하 → 죽상경화 진행 억제",
+              "dosage": "LDL 100 mg/dL 미만 목표. 제2형 당뇨 환자 일차예방에 추천.",
+              "notes": "뇌졸중 이차예방에서도 스타틴 사용 권장."
+            },
+            {
+              "name": "Warfarin (심장탓 뇌색전증)",
+              "brand": "쿠마딘",
+              "mechanism": "비타민 K 의존성 응고인자 억제",
+              "dosage": "INR 2.0~3.0 목표",
+              "notes": "색전증 위험 높은 심장질환 동반 뇌졸중·TIA 환자. 사용 불가 시 아스피린 고려."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Clopidogrel",
+              "brand": "플라빅스",
+              "mechanism": "P2Y12 차단 → 혈소판 응집 억제",
+              "dosage": "75mg qd",
+              "notes": "아스피린 단독 대비 효과 유사 또는 다소 우월."
+            },
+            {
+              "name": "Ticlopidine",
+              "brand": "유크리드",
+              "mechanism": "ADP 수용체 차단 → 혈소판 응집 억제",
+              "dosage": "250mg bid",
+              "notes": "뇌졸중 이차예방 항혈소판제. 골수 억제 부작용 모니터링 필요."
+            }
+          ],
+          "sideEffects": [
+            "아스피린: 위장 출혈, 소화성 궤양",
+            "Clopidogrel: 출혈, 혈전성 혈소판 감소성 자반증(드뭄)",
+            "Cilostazol: 두통, 심계항진, 설사",
+            "Warfarin: 출혈, 피부괴사, 음식·약물 상호작용",
+            "스타틴: 근육통, 간독성"
+          ],
+          "contraindications": [
+            "NOAC: 신기능 저하 시 권장 X",
+            "ACEI/ARB: 임신부 금기",
+            "아스피린: 출혈 경향·심한 간신장애 환자 주의",
+            "Warfarin: 임신부 금기 (저분자량 헤파린 사용)"
+          ],
+          "combos": [
+            "허혈 뇌졸중·TIA 이차예방: 항혈소판제 (아스피린 또는 클로피도그렐 또는 실로스타졸)",
+            "심방세동 동반: 항응고제 (NOAC 또는 Warfarin)",
+            "고혈압 이차예방: Thiazide 이뇨제 + ACEI 병용 우선",
+            "DAPT (아스피린 + 클로피도그렐): 급성기 단기간 사용 후 단독으로 전환"
+          ]
+        },
+        {
+          "id": "vte",
+          "name": "정맥혈전색전증",
+          "guideline": "약물치료학 교재",
+          "tags": [
+            "NOAC",
+            "헤파린",
+            "Warfarin",
+            "항응고제"
+          ],
+          "overview": "정맥순환계에서 혈전 생성 후 색전을 형성하는 질환. 심부정맥혈전증(DVT)과 폐색전증(PE)으로 나뉨. 운동 저하·혈관 손상·응고항진 상태에서 발병.",
+          "criteria": [
+            {
+              "label": "DVT (심부정맥혈전증)",
+              "sbp": "한쪽 하지 부종·압통",
+              "dbp": "Homan's sign 양성"
+            },
+            {
+              "label": "PE (폐색전증)",
+              "sbp": "호흡곤란·흉통·빈맥",
+              "dbp": "D-dimer 상승, CT 혈관조영술 확진"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "💊 항응고 치료 원칙",
+              "items": [
+                "항응고 치료: 최소 3개월 이상 지속",
+                "초기치료: 속효성 항응고제 (미분획 헤파린, 저분자량 헤파린, fondaparinux)",
+                "Bridging therapy: INR ≥2까지 최소 5일간 속효성 항응고제 + Warfarin 중복 투여",
+                "Apixaban·Rivaroxaban: Bridging therapy 불필요",
+                "Dabigatran·Edoxaban: 반드시 최소 5일 비경구 항응고제 선투여 후 시작"
+              ]
+            },
+            {
+              "title": "⚖️ 용량 선택 기준",
+              "items": [
+                "Edoxaban: 체중 ≤60kg → 30mg / 체중 >60kg → 60mg",
+                "Rivaroxaban: VTE 치료 초기 3주간 15mg bid → 이후 20mg qd",
+                "Warfarin 초기: 1일 2.5~5mg 후 INR 수치에 따라 조절",
+                "Warfarin 과용량: Vitamin K 정맥 또는 경구 투여"
+              ]
+            },
+            {
+              "title": "🌿 Warfarin과 음식 상호작용",
+              "items": [
+                "주의 음식: 녹황색 채소 (Vitamin K 함유) — 일정하게 먹으면 됨",
+                "삼가야 할 식품: 생청국장, 인삼, 가시오가피, 영지버섯, 녹즙, 감초, 상황버섯, 마늘즙, 양파즙, 당귀",
+                "복용 잊었을 때: 얼마 안 됐으면 즉시 복용, 다음 복용 시간이 가까우면 그냥 1회분만 복용"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Rivaroxaban",
+              "brand": "자렐토정 15/20mg",
+              "mechanism": "Factor Xa 직접 억제",
+              "dosage": "초기 3주: 15mg bid (식사와 함께) → 이후 20mg qd (식사와 함께)",
+              "notes": "Bridging 불필요. 척수 주사·경막외 주사 시 금기."
+            },
+            {
+              "name": "Apixaban",
+              "brand": "엘리퀴스정",
+              "mechanism": "Factor Xa 직접 억제",
+              "dosage": "초기: 10mg bid × 7일 → 유지: 5mg bid",
+              "notes": "Bridging 불필요."
+            },
+            {
+              "name": "Edoxaban",
+              "brand": "릭시아나정 30/60mg",
+              "mechanism": "Factor Xa 직접 억제",
+              "dosage": "5일 비경구 항응고제 선투여 후 시작. 체중 ≤60kg: 30mg qd / >60kg: 60mg qd",
+              "notes": "P-gp 저해제 (Verapamil, Dronedarone, Erythromycin 등) 사용 시 30mg으로 감량."
+            },
+            {
+              "name": "Dabigatran",
+              "brand": "프라닥사캡슐 110/150mg",
+              "mechanism": "트롬빈 직접 억제",
+              "dosage": "5일 비경구 항응고제 선투여 후 150mg bid",
+              "notes": "중증 신장애 금기. 캡슐 개봉 금지."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Warfarin",
+              "brand": "쿠마딘",
+              "mechanism": "비타민 K 의존성 응고인자 억제",
+              "dosage": "INR 2.0~3.0 목표. 최소 5일 bridging 필요.",
+              "notes": "부작용: 출혈, 피부괴사 (지방 많은 부위, 복용 첫 주), 자색 발가락 증후군. 임신부 금기."
+            },
+            {
+              "name": "저분자량 헤파린 (LMWH)",
+              "brand": "Enoxaparin(크렉산), Dalteparin(프라그민)",
+              "mechanism": "안티트롬빈 III 활성화 → Xa·IIa 인자 억제",
+              "dosage": "치료 용량 피하주사. 임신부에서도 사용 가능.",
+              "notes": "임신 중 사용 가능 (Warfarin 대체). 신기능 감소 시 용량 조절 필요."
+            }
+          ],
+          "sideEffects": [
+            "NOAC 공통: 출혈, 소화장애",
+            "Dabigatran: 소화기 증상 다소 흔함",
+            "Warfarin: 출혈, 피부괴사 (첫 주, 지방 많은 부위), 자색 발가락 증후군",
+            "LMWH: 주사 부위 출혈·멍, HIT (헤파린 유발 혈소판 감소증, 드뭄)"
+          ],
+          "contraindications": [
+            "Warfarin: 임신부 절대 금기 → LMWH 사용",
+            "Dabigatran: 중증 신장애 금기",
+            "NOAC: 중등증~중증 신장애 주의 (용량 조절 또는 Warfarin 전환)",
+            "아스피린: VTE 예방 목적 사용 X (NOAC 거부·중단 시 치료에만 보조적으로 고려)"
+          ],
+          "combos": [
+            "VTE 치료: NOAC 단독요법 (Rivaroxaban·Apixaban: bridging 없이 즉시 시작)",
+            "Dabigatran·Edoxaban: 반드시 최소 5일 헤파린/LMWH 선투여 후 전환",
+            "임신 중: LMWH 1/3분기, 2분기는 LMWH 또는 INR 목표 Warfarin",
+            "주의: 항응고제 + 항혈소판제 병용 시 출혈 위험 유의하게 증가"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "respiratory",
+      "name": "호흡기",
+      "icon": "🫁",
+      "color": "#5DC8B8",
+      "diseases": [
+        {
+          "id": "asthma",
+          "name": "천식",
+          "guideline": "2022 천식 진료지침 (GINA 2021)",
+          "tags": [
+            "ICS",
+            "LABA",
+            "SABA",
+            "LTRA",
+            "생물학적제제"
+          ],
+          "overview": "만성 기관지 염증을 특징으로 다양한 임상 양상을 보이는 질환. 가변적인 호기 기류제한과 함께 시간에 따라 중증도가 변하는 천명, 호흡곤란, 가슴답답함, 기침 등의 증상이 나타남. 기도 과민성 증가가 특징적이며 기도 개형(리모델링)이 동반됨.",
+          "criteria": [
+            {
+              "label": "천식 조절됨",
+              "sbp": "4항목 모두 없음",
+              "dbp": "주간 증상·야간 수면방해·SABA 사용·활동 제한 모두 없음"
+            },
+            {
+              "label": "일부 조절",
+              "sbp": "1~2항목 있음",
+              "dbp": "주간 증상 주 3회 이상 OR 야간 수면방해 OR SABA 주 3회 이상 OR 활동 제한"
+            },
+            {
+              "label": "조절되지 않음",
+              "sbp": "3~4항목 있음",
+              "dbp": "위 항목 3가지 이상 해당"
+            },
+            {
+              "label": "ACO (천식-COPD 중복)",
+              "sbp": "천식 + COPD 동시",
+              "dbp": "ICS 기관지확장제 처방 고려"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🪜 치료 단계별 접근",
+              "items": [
+                "1단계: 필요 시 저용량 ICS-formoterol (또는 SABA)",
+                "2단계: 저용량 ICS 유지 + 필요 시 ICS-formoterol (또는 SABA)",
+                "3단계: 저용량 ICS-LABA 유지 + 필요 시 ICS-formoterol",
+                "4단계: 중간용량 ICS-LABA 유지 + 필요 시 ICS-formoterol",
+                "5단계: 고용량 ICS-LABA + LAMA 또는 생물학적 제제 또는 저용량 OCS",
+                "⚠️ SABA 사용 증가 → 치료 단계 올림 신호"
+              ]
+            },
+            {
+              "title": "📊 단계 올림/내림 기준",
+              "items": [
+                "장기간 단계 올림 (최소 2~3개월): 치료 반응 없을 때",
+                "단기간 단계 올림 (1~2주): 바이러스 감염·계절성 알레르기 항원 노출 시 ICS 일시 증량",
+                "단계 내림: 최소 3개월 이상 증상 조절 + 폐기능 안정적일 때 고려",
+                "단계 내림 금지: 지난 1년간 악화 위험인자 있거나 지속적 기류제한 있을 때",
+                "ICS 용량 감량 시: 3개월 간격으로 25~50% 감량이 안전"
+              ]
+            },
+            {
+              "title": "🧬 중증 천식 (생물학적 제제)",
+              "items": [
+                "난치성 천식: 중간/고용량 ICS + 다른 조절제에도 조절 안 될 때",
+                "중증 천식: 고용량 ICS-LABA 최적화에도 조절 안 되거나 용량 줄이면 악화",
+                "2형 염증 동반 중증 천식: Anti-IgE, Anti-IL5/IL5R, Anti-IL4R 생물학적 제제 추가",
+                "비2형 염증: LAMA 또는 Azithromycin 또는 저용량 전신스테로이드 추가",
+                "생물학적 제제 투여 후 3~4개월, 이후 3~6개월마다 반응 평가"
+              ]
+            },
+            {
+              "title": "👶 임신 중 천식",
+              "items": [
+                "대부분의 천식 약제는 임신 중 안전",
+                "조절되지 않는 천식이 약의 잠재적 위험보다 더 위험",
+                "ICS, SABA/LABA, Montelukast, 테오필린은 태아에 나쁜 영향 없는 것으로 보고"
+              ]
+            },
+            {
+              "title": "⚠️ AERD (아스피린 악화 호흡기질환)",
+              "items": [
+                "COX-1 억제에 대한 과민증과 연관",
+                "비만세포·호산구에서 씨스테닐류코트리엔 분비 증가",
+                "LTRA (류코트리엔 수용체 길항제)가 특히 효과적",
+                "NSAIDs, 경구·점안용 BB는 천식 악화 유발 가능 → 회피 필요"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "ICS (흡입 코르티코스테로이드)",
+              "brand": "부데소니드(심비코트·듀오레스피), 플루티카손(세레타이드·플루티폼), 베클로메타손(포스터), 시클레소니드(알베스코), 모메타손(어택트라)",
+              "mechanism": "기도 염증 억제 → 기도 과민성 감소, 악화 빈도 및 중증도 감소",
+              "dosage": "저용량~고용량까지 단계별 사용. Budesonide 기준 저용량 200~400μg/일, 고용량 >800μg/일.",
+              "notes": "가장 효과적인 항염증 약제. 흡입 후 구강 세척으로 칸디다증 예방. Ciclesonide(알베스코)는 전구약물로 국소 부작용 적음."
+            },
+            {
+              "name": "ICS + LABA 복합제",
+              "brand": "부데소니드/포르모테롤(심비코트·듀오레스피), 플루티카손/살메테롤(세레타이드), 베클로메타손/포르모테롤(포스터), 플루티카손/포르모테롤(플루티폼)",
+              "mechanism": "ICS(항염증) + LABA(기관지 지속 확장) 복합 효과",
+              "dosage": "저용량 부데소니드-포르모테롤(160/4.5μg): 조절제 + 증상완화제 겸용 가능, 1일 최대 12회",
+              "notes": "Formoterol은 Salmeterol보다 작용 빠름 → 증상 완화제로도 사용 가능. ICS+LABA로 조절되면 ICS 단독으로 유지 권고."
+            },
+            {
+              "name": "LTRA (류코트리엔 수용체 길항제)",
+              "brand": "몬테루카스트(싱귤레어·모노루카·몬테잘), 프란루카스트(씨투스)",
+              "mechanism": "씨스테닐류코트리엔 수용체 차단 → 기관지 수축·염증 억제",
+              "dosage": "몬테루카스트 10mg 취침 전 1회 (성인)",
+              "notes": "아스피린 과민성 천식에 특히 효과적. ICS 대신 또는 추가로 사용 가능. ⚠️ 몬테루카스트: 정신 건강 부작용(우울·자살충동) 경고."
+            },
+            {
+              "name": "SABA (속효성 베타2 작용제)",
+              "brand": "살부타몰(벤토린 에보할러·네뷸·흡입액), 테르부탈린, 페노테롤",
+              "mechanism": "베타2 수용체 자극 → 기관지 평활근 이완 → 즉각적 기도 개방",
+              "dosage": "필요할 때만 최소 용량·빈도로 사용. 1일 최대 8 puffs. 매일 규칙적 사용 금지.",
+              "notes": "급성 악화 1차 완화제. 생명 위협 않는 수준: MDI / 생명 위협 수준: 네뷸라이저 추천."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "LAMA (장시간 작용 항무스카린제)",
+              "brand": "티오트로피움(스피리바 레스피맷), 글리코피로늄(트림보우·에너제어·조터나), 우메클리디늄(인크루즈·아노로·트렐리지)",
+              "mechanism": "무스카린 수용체 차단 → 기관지 확장 + 점액 분비 감소",
+              "dosage": "ICS/LABA에도 조절 안 될 때 4단계 추가 옵션",
+              "notes": "LABA보다 효과적이지는 않음. 부작용: 구강 건조."
+            },
+            {
+              "name": "전신 스테로이드 (OCS)",
+              "brand": "프레드니솔론(소론도정)",
+              "mechanism": "전신 항염증 효과",
+              "dosage": "저용량 ≤7.5mg/일 (prednisone equivalent). 5단계 조절제를 사용해도 조절 안 될 때.",
+              "notes": "⚠️ 부작용 큼: 골다공증, 고혈압, 당뇨, 백내장, 녹내장, 부신억제. 3개월 이상 필요 시 모니터링 필수."
+            },
+            {
+              "name": "Omalizumab (항IgE 항체)",
+              "brand": "졸레어주",
+              "mechanism": "IgE에 결합 → 비만세포·호산구 활성화 차단",
+              "dosage": "4~5단계 치료에도 조절 안 되는 6세 이상 심한 알레르기 천식. 매 2~4주 피하주사, 최소 4개월.",
+              "notes": "다른 장기 부작용 없는 비교적 안전한 약제."
+            },
+            {
+              "name": "Dupilumab (항IL-4 수용체 항체)",
+              "brand": "듀피젠트주",
+              "mechanism": "IL-4/IL-13 수용체 차단 → 2형 염증 억제",
+              "dosage": "중증 2형 호산구성 천식. 격주 피하주사.",
+              "notes": "아토피 피부염 동반 시 특히 유용."
+            },
+            {
+              "name": "Mepolizumab / Benralizumab (항IL-5/IL-5R 항체)",
+              "brand": "누칼라주(메폴리주맙), 파센라주(벤라리주맙)",
+              "mechanism": "IL-5 또는 IL-5R 차단 → 호산구 감소",
+              "dosage": "중증 호산구성 천식. 피하주사 또는 정맥주사.",
+              "notes": "혈중 호산구 수치 높은 환자에서 효과적."
+            },
+            {
+              "name": "Azithromycin (Macrolide 항생제)",
+              "brand": "지스로맥스정 250/500mg",
+              "mechanism": "항균 + 항염증·면역조절 효과",
+              "dosage": "주 3회 250mg 또는 500mg. 최소 6개월 이상.",
+              "notes": "중등도 이상 ICS + LABA에도 증상 지속 시 추가. 부작용: 설사(가장 흔함), 이독성, 부정맥, 항생제 내성 주의."
+            },
+            {
+              "name": "테오필린 (Theophylline)",
+              "brand": "유니필정, 테오덕서방정",
+              "mechanism": "PDE 억제 → cAMP 증가 → 기관지 확장 + 일부 항염증 효과",
+              "dosage": "다른 조절제 우선 사용 후 조절 안 될 때 고려. 저용량은 항염증 목적.",
+              "notes": "⚠️ 고용량(≥10mg/kg/일): 구역·구토·심부정맥·경련 가능. 간질환·신부전·Cimetidine·Quinolone·Macrolide 병용 시 독성 ↑."
+            }
+          ],
+          "sideEffects": [
+            "ICS: 구인두 캔디다증, 목소리 변형(발성장애), 간헐적 기침 → 흡입 후 구강 세척으로 예방",
+            "ICS 장기 전신 부작용: 부신억제, 피부 멍, 골밀도 감소",
+            "LABA: 심혈관 자극, 골격근 진전, 저칼륨혈증 (경구보다 적음)",
+            "LTRA(몬테루카스트): 정신건강 부작용 경고 — 우울·자살충동·행동 변화",
+            "OCS: 골다공증, 고혈압, 당뇨, 백내장, 녹내장, 비만, 피부 얇아짐, 근력 약화, 부신억제",
+            "테오필린: 구역·구토(초기 가장 흔함), 심장 부정맥, 경련 (고용량)",
+            "Azithromycin: 설사(가장 흔함), 이독성, QT 연장",
+            "LAMA: 구강 건조, 변비, 요폐 (항콜린 부작용)"
+          ],
+          "contraindications": [
+            "SABA 매일 규칙적 사용: 금지 (천식 조절 악화 신호)",
+            "BB (베타차단제): 천식 환자에서 기관지 경련 유발 → 회피 (점안용 포함)",
+            "NSAIDs/아스피린: AERD 환자에서 기관지 수축 유발",
+            "테오필린 + Cimetidine·Quinolone·Macrolide 병용: 혈중 농도 상승 → 독성 위험",
+            "OCS 장기 사용: 결핵·기생충 감염·우울증·소화성 궤양 있는 경우 주의",
+            "속효성 CCB (니페디핀 등): 반사성 빈맥으로 천식 증상 악화 가능"
+          ],
+          "combos": [
+            "단계 1~2: 저용량 ICS 단독 또는 + 필요 시 ICS-formoterol",
+            "단계 3: 저용량 ICS-LABA + 필요 시 ICS-formoterol",
+            "단계 4: 중간용량 ICS-LABA + LAMA 추가 가능",
+            "단계 5: 고용량 ICS-LABA + 생물학적 제제 or 저용량 OCS",
+            "LTRA 추가: ICS에 추가 시 스테로이드 용량 절감 가능 (단, LABA보다 열등)",
+            "ICS + LABA + LAMA 삼제요법: ICS/LABA 조절 부족 시 고려",
+            "중증 천식 + 2형 염증: Anti-IgE / Anti-IL5/IL5R / Anti-IL4R 생물학적 제제"
+          ]
+        },
+        {
+          "id": "copd",
+          "name": "COPD",
+          "guideline": "2020 COPD 진료지침",
+          "tags": [
+            "LAMA",
+            "LABA",
+            "ICS",
+            "SABA",
+            "PDE4억제제"
+          ],
+          "overview": "완전히 회복되지 않는 기류제한을 특징으로 하며, 흡연이나 실내외 먼지·가스에 의해 기도와 폐포가 손상되어 호흡기 증상을 일으키는 질환. 흡연이 가장 중요한 원인. 40세 이상 + 흡연 노출력 + 만성 호흡곤란·기침·가래가 있으면 의심.",
+          "criteria": [
+            {
+              "label": "가군 (저증상·저악화)",
+              "sbp": "mMRC 0~1 / CAT <10",
+              "dbp": "지난해 악화 0~1회 (입원할 정도 없음), FEV1 ≥60%"
+            },
+            {
+              "label": "나군 (고증상·저악화)",
+              "sbp": "mMRC ≥2 / CAT ≥10",
+              "dbp": "지난해 악화 0~1회 (입원할 정도 없음), FEV1 ≥60%"
+            },
+            {
+              "label": "다군 (고악화)",
+              "sbp": "악화 ≥2회 or 입원할 정도 ≥1회",
+              "dbp": "FEV1 <60% (증상 무관)"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "💊 군별 약물치료 원칙",
+              "items": [
+                "가군: SABA 필요 시 처방 → 악화 경험·mMRC≥2이면 LAMA 또는 LABA 추가",
+                "나군: LAMA 단일 또는 LABA 단일 또는 LAMA+LABA 권고",
+                "나군 악화·호흡곤란 지속: LAMA+LABA로 강화",
+                "다군: LAMA+LABA 권고 → 악화·호흡곤란 지속 시 ICS+LAMA+LABA 삼제요법",
+                "ICS+LAMA+LABA: ICS+LABA나 LAMA+LABA보다 중등도~중증 COPD 악화 감소"
+              ]
+            },
+            {
+              "title": "🩺 ICS 추가 기준",
+              "items": [
+                "천식 중복(ACO) 또는 혈중 호산구 높은 경우: ICS+LABA 초치료 고려",
+                "호산구 300개 이상: ICS 추가 일반적으로 고려 가능",
+                "지속성 기관지확장제 사용 중 호산구 100개 이상: 추가 가능",
+                "⚠️ ICS 단독 장기 사용: 권고하지 않음 (폐렴 부작용)",
+                "⚠️ 경구스테로이드 장기 단독 사용: 권고하지 않음"
+              ]
+            },
+            {
+              "title": "🚨 급성 악화 COPD 치료",
+              "items": [
+                "가장 흔한 원인: 바이러스(리노바이러스)·세균 호흡기 감염",
+                "SABA 권고 + 전신스테로이드 권고 + 감염 징후 시 항생제",
+                "스테로이드: Prednisolone 30~40mg/일 × 10~14일 (또는 40mg × 5일 단기)",
+                "항생제 적응증: ① 3가지 주요 증상(호흡곤란 악화·가래 양 증가·가래 화농성) 모두 OR ② 가래 화농성 포함 2가지 주요 증상 OR ③ 기계호흡 필요",
+                "항생제 투여 기간: 5~7일"
+              ]
+            },
+            {
+              "title": "💉 예방접종 및 비약물 요법",
+              "items": [
+                "인플루엔자·폐렴구균·대상포진 예방접종 권고",
+                "금연 (가장 중요한 비약물 요법)",
+                "규칙적인 신체활동",
+                "동반질환 관리: 폐암, 심혈관질환, 골다공증, 위식도역류"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "LAMA (흡입 지속성 항콜린제)",
+              "brand": "티오트로피움(스피리바 핸디헬러/레스피맷), 아클리디늄(에클리라 제뉴에어), 우메클리디늄(인크루즈 엘립타)",
+              "mechanism": "무스카린 M3 수용체 차단 → 기관지 확장 지속 (24시간)",
+              "dosage": "티오트로피움 18μg 1일 1회 캡슐(핸디헬러) 또는 5μg 1일 1회(레스피맷)",
+              "notes": "COPD 치료 핵심 약물. 부작용: 구강 건조, 변비, 심방세동 주의."
+            },
+            {
+              "name": "LABA (흡입 지속성 베타2 작용제)",
+              "brand": "인다카테롤(온브리즈 브리즈헬러), 올로다테롤(스트리베르디 레스피맷), 포르모테롤, 살메테롤",
+              "mechanism": "베타2 수용체 자극 → 기관지 평활근 이완 지속 (12~24시간)",
+              "dosage": "인다카테롤 150~300μg 1일 1회 캡슐",
+              "notes": "LAMA와 함께 COPD 1차 치료 핵심. 천식·심혈관성질환·경련성 장애 신중투여."
+            },
+            {
+              "name": "LAMA + LABA 복합제",
+              "brand": "우메클리디늄/빌란테롤(아노로 엘립타), 아클리디늄/포르모테롤(듀어클리어 제뉴에어), 글리코피로늄/인다카테롤(조터나 브리즈헬러), 티오트로피움/올로다테롤(바헬바 레스피맷)",
+              "mechanism": "항콜린 + 베타2 상가작용 → 단일제보다 우월한 기관지 확장",
+              "dosage": "1일 1회 흡입 (제제에 따라 1일 2회)",
+              "notes": "단일제보다 증상·폐기능·삶의 질 개선 및 악화 감소 효과 우월."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "ICS + LABA 복합제",
+              "brand": "부데소니드/포르모테롤(심비코트·듀오레스피), 플루티카손/살메테롤(세레타이드), 플루티카손/빌란테롤(렐바 엘립타), 베클로메타손/포르모테롤(포스터)",
+              "mechanism": "항염증(ICS) + 기관지 지속 확장(LABA) 복합",
+              "dosage": "1일 1~2회 흡입",
+              "notes": "호산구 높거나 ACO에서 우선 고려. 폐렴 부작용 주의. 지속성 기관지확장제 대체가 보통 가능해 사용 줄고 있음."
+            },
+            {
+              "name": "ICS + LAMA + LABA 삼제요법",
+              "brand": "플루티카손/빌란테롤/우메클리디늄(트렐리지 엘립타), 인다카테롤/글리코피로늄/모메타손(에너제어), 베클로메타손/포르모테롤/글리코피로늄(트림보우)",
+              "mechanism": "항염증 + 항콜린 + 베타2 삼중 기전",
+              "dosage": "1일 1회 흡입",
+              "notes": "다군에서 LAMA+LABA에도 악화 지속 시 권고. ICS+LABA나 LAMA+LABA보다 악화 감소."
+            },
+            {
+              "name": "PDE4 억제제 (Roflumilast)",
+              "brand": "닥사스정 500μg",
+              "mechanism": "PDE4 억제 → cAMP 농도 증가 → 항염증 효과",
+              "dosage": "18세 이상 성인 1일 1회 1정(식사와 무관). 지속성 기관지확장제와 병용.",
+              "notes": "만성기관지염 수반 중증 COPD에서 악화 반복 시 추가. ⚠️ 소화기 부작용(설사·오심·체중감소) 흔함. 금기: 중등증~중증 간장애, 자살충동 관련 정신질환."
+            },
+            {
+              "name": "SABA (증상완화제)",
+              "brand": "살부타몰(벤토린 에보할러/네뷸/흡입액)",
+              "mechanism": "베타2 수용체 자극 → 즉각적 기관지 확장",
+              "dosage": "1회 2 puffs씩 1일 4회 (최대 8 puffs/일). 필요 시만 사용.",
+              "notes": "모든 군에서 급성 호흡곤란 완화 목적. 지속적 규칙 사용은 아님."
+            },
+            {
+              "name": "SAMA (Ipratropium)",
+              "brand": "아트로벤트 유디비 흡입액",
+              "mechanism": "무스카린 수용체 차단 → 기관지 확장 (단기)",
+              "dosage": "1회 0.4~2.0mL 1일 4회 분무기로 흡입",
+              "notes": "급성 악화 시 SABA와 병용 가능. 금기: 녹내장, 전립선 비대."
+            }
+          ],
+          "sideEffects": [
+            "LAMA: 구강 건조(가장 흔함), 변비, 요폐, 심방세동, 뇨저류",
+            "LABA: 심계항진, 진전, 저칼륨혈증, 고혈당증",
+            "ICS 장기: 폐렴(COPD에서 천식보다 위험 높음), 골밀도 감소, 구인두 칸디다증",
+            "PDE4 억제제(Roflumilast): 체중감소, 식욕감소, 설사, 오심, 복통, 두통, 우울증",
+            "SABA 과다: 심계항진, 진전, 저칼륨혈증, 빈맥",
+            "전신스테로이드 (급성 악화 단기): 고혈당, 수면장애, 감염 위험 증가"
+          ],
+          "contraindications": [
+            "LAMA/SAMA: 녹내장, 전립선 비대(폐쇄성) 주의",
+            "ICS 단독 장기 사용: 권고하지 않음",
+            "경구스테로이드 장기 단독 사용: 권고하지 않음",
+            "PDE4 억제제: 중등증~중증 간장애, 자살충동 관련 정신질환, 잠복결핵·울혈성심부전·급성감염 금기",
+            "베타차단제: 기관지 경련 위험 — 심장 선택성 BB만 신중 투여",
+            "Budesonide/Formoterol: 부데소니드·포르모테롤 유당 과민증, 6세 미만 금기"
+          ],
+          "combos": [
+            "가군: SABA 필요 시 → 악화 시 LAMA 또는 LABA 추가",
+            "나군: LAMA 또는 LABA 단독 → 악화·호흡곤란 지속 시 LAMA+LABA",
+            "다군: LAMA+LABA → 악화 시 ICS+LAMA+LABA 삼제요법",
+            "ACO 또는 고호산구: ICS+LABA 우선 고려",
+            "만성기관지염 + FEV1<50% + 연 2회 이상 악화: PDE4 억제제 + LAMA/LABA 병용",
+            "급성 악화: SABA + 전신스테로이드(5~14일) + 항생제(적응증 해당 시 5~7일)"
+          ]
+        },
+        {
+          "id": "allergic-rhinitis",
+          "name": "알레르기 비염",
+          "guideline": "2022 알레르기 비염 진료지침",
+          "tags": [
+            "항히스타민제",
+            "비강스테로이드",
+            "LTRA",
+            "비충혈제거제"
+          ],
+          "overview": "특정 알레르겐에 감작된 사람에서 알레르겐이 비강 점막에 노출된 후 IgE 매개 면역 반응에 의해 발생한 코의 염증 반응. 콧물, 코막힘, 재채기, 코 가려움증 등의 증상. 천식·아토피와 밀접하게 관련.",
+          "criteria": [
+            {
+              "label": "간헐성",
+              "sbp": "< 4일/주 OR < 연속 4주/년",
+              "dbp": "-"
+            },
+            {
+              "label": "지속성",
+              "sbp": "≥ 4일/주 AND ≥ 연속 4주/년",
+              "dbp": "-"
+            },
+            {
+              "label": "경증",
+              "sbp": "수면장애·일상활동장애·직장·불편 없음",
+              "dbp": "모든 항목 해당 없음"
+            },
+            {
+              "label": "중등도~중증",
+              "sbp": "수면장애, 일상/직장 어려움, 불편 중 1개 이상",
+              "dbp": "항목 1가지 이상 해당"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "💊 중증도별 치료 원칙",
+              "items": [
+                "경증 간헐성: 경구 또는 비강 분무 항히스타민제 단독 (또는 비충혈제거제 병용)",
+                "중등도~중증 간헐성: 항히스타민제 or 비강 분무 스테로이드 or LTRA",
+                "지속성 경증: 항히스타민제 or 비강 분무 스테로이드 or LTRA",
+                "지속성 중등도~중증: 비강 분무 스테로이드 우선 → 필요 시 항히스타민제 or LTRA 추가",
+                "2~4주 후 평가: 효과 있으면 1개월 지속 → 효과 없으면 step up"
+              ]
+            },
+            {
+              "title": "🌸 예방적 약물치료",
+              "items": [
+                "꽃가루 알레르기: 봄철 꽃가루 유행 2주 전부터 치료약제 투약",
+                "꽃가루 농도 최고 시기(유행 후 3~4주) 비염 증상 경감 가능",
+                "알레르기 비염 환자: 식염수 비강세척 권고",
+                "환경 관리: 공기청정기, 비투과성 침구, 집먼지진드기 농도 감소"
+              ]
+            },
+            {
+              "title": "⚠️ 비강 분무형 비충혈제거제 주의",
+              "items": [
+                "3일 이상 연속 사용 금지 → 반동성 혈관확장 → 약물 유발성 비염 발생",
+                "약물 유발성 비염 발생 시: 즉시 중단 또는 서서히 중단",
+                "부작용: 작열감, 따가움, 비점막 건조"
+              ]
+            },
+            {
+              "title": "😴 항히스타민제 졸음 비교",
+              "items": [
+                "졸음 많음: Cetirizine(지르텍), 비강 Azelastine",
+                "졸음 중간: Loratadine, Desloratadine",
+                "졸음 적음: Fexofenadine(알레그라) — 가장 적음",
+                "복용 시기: 알레르겐 노출 1~2시간 전 복용이 가장 효과적",
+                "식후 복용: 오심·구토·상복부 자극 부작용 예방"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "경구 2세대 항히스타민제",
+              "brand": "세티리진(지르텍 10mg), 로라타딘, 데스로라타딘(에리우스 5mg), 펙소페나딘(알레그라 180mg), 레보세티리진(씨잘), 베포타스틴(베포텐 10mg), 에바스틴(에바스텔 10mg), 올로파타딘(오로파트 5mg)",
+              "mechanism": "H1 수용체 차단 → 히스타민 매개 증상(콧물·재채기·가려움·눈 증상) 억제",
+              "dosage": "대부분 1일 1~2회. 펙소페나딘 180mg 1일 1회. 세티리진 10mg 1일 1회.",
+              "notes": "콧물·재채기·코가려움·눈 증상에 효과적. 코막힘에는 다소 약함. 졸음: 펙소페나딘 < 로라타딘 < 세티리진 순."
+            },
+            {
+              "name": "비강 분무 스테로이드",
+              "brand": "플루티카손(아바미스나잘스프레이), 모메타손(나조넥스나잘스프레이)",
+              "mechanism": "국소 항염증 → 비강 내 모든 증상 + 눈 증상 개선",
+              "dosage": "각 비강에 1일 1~2회 2번씩 분무. 분무 후 최소 10분간 재채기 금지.",
+              "notes": "통년성·계절성 알레르기비염 가장 효과적 약물. 코막힘 효과 가장 큼. ⚠️ 효과 즉각적이지 않음 — 분무 7시간 후 반응, 최고 효력 2주 소요."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "LTRA (류코트리엔 수용체 길항제)",
+              "brand": "몬테루카스트(싱귤레어·모노루카), 프란루카스트(씨투스)",
+              "mechanism": "류코트리엔 수용체 차단 → 염증·기관지 수축 억제",
+              "dosage": "몬테루카스트 10mg 취침 전 1회",
+              "notes": "천식 동반 알레르기 비염에서 선택적으로 권고. 항히스타민제와 병용 시 효과 증대. ⚠️ 몬테루카스트: 정신건강 부작용 경고."
+            },
+            {
+              "name": "비강 분무 항히스타민제",
+              "brand": "아젭틴비액(Azelastine), 모테손플러스나잘(Azelastine+Mometasone), 딜라스틴나잘(Azelastine+Fluticasone)",
+              "mechanism": "국소 H1 차단 → 콧물·재채기·가려움 억제 + 코막힘 개선",
+              "dosage": "각 비강에 1일 2회 분무",
+              "notes": "코막힘 개선은 경구 항히스타민제보다 우수. 쓴 맛 부작용으로 선호도 낮음. 눈 증상에는 효과 없음."
+            },
+            {
+              "name": "경구 비충혈제거제",
+              "brand": "슈다펜정(Pseudoephedrine 60mg), 리노에바스텔캡슐(Ebastine 10mg/Pseudoephedrine 120mg), 액티피드정(Triprolidine+Pseudoephedrine)",
+              "mechanism": "알파-1 수용체 자극 → 비강 혈관 수축 → 코막힘 해소",
+              "dosage": "Pseudoephedrine 30~60mg 1일 3~4회 (최대 240mg/일)",
+              "notes": "국소 제제보다 효과 지속 길고 약물 유발성 비염 위험 낮음. 부작용: 불면, 빈맥, 혈압 상승."
+            },
+            {
+              "name": "항콜린제 (Ipratropium)",
+              "brand": "리노벤트비액 0.03%",
+              "mechanism": "콜린성 수용체 차단 → 비강 분비 억제",
+              "dosage": "0.03% 용액 1일 2~3회 분무",
+              "notes": "알레르기·통년성 비염의 콧물 증상 개선에 효과적. 부작용: 두통, 코피, 비강 건조 (경미)."
+            },
+            {
+              "name": "1세대 항히스타민제",
+              "brand": "클로르페니라민(페니라민정 2mg)",
+              "mechanism": "H1 차단 + 항콜린 효과",
+              "dosage": "1회 2~6mg 1일 2~4회 (최대 24mg/일)",
+              "notes": "졸음 부작용 현저. 현재는 2세대 선호. 급성기 단기 사용 또는 야간 사용 고려."
+            }
+          ],
+          "sideEffects": [
+            "1세대 항히스타민제: 졸음(현저), 구강건조, 인지 저하, 요폐 (항콜린 효과)",
+            "2세대 항히스타민제: 졸음 적음 (펙소페나딘 최소), 두통, 소화 불편",
+            "비강 스테로이드: 재채기, 따가움, 두통, 코피 (경미한 국소 반응)",
+            "경구 비충혈제거제: 불면, 빈맥, 혈압 상승, 두통, 불안",
+            "비강 분무 비충혈제거제: 반동성 비충혈 (3일 이상 사용 시 약물 유발성 비염)",
+            "LTRA(몬테루카스트): 정신건강 부작용 (우울·자살충동·행동 변화)"
+          ],
+          "contraindications": [
+            "비강 분무 비충혈제거제: 3일 이상 연속 사용 금지",
+            "경구 비충혈제거제(슈다펜): 고혈압·관상동맥질환·갑상선 항진증·녹내장·전립선비대 주의",
+            "1세대 항히스타민제: 운전·정밀기계 조작 주의, 녹내장·전립선비대 주의",
+            "LTRA(몬테루카스트): 정신건강 병력 있는 환자 처방 시 모니터링 강화",
+            "비강 스테로이드: 비중격 천공 과거력 주의"
+          ],
+          "combos": [
+            "경증 간헐성: 항히스타민제 단독 (또는 비충혈제거제 병용)",
+            "중등도~중증 지속성: 비강 스테로이드 우선 → 항히스타민제 추가",
+            "천식 동반 알레르기 비염: LTRA (montelukast) 추가 선택적 권고",
+            "코막힘 심할 때: 비강 분무 스테로이드 + 비강 분무 항히스타민제 병용 (코막힘 효과 상가)",
+            "콧물 조절 추가 필요 시: ipratropium 추가",
+            "알레르기 비염 + 천식 동반: ICS 흡입 + montelukast 병용 효과적"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digestive",
+      "name": "소화기",
+      "icon": "🫁",
+      "color": "#F97FA3",
+      "diseases": [
+        {
+          "id": "peptic-ulcer",
+          "name": "소화성궤양 / H.pylori",
+          "guideline": "2020 H.pylori 임상진료지침 / 2019 약제관련 소화성궤양 가이드라인",
+          "tags": [
+            "PPI",
+            "H2RA",
+            "제균요법",
+            "NSAIDs",
+            "PCAB"
+          ],
+          "overview": "위산과 펩신에 의해 위장관 점막이 점막하층까지 손상되는 질환. H.pylori(주로 십이지장)와 NSAIDs(주로 위)가 주된 원인. H.pylori는 전 세계에서 가장 흔한 감염성 질환이며 위암 발생률을 높임.",
+          "criteria": [
+            {
+              "label": "소화성궤양 (PUD)",
+              "sbp": "위·십이지장",
+              "dbp": "상복부 통증(식후 1~3시간), 속쓰림, 더부룩함"
+            },
+            {
+              "label": "H.pylori 적응증",
+              "sbp": "제균 치료 대상",
+              "dbp": "H.pylori 양성 위궤양·십이지장궤양·기능성 소화불량·철결핍성 빈혈"
+            },
+            {
+              "label": "NSAIDs 관련 궤양",
+              "sbp": "고위험: 고령·과거력·고용량",
+              "dbp": "PPI 예방투여 권고"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🦠 H.pylori 제균 치료 방법",
+              "items": [
+                "1차 표준 3제요법 (PAC14): PPI 표준용량 + Amoxicillin 1g + Clarithromycin 500mg, bid 14일",
+                "순차 치료 (PA5+PCM5): PPI+Amoxicillin 5일 → PPI+Clarithromycin+Metronidazole 5일 (총 10일)",
+                "동시 치료 (PACM10): PPI+Amoxicillin+Clarithromycin+Metronidazole bid 10일",
+                "Bismuth 4제요법 (PMBT10-14): PPI bid + Metronidazole 500mg tid + Bismuth 120mg qid + Tetracycline 500mg qid",
+                "Levofloxacin 3제요법: PPI + Amoxicillin 1g bid + Levofloxacin 500mg qd, 10일"
+              ]
+            },
+            {
+              "title": "📋 제균 치료 알고리즘",
+              "items": [
+                "1차 (경험적): PAC 14일",
+                "2차: Bismuth 4제 14일 또는 PAL(PPI+Amoxicillin+Levofloxacin)",
+                "Clarithromycin 내성 없음: PAC 7일 / 내성 있음: Bismuth 4제 또는 PAM 7일",
+                "제균율 목표: 80% 이상 (Clarithromycin 내성으로 저하 가능)"
+              ]
+            },
+            {
+              "title": "💊 NSAIDs 궤양 예방",
+              "items": [
+                "소화궤양 위험 낮음 + 심혈관 위험 낮음: 비선택적 NSAID",
+                "소화궤양 위험 높음 + 심혈관 위험 낮음: 선택적 COX-2 차단제 또는 비선택적 NSAID + PPI",
+                "소화궤양 위험 낮음 + 심혈관 위험 높음: 비선택적 NSAID + PPI",
+                "소화궤양·심혈관 위험 모두 높음: 가능한 NSAID 사용 X, 불가피하면 비선택적 NSAID + PPI",
+                "NSAIDs 계속 사용 시 반드시 PPI 병용"
+              ]
+            },
+            {
+              "title": "⏰ PPI 복용 시기",
+              "items": [
+                "아침 첫 식사 30~60분 전 복용이 가장 효과적 (산성 환경에서 활성화)",
+                "5일간 투여 시 약 80%의 양성자 펌프 억제 가능",
+                "1회 투여로는 모든 양성자 펌프 충분히 억제되지 않음",
+                "⚠️ Clopidogrel + Omeprazole/S-Omeprazole 병용 금기"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "PPI (양성자펌프억제제)",
+              "brand": "오메프라졸(오메드·오엠피), 에소메프라졸(넥시움·넥시퀸), 란소프라졸(란스톤), 라베프라졸(라비에트·파리에트), 판토프라졸(판토록), S-판토프라졸(레토프라), 일라프라졸(놀텍)",
+              "mechanism": "벽세포 양성자펌프(H+/K+-ATPase)에 비가역적 결합 → 위산분비 차단",
+              "dosage": "식사 30~60분 전 1일 1회. 십이지장/위궤양 치료: 표준용량 4~8주.",
+              "notes": "약물 내성 보고 없음. 장기 고용량 사용 시 골밀도 감소, 저마그네슘혈증, C.difficile 감염 위험 주의."
+            },
+            {
+              "name": "PCAB (K 경쟁적 산분비억제제)",
+              "brand": "테고프라잔(케이캡 25·50mg), 펙수프라잔(펙수클루 10·40mg)",
+              "mechanism": "양성자펌프 K+ 결합부위에 경쟁적 이온결합 → 가역적 위산분비 억제",
+              "dosage": "십이지장궤양 4주, 위궤양 4~8주.",
+              "notes": "PPI보다 효과 빠름. 위점막 세포보호기능 동시 보유."
+            },
+            {
+              "name": "H2RA (히스타민 수용체 길항제)",
+              "brand": "파모티딘(가스터정 20mg), 록사티딘(가스트릭캡슐 75mg), 라푸티딘(스토가정 10mg), 니자티딘(액시드캡슐 150mg), 시메티딘(타가메트정 200mg)",
+              "mechanism": "벽세포 H2 수용체에 경쟁적 결합 → 히스타민 차단 → 위산분비 억제",
+              "dosage": "대부분 bid 또는 취침 전 qd. Famotidine 20mg bid.",
+              "notes": "2주 이상 장기 사용 시 내성 발생. Cimetidine: theophylline·warfarin 대사 억제 → 농도 상승 주의. 제산제와 동시 투여 시 흡수 10~20% 저해."
+            },
+            {
+              "name": "Rebamipide (점막보호제)",
+              "brand": "무코스타, 뮤코트라, 바메딘",
+              "mechanism": "위점막 프로스타글란딘 생산 증가 + 위점액 분비 활성 + 활성산소 억제",
+              "dosage": "100mg 1일 3회",
+              "notes": "위산 분비에는 영향 없음. 약물 상호작용 거의 없음."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Sucralfate",
+              "brand": "알츠산현탁액",
+              "mechanism": "궤양 병변에 보호막 형성",
+              "dosage": "공복 투여",
+              "notes": "부작용: 변비, 구역, 금속성 맛."
+            },
+            {
+              "name": "Misoprostol",
+              "brand": "싸이토텍 200μg",
+              "mechanism": "합성 PGE1 유사체 → 점막 방어기전 강화",
+              "dosage": "200μg qid",
+              "notes": "임부 금기 (자궁 수축). 설사·복통 유발 가능."
+            },
+            {
+              "name": "Bismuth (데놀정)",
+              "brand": "데놀정 300mg",
+              "mechanism": "위점막 보호 + 항H.pylori 작용",
+              "dosage": "4제요법 포함: 120mg qid",
+              "notes": "대변이 검게 변할 수 있음."
+            }
+          ],
+          "sideEffects": [
+            "PPI: 두통·설사(흔함), 장기 사용 시 골절 위험, 저마그네슘혈증(이뇨제·디곡신 병용 주의)",
+            "PPI 장기: C.difficile 감염 위험, 비타민B12·철분 흡수 감소",
+            "H2RA: 두통, 설사, 어지러움, 피로, 혼동",
+            "Cimetidine: 여성형 유방·발기부전(고용량 장기 사용, 중단 시 회복)",
+            "Misoprostol: 설사·복통(흔함), 임부 금기"
+          ],
+          "contraindications": [
+            "Clopidogrel + Omeprazole/S-omeprazole: 병용 금기",
+            "Misoprostol: 임부 절대 금기",
+            "H2RA + 제산제 동시 투여: 흡수 10~20% 저해 → 1~2시간 간격 필요",
+            "신부전 환자: Mg·Al 제산제 → 혈중 농도 상승 주의",
+            "구연산(citrate) 함유 식품: 알루미늄 흡수 50배 증가 주의"
+          ],
+          "combos": [
+            "H.pylori 1차: PPI + Amoxicillin + Clarithromycin (PAC) 14일",
+            "H.pylori 2차: Bismuth 4제요법 또는 Levofloxacin 3제요법",
+            "NSAIDs + 궤양 위험 높음: NSAIDs + PPI 반드시 병용",
+            "GERD 초기: 표준용량 PPI qd 최소 4~8주",
+            "GERD 유지: PPI 유지요법 또는 H2RA 간헐적"
+          ]
+        },
+        {
+          "id": "gerd",
+          "name": "위식도역류병 (GERD)",
+          "guideline": "서울 GERD 진료지침 2020 / 약물치료학 5판",
+          "tags": [
+            "PPI",
+            "H2RA",
+            "위장운동촉진제",
+            "생활습관"
+          ],
+          "overview": "위내용물의 역류로 불편한 증상이 발생하거나 합병증이 동반되는 질병. 가슴쓰림·역류가 전형적 증상. 하부식도괄약근 이완 또는 압력 저하가 주된 기전. 주 2회 이상 발생 시 삶의 질 유의하게 감소.",
+          "criteria": [
+            {
+              "label": "전형적 증상",
+              "sbp": "가슴쓰림·역류",
+              "dbp": "식후 30분~2시간 발생, 눕거나 구부릴 때 악화"
+            },
+            {
+              "label": "비전형적 증상",
+              "sbp": "흉통·만성기침·인후이물감·쉰목소리",
+              "dbp": "우리나라에서 비전형 증상이 더 많다고 보고"
+            },
+            {
+              "label": "치료 목표 pH",
+              "sbp": "위 pH 4 이상 유지",
+              "dbp": "효과적인 위산 억제 기준"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🚫 생활요법 (비약물치료)",
+              "items": [
+                "자극적 음식 피하기: 오렌지 주스·토마토·양파·탄산음료",
+                "역류 유발 음식 피하기: 고지방식·커피·초콜릿·민트류",
+                "과식 금지, 소량씩 자주 섭취",
+                "취침 시 침상 머리쪽 올리기(30도) / 식후 3시간 내 눕지 않기",
+                "금연·금주·꽉 죄는 옷 금지·과체중 시 체중 감량",
+                "⚠️ 하부식도괄약근 압력 감소시키는 약물 주의: CCB, Theophylline, 항콜린제, BB, Benzodiazepine"
+              ]
+            },
+            {
+              "title": "💊 약물치료 원칙",
+              "items": [
+                "초기치료: 표준용량 PPI qd 최소 4~8주",
+                "심한 식도염: PPI bid, 8주 이상",
+                "장기유지: PPI 유지요법 (H2RA에서는 Ranitidine 150mg bid)",
+                "H2RA: PPI보다 효과 떨어지나 유효. 약제 내성 발생 → 간헐적 투여.",
+                "제산제: 증상 신속 완화, 중증이나 합병증 있으면 효과 부족"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "PPI (1차 선택)",
+              "brand": "오메프라졸(오메드), 에소메프라졸(넥시움), 란소프라졸(란스톤), 라베프라졸(라비에트), 판토프라졸(판토록), 덱스란소프라졸(덱실란트)",
+              "mechanism": "양성자펌프 비가역적 억제 → 24시간 위산분비 차단",
+              "dosage": "표준용량 qd (식전 30~60분). 심한 식도염: bid 8주 이상.",
+              "notes": "치료 성공 3요소: ① 산억제 정도 ② 24시간 억제 기간 ③ 치료기간."
+            },
+            {
+              "name": "위장운동 촉진제",
+              "brand": "메토클로프라미드(맥페란 5~10mg tid-qid), 돔페리돈(멕시롱 10~20mg tid), 이토프리드(가나칸 50mg tid), 모사프리드(가스모틴 5mg tid)",
+              "mechanism": "하부식도괄약근 압력 상승 + 위배출 향상 + 산청소능 개선",
+              "dosage": "식사 전 투여. 증상 개선 효과 있으나 식도염 치유 효과는 없음.",
+              "notes": "부작용: 추체외로 이상반응(메토클로프라미드·레보설피리드), 유즙 분비."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "H2RA (2차 또는 유지)",
+              "brand": "파모티딘(가스터 20mg bid), 니자티딘(액시드 150mg bid)",
+              "mechanism": "H2 수용체 차단 → 위산 억제",
+              "dosage": "복용 30분 후 작용 시작, 12시간 지속. 간헐적 투여 권장.",
+              "notes": "내성 발생 가능 → 지속 투여보다 간헐적 사용."
+            },
+            {
+              "name": "Baclofen (하부식도괄약근 작용제)",
+              "brand": "바클란 10mg",
+              "mechanism": "GABA-B 수용체 작용 → 하부식도괄약근 이완 횟수 감소",
+              "dosage": "5mg tid-qid 시작 → 10일에 걸쳐 40~60mg/일로 상향",
+              "notes": "부작용: 두통, 저림, 졸음."
+            }
+          ],
+          "sideEffects": [
+            "PPI: 두통·설사·변비·복통(흔함)",
+            "위장운동촉진제: 추체외로 증상(메토클로프라미드), 유즙분비, 중추신경 억제",
+            "H2RA: 두통, 설사, 어지러움, 혼동"
+          ],
+          "contraindications": [
+            "Clopidogrel + Omeprazole 병용: 금기",
+            "하부식도괄약근 압력 낮추는 약물 주의: CCB, Theophylline, 항콜린제, Caffeine, Opioid, Benzodiazepine"
+          ],
+          "combos": [
+            "표준: PPI qd 4~8주 (초기치료)",
+            "심한 식도염: PPI bid 8주 이상",
+            "증상 잔존: PPI + 위장운동촉진제 병용",
+            "유지요법: PPI 최소유효용량 또는 H2RA 간헐적"
+          ]
+        },
+        {
+          "id": "constipation",
+          "name": "만성 변비",
+          "guideline": "2019 만성기능성변비 최신 진료지침",
+          "tags": [
+            "완하제",
+            "삼투성",
+            "자극성",
+            "팽창성",
+            "Prucalopride"
+          ],
+          "overview": "배변 횟수 감소(주 3회 미만)뿐 아니라 단단한 변, 불완전 배변감, 과도한 힘주기 등의 증상. ROME IV 기준: 6가지 항목 중 2가지 이상이 진단 6개월 전에 시작되어 최근 3개월 동안 존재.",
+          "criteria": [
+            {
+              "label": "ROME IV (6항목 중 2개 이상)",
+              "sbp": "① 과도한 힘주기 ② 덩어리·딱딱한 변 ③ 불완전 배변감",
+              "dbp": "④ 직장항문 폐쇄감 ⑤ 수지 조작 필요 ⑥ 주 3회 미만 배변"
+            },
+            {
+              "label": "변비 유발 약물",
+              "sbp": "CCB, 항콜린제, 항파킨슨제, 진통제",
+              "dbp": "항우울제, 항히스타민제"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "💊 완하제 단계별 선택",
+              "items": [
+                "1단계: 생활습관·식이 교정 (식이섬유, 수분, 운동)",
+                "2단계: 부피형성 완하제 또는 삼투성 완하제",
+                "약물성 변비: 삼투성 완하제 우선 (부피형성 효과 없을 수 있음)",
+                "3단계: 자극성 완하제 (단기간 사용, 취침 전 복용)",
+                "4단계: 5-HT4 수용체 작용제 (Prucalopride)",
+                "⚠️ 자극성 완하제: 제산제·H2RA·PPI·우유 섭취 후 1~2시간 내 복용 금지"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "삼투성 완하제",
+              "brand": "폴리에틸렌글리콜-PEG(폴락스산 10g/Macrogol), 락툴로스(듀락칸이지), 산화마그네슘(마그오)",
+              "mechanism": "삼투압으로 장관 내 수분 이동 → 변 연화 및 배변 용이",
+              "dosage": "복용 24~72시간 후 효과. 장기 투여 가능.",
+              "notes": "PEG: 가스 발생 없어 순응도 높음. 마그네슘: 신기능 저하 환자에서 고마그네슘혈증 주의."
+            },
+            {
+              "name": "부피형성 완하제",
+              "brand": "차전자(아기오 과립), 칼슘폴리카르보필(실콘정)",
+              "mechanism": "수분 흡수 → 대변 부피 증가 → 장 통과시간 단축",
+              "dosage": "복용 12~72시간 후 효과. 반드시 충분한 수분(240mL) 함께 복용.",
+              "notes": "부작용: 가스·복부팽만. 대장 폐쇄 시 금기. 1~2주 간격으로 서서히 증량."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "자극성 완하제",
+              "brand": "비사코딜(비코그린장용정), 센나(아락실 과립), 피코설페이트",
+              "mechanism": "대장 점막 직접 자극 → 연동운동 촉진",
+              "dosage": "취침 전 복용 (아침 배변 유도). 단기간 사용 권고.",
+              "notes": "부작용: 복부 경련·전해질 이상·대장 흑색증(장기 사용)."
+            },
+            {
+              "name": "Prucalopride (5-HT4 수용체 작용제)",
+              "brand": "모비졸로정 1mg, 2mg",
+              "mechanism": "5-HT4 수용체 자극 → 위장관 운동 직접 촉진",
+              "dosage": "1일 1회 2mg / 65세 이상·중증 신장애·간장애: 1일 1회 1mg",
+              "notes": "두통이 첫날 가장 흔함(서서히 호전). 복통·설사·오심 가능. 4주 후 효과 없으면 중단. 투석 필요·장 폐쇄·심한 장관 염증 시 금기."
+            }
+          ],
+          "sideEffects": [
+            "삼투성(마그네슘): 고마그네슘혈증(신기능 저하 환자), 저혈압·서맥·심정지",
+            "삼투성(PEG 과량): 전해질 및 수분 저류",
+            "부피형성: 복부 팽만·가스, 대장 폐쇄(수분 불충분 시)",
+            "자극성: 복부 경련, 전해질 이상, 대장 흑색증(장기 사용)",
+            "Prucalopride: 두통(첫날), 복통, 설사, 오심"
+          ],
+          "contraindications": [
+            "자극성 완하제 + 제산제·H2RA·PPI·우유: 1~2시간 간격 필요",
+            "마그네슘 제제: 신기능 저하 환자·신경근육질환 금기",
+            "Prucalopride: 투석 필요, 장 폐쇄, 심한 장관 염증 금기"
+          ],
+          "combos": [
+            "1단계: 부피형성 또는 삼투성 완하제",
+            "약물성 변비: 삼투성 완하제 우선",
+            "가스 심한 환자: PEG 선호 (비흡수다당류보다 가스 없음)",
+            "단기: 자극성 완하제 (취침 전)",
+            "만성 난치성: Prucalopride 추가"
+          ]
+        },
+        {
+          "id": "ibs",
+          "name": "과민성대장증후군 (IBS)",
+          "guideline": "2019 과민성장증후군 최신 진료지침 / 약물치료학 5판",
+          "tags": [
+            "진경제",
+            "Loperamide",
+            "5-HT3길항제",
+            "5-HT4작용제",
+            "Rifaximin"
+          ],
+          "overview": "복통이 동반되는 배변 이상이 반복되는 기능성 장질환. Rome IV 기준: 지난 3개월간 주당 1일 이상 재발성 복통 + 배변·빈도·형태 변화 중 2가지 이상. IBS-C(변비형), IBS-D(설사형), IBS-M(혼합형)으로 분류.",
+          "criteria": [
+            {
+              "label": "IBS-D (설사형)",
+              "sbp": "하루 3회 이상 묽은 변",
+              "dbp": "Loperamide, 진경제, 5-HT3 길항제"
+            },
+            {
+              "label": "IBS-C (변비형)",
+              "sbp": "주 3회 미만 배변, 단단한 변",
+              "dbp": "팽창성 하제, 5-HT4 작용제, SSRI"
+            },
+            {
+              "label": "IBS-M (혼합형)",
+              "sbp": "변비와 설사 반복",
+              "dbp": "증상에 따라 약제 조합"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🥗 비약물 요법",
+              "items": [
+                "IBS-D: 우유·과당·소르비톨·밀·쇠고기 피하기",
+                "고창: 콩·샐러리·양파·바나나·건자두 등 가스 유발 음식 줄이기",
+                "규칙적 신체활동 (IBS 증상·심리적 증상 장기 개선)"
+              ]
+            },
+            {
+              "title": "⚠️ 약물 선택 주의사항",
+              "items": [
+                "Tegaserod(5-HT4): 심장마비·뇌졸중 위험 → 국내 판매 금지",
+                "Ramosetron(5-HT3): 투여 3개월 기준 지속 여부 결정, 장기 투여 피하기",
+                "TCA (amitriptyline): IBS-D에 저용량(10~25mg) 복통 완화 / IBS-C에는 항콜린 부작용으로 금기"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "진경제 (IBS-D)",
+              "brand": "피나베리움(디세텔정 50mg), 트리메부틴(포리부틴정 100mg/서방정 300mg), 옥틸로늄(메녹틸정 40mg), 알베린(위트림연질캡슐)",
+              "mechanism": "장 평활근 이완 또는 칼슘채널 차단 → 장 경련 억제",
+              "dosage": "피나베리움 1정 1일 3회 식사 중 / 트리메부틴 100~200mg 1일 3회 식전",
+              "notes": "단기간 복통·복부 불편감 개선. 심각한 부작용 없어 비교적 안전."
+            },
+            {
+              "name": "Loperamide (항운동제, IBS-D)",
+              "brand": "로파인캡슐 2mg",
+              "mechanism": "장 통과시간 연장 → 수분 재흡수 → 대변 굳기 개선",
+              "dosage": "초기 4mg(2캡슐) → 묽은 변마다 2mg, 1일 최대 16mg",
+              "notes": "대변 굳기 개선·배변 횟수 감소에 가장 유용. 복통 악화 가능 → 주의."
+            },
+            {
+              "name": "Prucalopride (5-HT4 작용제, IBS-C)",
+              "brand": "모비졸로정 1mg, 2mg",
+              "mechanism": "5-HT4 자극 → 장 분비·연동·소장 통과 증가",
+              "dosage": "1일 1회 2mg (고령·신장애: 1mg)",
+              "notes": "Tegaserod보다 심혈관계 부작용 위험 낮음."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Ramosetron (5-HT3 길항제, IBS-D)",
+              "brand": "이리보정",
+              "mechanism": "5-HT3 수용체 차단 → 장 운동·분비 억제",
+              "dosage": "남성 5μg/일, 여성 2.5μg/일",
+              "notes": "3개월 기준 지속 여부 결정. 변비 유발 가능. 임부·SSRI·SNRI 주의."
+            },
+            {
+              "name": "Rifaximin (항균제, IBS-D)",
+              "brand": "노르믹스정 200mg",
+              "mechanism": "장내 세균 증식 억제 (장에서 거의 흡수 안 됨)",
+              "dosage": "1정 매 6시간마다",
+              "notes": "팽만감 완화. 간기능 장애 환자 주의."
+            },
+            {
+              "name": "SSRI (IBS-C)",
+              "brand": "파록세틴, 플루옥세틴, 설트랄린",
+              "mechanism": "내장 과민성 감소 → 복통·복부팽만 감소",
+              "dosage": "IBS-C에 사용",
+              "notes": "IBS-D에는 TCA 저용량(10~25mg) 사용 / IBS-C에는 SSRI."
+            }
+          ],
+          "sideEffects": [
+            "진경제: 흐린 시력, 변비, 소변정체(항콜린 부작용)",
+            "Loperamide: 복통 악화 가능",
+            "5-HT3 길항제(Ramosetron): 변비, 허혈성 대장염(드뭄)",
+            "Rifaximin: 오심, ALT·CK 증가, 과민반응(15분 내)",
+            "TCA: 항콜린 부작용(변비·구강건조), 진정, 심계항진"
+          ],
+          "contraindications": [
+            "Tegaserod: 국내 판매 금지 (심혈관 위험)",
+            "TCA: IBS-C에는 항콜린 부작용으로 금기",
+            "Ramosetron: 임부·수유부·SSRI·SNRI 병용 주의"
+          ],
+          "combos": [
+            "IBS-D: 진경제 + Loperamide",
+            "IBS-D 난치성: Rifaximin 추가",
+            "IBS-D 지속: Ramosetron(5-HT3 길항제)",
+            "IBS-C: 팽창성 하제 + Prucalopride",
+            "IBS-C + 복통: SSRI 추가"
+          ]
+        },
+        {
+          "id": "ibd",
+          "name": "염증성 장질환 (IBD)",
+          "guideline": "2017 크론병·궤양성대장염 치료 가이드라인 / 약물치료학 5판",
+          "tags": [
+            "5-ASA",
+            "스테로이드",
+            "Thiopurine",
+            "항TNF",
+            "JAK억제제"
+          ],
+          "overview": "궤양성 대장염(UC): 직장·대장에 한정된 만성 염증성 질환. 혈성 설사·복통·대변급박감이 주증상. 크론병(CD): 구강~항문까지 위장관 어느 부위나 침범. 복통·설사·체중감소가 주증상. 10~20대 발병 多.",
+          "criteria": [
+            {
+              "label": "UC 경도-중등도",
+              "sbp": "혈성 설사·복통",
+              "dbp": "5-ASA 1차 치료"
+            },
+            {
+              "label": "UC 중등도-중증",
+              "sbp": "발열·백혈구증가·저알부민",
+              "dbp": "전신 스테로이드 또는 항TNF"
+            },
+            {
+              "label": "크론병 경도 (CDAI 150~220)",
+              "sbp": "복통·설사·체중감소",
+              "dbp": "5-ASA 또는 Budesonide"
+            },
+            {
+              "label": "크론병 중등도-중증 (CDAI 220~450)",
+              "sbp": "전신 증상 동반",
+              "dbp": "전신 스테로이드 → 항TNF"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "💊 UC 활동기 치료 원칙",
+              "items": [
+                "직장염: 5-ASA 좌약(펜타사) 1g/day 또는 관장액 1~2g/day",
+                "좌측·광범위 대장염: 경구 5-ASA ≥2.4g/day",
+                "경구+국소 5-ASA 병합이 단독보다 효과적",
+                "5-ASA 효과 없으면: 경구 스테로이드 (Prednisolone 30~40mg/day)",
+                "스테로이드 반응 없는 경우: 항TNF (infliximab·adalimumab·golimumab)"
+              ]
+            },
+            {
+              "title": "🎯 크론병 치료 원칙",
+              "items": [
+                "말단 회장/회맹부 경도-중등도: Budesonide 9mg/day 선호",
+                "중등도-중증 1차: 전신 스테로이드 (Prednisolone 0.5~1mg/kg/day)",
+                "스테로이드 실패: 항TNF 제제",
+                "항TNF 사용 시: Thiopurine 병합이 단독보다 효과적",
+                "누공형 크론병: Metronidazole 750~1,500mg/day 또는 Ciprofloxacin 1,000mg/day"
+              ]
+            },
+            {
+              "title": "🔬 항TNF 치료 전 필수 확인",
+              "items": [
+                "결핵·B형간염·HIV 잠복감염 배제 또는 미리 치료",
+                "감염 있는 환자: 감염 조절 후 투여",
+                "농양: 항TNF 투여 전 배농 필요"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "5-ASA (Aminosalicylate)",
+              "brand": "설파살라진(조피린 장용정 500mg), 메살라진(펜타사 서방정 500mg·1g / 펜타사 좌약 1g / 아사콜디알 400mg)",
+              "mechanism": "장 점막 국소 항염증 작용",
+              "dosage": "UC 활동기: 2.4~4.8g/day 경구 / 좌약: 1g/day / 유지: ≥2g/day",
+              "notes": "메살라진이 설파살라진보다 독성 적어 선호. 신독성 주의."
+            },
+            {
+              "name": "Thiopurine (Azathioprine, 이뮤란정 50mg)",
+              "brand": "이뮤란정 50mg",
+              "mechanism": "퓨린 합성 억제 → 림프구 증식 억제",
+              "dosage": "1~2.5mg/kg/day. 효과 1~3개월에 걸쳐 발현.",
+              "notes": "⚠️ 정기적 혈액 검사 필수. 부작용: 골수억제, 간손상, 발열."
+            },
+            {
+              "name": "전신 스테로이드",
+              "brand": "프레드니솔론(소론도정 5mg), 메틸프레드니솔론",
+              "mechanism": "광범위 항염증·면역억제",
+              "dosage": "UC 중등도-중증: Prednisolone 40~60mg/day. 8주에 걸쳐 서서히 감량.",
+              "notes": "유지치료로는 권고하지 않음. Budesonide는 크론병 회맹부에 선호(9mg/day)."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "항TNF 제제",
+              "brand": "인플릭시맙(레미케이드), 아달리무맙(휴미라), 골리무맙(심포니)",
+              "mechanism": "TNF-α 중화 → 장 염증 억제",
+              "dosage": "UC/CD 중등도-중증, 스테로이드 실패 또는 의존 시.",
+              "notes": "투여 전: 결핵·B형간염·HIV 잠복감염 필수 확인. 농양·감염 조절 후 투여."
+            },
+            {
+              "name": "JAK 억제제",
+              "brand": "토파시티닙(젤잔즈정, UC), 우파다시티닙(린버크 서방정)",
+              "mechanism": "JAK-STAT 신호 전달 억제 → 사이토카인 신호 차단",
+              "dosage": "UC에서 스테로이드·항TNF 실패 또는 부적합 시.",
+              "notes": "감염·혈전·악성종양 위험 모니터링 필요."
+            }
+          ],
+          "sideEffects": [
+            "5-ASA(메살라진): 신독성, 설사·오심·복통·두통",
+            "설파살라진: GI 부작용·췌장염·간염·골수억제·가역적 남성 불임",
+            "Thiopurine: 골수억제(정기 혈액검사 필수), 간손상, 발열",
+            "전신 스테로이드(장기): 골다공증·고혈압·당뇨·백내장·면역억제",
+            "항TNF: 결핵·감염 재활성화, 주사 부위 반응",
+            "JAK 억제제: 감염·혈전·악성종양 위험"
+          ],
+          "contraindications": [
+            "항TNF: 결핵·B형간염·HIV 잠복감염 배제 전 금기",
+            "항TNF: 진행 중인 감염·농양 조절 전 금기",
+            "전신 스테로이드·Budesonide: IBD 유지치료로 권고하지 않음",
+            "MMF(마이렙트): 임산부 절대 금기"
+          ],
+          "combos": [
+            "UC 경도: 5-ASA 단독 (경구+국소 병합 > 단독)",
+            "UC 중등도-중증: 전신 스테로이드 → 관해 후 5-ASA 또는 Thiopurine 유지",
+            "UC 스테로이드 의존·불응: 항TNF (± Thiopurine)",
+            "크론병 중등도-중증: 스테로이드 → 항TNF (± Thiopurine)",
+            "항TNF + Thiopurine 병합: 항TNF 단독보다 효과 우월"
+          ]
+        },
+        {
+          "id": "liver-cirrhosis",
+          "name": "간경화증 및 합병증",
+          "guideline": "2017·2019 간경변증 진료가이드라인",
+          "tags": [
+            "이뇨제",
+            "Spironolactone",
+            "Lactulose",
+            "Rifaximin",
+            "비선택적BB"
+          ],
+          "overview": "만성 간손상으로 재생결절과 진행성 간섬유화가 발생한 상태. 알코올·바이러스 간염이 주원인. 합병증: 정맥류 출혈, 복수, 저나트륨혈증, 자발성 세균성 복막염(SBP), 간성뇌증.",
+          "criteria": [
+            {
+              "label": "Child-Pugh A (경증)",
+              "sbp": "5~6점",
+              "dbp": "대상성 간경변"
+            },
+            {
+              "label": "Child-Pugh B (중등도)",
+              "sbp": "7~9점",
+              "dbp": "-"
+            },
+            {
+              "label": "Child-Pugh C (중증)",
+              "sbp": "10~15점",
+              "dbp": "비대상성 간경변증"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🩸 정맥류 출혈 예방",
+              "items": [
+                "비선택적 BB: Propranolol 20~40mg bid 시작 → 안정시 심박수 55~60회/분 목표",
+                "Carvedilol 6.25mg qd 시작 → 3일 후 bid, 최대 12.5mg/day",
+                "수축기 혈압 90mmHg 이상 유지 필수",
+                "큰 식도정맥류: 비선택적 BB 또는 EVL(내시경 정맥류 결찰술)",
+                "재출혈 예방: EVL + 비선택적 BB 병합",
+                "⚠️ 난치성 복수·SBP 환자에서 BB 사용 신중"
+              ]
+            },
+            {
+              "title": "💧 복수 치료",
+              "items": [
+                "기본: 알코올 중단 + 염분 제한 (하루 5g, 나트륨 2g 이하)",
+                "이뇨제: Spironolactone 50~100mg/day → 최대 400mg/day (알도스테론 길항제 우선)",
+                "Furosemide 20~40mg/day 추가 → 최대 160mg/day",
+                "루프 이뇨제 단독보다 알도스테론 길항제 우선",
+                "난치성 복수: 최대 이뇨제에도 안 되면 대량 복수천자 + Midodrine 7.5mg q8h",
+                "⚠️ NSAID, ACEI, ARB: 신기능 악화로 제한"
+              ]
+            },
+            {
+              "title": "🧠 간성뇌증 치료",
+              "items": [
+                "Lactulose: 30~45mL를 1~2시간 간격 (하루 2회 이상 배변 목표)",
+                "Rifaximin(노르믹스): 장내 암모니아 생성 억제, 재발 예방에도 사용",
+                "L-ornithine-L-aspartate(헤파멜즈산): 혈중 암모니아 감소",
+                "BZD 유발 시: Flumazenil / Opioid 유발 시: Naloxone",
+                "영양: 단백질 섭취 제한 + 아연 보충"
+              ]
+            },
+            {
+              "title": "🦠 자발성 세균성 복막염 (SBP)",
+              "items": [
+                "지역사회 획득: 3세대 세팔로스포린(Cefotaxime) 정주 5일",
+                "알부민 병용: 신기능 장애 예방",
+                "SBP 재발 예방: Norfloxacin 400mg/day 또는 Rifaximin 1,100~1,200mg/day"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Spironolactone (알도스테론 길항제)",
+              "brand": "스피락톤정 50mg",
+              "mechanism": "알도스테론 수용체 차단 → 나트륨 배출·칼륨 보존",
+              "dosage": "50~100mg/day 시작 → 3~5일 간격 조절 → 최대 400mg/day",
+              "notes": "복수 치료 기본 이뇨제. 안정 농도까지 3~4일 소요. 부작용: 고칼륨혈증, 여성형 유방, 유방통."
+            },
+            {
+              "name": "Lactulose (비흡수성 이당류)",
+              "brand": "듀락칸 시럽",
+              "mechanism": "장내 pH 감소 → 암모니아 생성 억제 + 삼투성 설사로 배설",
+              "dosage": "간성뇌증: 30~45mL를 1~2시간 간격 (하루 2회 이상 배변 목표)",
+              "notes": "불현성 간성뇌증에도 사용. 과다 투여 시 탈수·전해질 불균형 주의."
+            },
+            {
+              "name": "비선택적 베타차단제 (정맥류 예방)",
+              "brand": "프로프라놀롤(인데놀), 나도롤(나도가드), 카르베딜롤(딜라트렌)",
+              "mechanism": "β1·β2 차단 → 심박출량 감소·내장 혈관 수축 → 문맥압 감소",
+              "dosage": "Propranolol 20~40mg bid 시작. 복수 없는 환자 최대 320mg, 복수 있으면 최대 160mg.",
+              "notes": "평생 투여 지속 필요. 중단 시 출혈 위험·사망률 증가. 금기: 동성서맥·COPD·심부전·말초동맥질환."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Furosemide (Loop 이뇨제)",
+              "brand": "라식스정 40mg",
+              "mechanism": "헨레고리 Na/K/2Cl 공동수송체 억제 → 강력 이뇨",
+              "dosage": "20~40mg/day → 최대 160mg/day",
+              "notes": "Spironolactone과 병합. 단독은 효과 떨어짐."
+            },
+            {
+              "name": "Rifaximin (비흡수성 항생제)",
+              "brand": "노르믹스정 200mg",
+              "mechanism": "RNA 합성 억제 → 장내 세균 억제 → 암모니아 생성 감소",
+              "dosage": "간성뇌증: 200mg tid 또는 매 6시간마다. SBP 이차예방: 1,100~1,200mg/day",
+              "notes": "Neomycin·Metronidazole보다 부작용 적어 선호."
+            }
+          ],
+          "sideEffects": [
+            "Spironolactone: 고칼륨혈증, 여성형 유방·유방통·성욕감퇴·발기부전",
+            "Furosemide: 저칼륨혈증, 저나트륨혈증, 저혈압, 신기능 악화",
+            "비선택적 BB: 어지럼·피로·호흡곤란·서맥·발기장애",
+            "Lactulose 과다: 탈수, 전해질 불균형",
+            "PPI 장기(간경변): SBP·C.difficile 위험 증가 주의"
+          ],
+          "contraindications": [
+            "비선택적 BB: 동성서맥·COPD·폐쇄폐질환·심부전·말초동맥질환 금기",
+            "NSAID·ACEI·ARB: 복수 동반 간경변 환자에서 신기능 악화 → 사용하지 않음",
+            "Statin: 복수 동반 환자에서 안전성 미확립",
+            "Vaptan(Tolvaptan): 간경변 복수에서 사망률 증가 보고"
+          ],
+          "combos": [
+            "복수: Spironolactone + Furosemide (알도스테론 길항제 우선)",
+            "간성뇌증: Lactulose + Rifaximin 병합",
+            "정맥류 예방: 비선택적 BB 또는 EVL",
+            "재출혈 예방: EVL + 비선택적 BB 병합",
+            "SBP 치료: 3세대 세팔로스포린 + 알부민",
+            "난치성 복수: Spironolactone(최대) + Furosemide(최대) + Midodrine + 대량 복수천자"
+          ]
+        },
+        {
+          "id": "hepatitis-b",
+          "name": "B형 간염",
+          "guideline": "2022 대한간학회 B형간염 가이드라인",
+          "tags": [
+            "Entecavir",
+            "Tenofovir",
+            "페그인터페론",
+            "항바이러스제"
+          ],
+          "overview": "감염 후 6개월 이상 HBsAg이 존재하는 만성 B형 간염. 임상 단계: 면역관용기 → HBeAg 양성 면역활동기 → 면역비활동기 → HBeAg 음성 면역활동기 → HBsAg 소실기. 현재 약제로는 완전 제거 어렵고 기능적 완치가 목표.",
+          "criteria": [
+            {
+              "label": "치료 시작: HBeAg 양성",
+              "sbp": "HBV DNA ≥20,000 IU/mL + ALT ≥정상 상한치 2배",
+              "dbp": "항바이러스 치료 시작"
+            },
+            {
+              "label": "치료 시작: HBeAg 음성",
+              "sbp": "HBV DNA ≥2,000 IU/mL + ALT ≥정상 상한치 2배",
+              "dbp": "항바이러스 치료 시작"
+            },
+            {
+              "label": "대상성 간경변증",
+              "sbp": "HBV DNA ≥2,000 IU/mL (ALT 무관)",
+              "dbp": "항바이러스 치료 시작"
+            },
+            {
+              "label": "비대상성 간경변증",
+              "sbp": "HBV DNA 검출 시 (ALT 무관)",
+              "dbp": "즉시 항바이러스 치료 + 간이식 고려"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🎯 치료 종료 기준",
+              "items": [
+                "HBeAg 양성: HBV DNA 불검출 + HBeAg 소실/혈청전환 후 12개월 이상 투여 후 종료 고려",
+                "HBsAg 소실 이루어진 후 항바이러스제 종료 권장",
+                "간경변증: 장기간 치료 (비대상성: 중단하지 않음)",
+                "페그인터페론: 48주 투여"
+              ]
+            },
+            {
+              "title": "⚠️ 특수 상황",
+              "items": [
+                "신기능 이상·골대사 질환: TDF보다 Entecavir, TAF, 베시포비어 우선",
+                "면역억제제·항암요법: Entecavir·Tenofovir 예방적 투여 (종료 후 최소 6개월, rituximab 포함 시 최소 12개월)",
+                "임신부: TDF(비리어드) 선호",
+                "비대상성 간경변: 인터페론 계열 금기",
+                "소아 2~11세: Entecavir 1차 / 12세 이상: Entecavir 또는 Tenofovir"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Entecavir (바라클·바라크루드)",
+              "brand": "바라클·바라크루드",
+              "mechanism": "HBV 역전사효소 억제 → HBV DNA 복제 차단",
+              "dosage": "공복(식사 2시간 후 또는 전) 복용. 성인 0.5mg qd. 신기능에 따라 조절.",
+              "notes": "약제 내성 장벽 높음 → 1차 치료제. 부작용: 젖산혈증(드뭄). 유산증/지방증을 동반한 중증 간종대 금기."
+            },
+            {
+              "name": "Tenofovir Disoproxil (TDF, 비리어드·테노포벨)",
+              "brand": "비리어드·테노포벨",
+              "mechanism": "HBV 역전사효소 억제",
+              "dosage": "식사와 함께 300mg qd. 신기능 저하 시 용량 조절. 12세 이상.",
+              "notes": "임신부 선호. 신독성·골밀도 감소 주의. Adefovir와 병용 금기."
+            },
+            {
+              "name": "Tenofovir Alafenamide (TAF, 베믈리디·베믈리아)",
+              "brand": "베믈리디·베믈리아",
+              "mechanism": "HBV 역전사효소 억제 (TDF보다 신독성·골독성 낮음)",
+              "dosage": "식사와 함께 25mg qd. 18세 이상.",
+              "notes": "신기능 이상·골대사 질환 환자에서 TDF보다 우선 추천."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "페그인터페론 알파",
+              "brand": "페가시스주, 페그인트론주",
+              "mechanism": "면역 활성화 + 항바이러스 효과",
+              "dosage": "48주 피하주사",
+              "notes": "금기: 비대상성 간경화, 세균감염, 간부전. 부작용: 인플루엔자유사증후군, 용혈성 빈혈, 범혈구감소증."
+            }
+          ],
+          "sideEffects": [
+            "Entecavir: 젖산혈증(드뭄), 두통, 피로",
+            "TDF(비리어드): 신독성, 골밀도 감소, 두통, 오심",
+            "TAF(베믈리디): TDF보다 신독성·골독성 낮음",
+            "페그인터페론: 인플루엔자유사증후군, 용혈성 빈혈, 범혈구감소증, 우울증"
+          ],
+          "contraindications": [
+            "페그인터페론: 비대상성 간경화, 세균감염, 간부전 금기",
+            "TDF(비리어드): Adefovir와 병용 금기",
+            "모든 핵산유사체: 유산증/지방증 동반 중증 간종대 금기",
+            "비대상성 간경변: 인터페론 계열 금기"
+          ],
+          "combos": [
+            "1차: Entecavir 또는 TDF 또는 TAF 단독 (약제내성 장벽 높음)",
+            "신기능 이상: Entecavir 또는 TAF 또는 베시포비어 우선",
+            "간이식: 항바이러스제 + B형간염 면역글로불린 병합",
+            "임신부: TDF(비리어드) 선호"
+          ]
+        },
+        {
+          "id": "hepatitis-c",
+          "name": "C형 간염",
+          "guideline": "2017 대한간학회 C형간염 가이드라인",
+          "tags": [
+            "DAA",
+            "마비렛",
+            "엡클루사",
+            "Sofosbuvir",
+            "SVR"
+          ],
+          "overview": "HCV에 의한 만성 간염. 직접 작용 항바이러스제(DAA)로 SVR(치료 후 12주 이상 HCV RNA 불검출) 달성이 목표. HCV 백신은 없음.",
+          "criteria": [
+            {
+              "label": "SVR (완치 기준)",
+              "sbp": "치료 후 12주간 HCV RNA 불검출",
+              "dbp": "사실상 완치"
+            },
+            {
+              "label": "마비렛(간경변 없음)",
+              "sbp": "유전자형 1~6형: 8주",
+              "dbp": "유전자형 3형 재치료: 16주"
+            },
+            {
+              "label": "엡클루사",
+              "sbp": "유전자형 1~6형: 12주",
+              "dbp": "유전자형 3형 재치료: 엡클루사+Ribavirin 12주"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "💊 치료 선택 원칙",
+              "items": [
+                "유전자형, 간경화증 동반 여부, 이전 치료 경험 고려",
+                "마비렛: 간경변 없음 8주, 간경변 동반 12주",
+                "엡클루사: 모든 유전자형 12주",
+                "유전자형 3형 재치료: 엡클루사 + Ribavirin 12주",
+                "ALT 모니터링: 치료 중 4, 8, 12, 24주 / 치료 후 24주"
+              ]
+            },
+            {
+              "title": "🚫 마비렛 주요 금기 약물",
+              "items": [
+                "항경련제: 카르바마제핀·옥스카르바제핀·페노바르비탈·페니토인",
+                "항결핵제: 리팜핀·리파펜틴·리파부틴",
+                "HIV 항바이러스제: 아타자나비어·다루나비어·로피나비어·리토나비어·에파비렌즈",
+                "Aliskiren, Dabigatran, Atorvastatin, Lovastatin, Simvastatin: 금기",
+                "경구 피임제(에티닐에스트라디올): ALT 상승 빈번 → 금기"
+              ]
+            },
+            {
+              "title": "🚫 엡클루사 주요 금기 약물",
+              "items": [
+                "항경련제·항결핵제·St John's wort·에파비렌즈: 금기",
+                "ClCr <30mL/min 또는 혈액 투석: 금기",
+                "Amiodarone 병합: 심각한 서맥 → 금기",
+                "제산제·H2RA·PPI: 엡클루사 용해도 감소 → 병합 시 주의",
+                "Atorvastatin·Rosuvastatin: 혈중 농도 증가 → 모니터링"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Glecaprevir/Pibrentasvir (마비렛정)",
+              "brand": "마비렛정 (Glecaprevir 100mg / Pibrentasvir 40mg)",
+              "mechanism": "NS3/4A 단백분해효소 억제 + NS5A 억제 → HCV 복제 차단",
+              "dosage": "3정 식사와 함께 1일 1회. 간경변 없음: 8주 / 간경변 동반: 12주.",
+              "notes": "중증 간장애(Child C) 금기. 중등증(Child B) 권고 않음. 흔한 부작용: 두통·피로감."
+            },
+            {
+              "name": "Sofosbuvir/Velpatasvir (엡클루사정)",
+              "brand": "엡클루사정 (Sofosbuvir 400mg / Velpatasvir 100mg)",
+              "mechanism": "NS5B 중합효소 억제 + NS5A 억제 → HCV 복제 차단",
+              "dosage": "식사와 무관하게 1정 1일 1회. 모든 유전자형 12주.",
+              "notes": "ClCr<30 또는 혈액투석: 금기. Amiodarone 병합 금기(심각한 서맥)."
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Ribavirin (바이라미드캡슐 200mg)",
+              "brand": "바이라미드캡슐 200mg",
+              "mechanism": "퓨린 유사체 → HCV RNA 합성 억제",
+              "dosage": "유전자형 3형 재치료 또는 특정 경우에 DAA에 추가",
+              "notes": "금기: 임부·배우자(치료 중·후 6개월 피임 필수), 수유부, ClCr<50, HB<8.5. 부작용: 용혈성 빈혈."
+            }
+          ],
+          "sideEffects": [
+            "마비렛: 두통·피로감(흔함)",
+            "엡클루사: 두통·피로감(흔함), Ribavirin 추가 시 피로·빈혈·오심·불면·설사",
+            "Ribavirin: 용혈성 빈혈(흔함), 임신 기형 위험",
+            "DAA 공통: 약물 상호작용 많으므로 복용 중인 모든 약물 확인 필수"
+          ],
+          "contraindications": [
+            "마비렛: 중증 간장애(Child C) 금기 / 중등증(Child B) 권고 않음",
+            "마비렛: 항경련제·항결핵제·HIV 항바이러스제(리토나비어·에파비렌즈 등) 금기",
+            "마비렛: Atorvastatin·Lovastatin·Simvastatin·Aliskiren·Dabigatran 금기",
+            "엡클루사: ClCr<30 또는 혈액투석 CKD 금기",
+            "엡클루사: Amiodarone 병합 금기",
+            "Ribavirin: 임부·배우자 절대 금기 (치료 후 6개월까지 피임)"
+          ],
+          "combos": [
+            "마비렛: 유전자형 1~6형 (간경변 없음 8주, 간경변 12주)",
+            "엡클루사: 유전자형 1~6형 12주",
+            "유전자형 3형 재치료: 엡클루사 + Ribavirin 12주",
+            "HIV 동반: DAA 우선(인터페론 없는 요법), 항레트로바이러스 중단하지 않음"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "neurology",
+      "name": "신경",
+      "icon": "🧠",
+      "color": "#9B59B6",
+      "diseases": [
+        {
+          "id": "migraine",
+          "name": "편두통",
+          "guideline": "2021 편두통 예방치료 약제 진료지침 / 2018 두통 진료지침",
+          "tags": [
+            "편두통",
+            "두통",
+            "Triptan",
+            "Topiramate",
+            "예방치료",
+            "CGRP"
+          ],
+          "overview": "발작적으로 발생하는 삽화성 두통 + 신경학적 증상. 조짐 유무에 따라 무조짐·조짐편두통으로 구분. 월 15일 이상·3개월 초과 시 만성 편두통. 예방치료는 급성기 치료 효과 불충분, 두통 빈도 잦음, 약물과용두통 위험(월 10~15일 이상 사용) 시 권고.",
+          "criteria": [
+            {
+              "label": "만성 편두통",
+              "sbp": "두통 ≥ 15일/월, 3개월 초과",
+              "dbp": "삽화: 그 이하"
+            },
+            {
+              "label": "약물과용두통 기준 — Triptan/Ergotamine",
+              "sbp": "월 10일 이상 복용",
+              "dbp": ""
+            },
+            {
+              "label": "약물과용두통 기준 — AAP·NSAIDs",
+              "sbp": "월 15일 이상 복용",
+              "dbp": ""
+            },
+            {
+              "label": "약물과용두통 기준 — Opioid·복합진통제",
+              "sbp": "월 10일 이상 복용",
+              "dbp": ""
+            },
+            {
+              "label": "예방치료 효과 판정",
+              "sbp": "두통 빈도 50% 이상 감소",
+              "dbp": "최소 2개월 시도 후 판정"
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "🚨 편두통 급성기 치료",
+              "items": [
+                "1차: 경구 Triptan + NSAID 또는 경구 Triptan + AAP 병용요법 권고",
+                "단독 선호 시: 경구 Triptan, NSAID, Aspirin 900mg, AAP 중 선택",
+                "구역·구토 없어도 항구토제 추가 고려",
+                "Ergotamine(크레밍정: Ergotamine+Caffeine)·Opioid 사용하지 말 것",
+                "군발두통 급성기: 산소 및/또는 피하·비강 Triptan 권고. AAP·NSAIDs·Opioid·Ergotamine·경구 Triptan 사용 금지"
+              ]
+            },
+            {
+              "title": "💊 삽화 편두통 예방 — 계열별 권고",
+              "items": [
+                "β-차단제(강력 권고): Propranolol(인데놀), Metoprolol. 보험급여: Propranolol·Nadolol",
+                "CCB: Flunarizine(씨베리움) — 혈압강하 효과 없음, T형 Ca 차단+항히스타민·항도파민·항세로토닌. Cinnarizine(마이그리진)도 유사. Verapamil·Nicardipine·Nifedipine·Nimodipine 권고 X",
+                "항우울제: Amitriptyline(에나폰) 권고 / Nortriptyline·Venlafaxine 약하게 권고 / Fluoxetine 권고 X",
+                "뇌전증약(강력 권고): Topiramate(토피론), Valproic acid(오르필). 약하게: Levetiracetam·Zonisamide. 권고 X: Gabapentin",
+                "ACEI/ARB: Candesartan(칸데모어)·Lisinopril(제스트릴) 고려 가능. 고혈압 동반 시 특히 유용. 보험급여 X",
+                "만성 편두통: Topiramate(강력)·Valproic sodium(약하게)·Botulinum toxin(강력)",
+                "월경 편두통 단기예방: Frovatriptan(미가드)·Naratriptan(나그란)·Zolmitriptan 모두 강력 권고"
+              ]
+            },
+            {
+              "title": "💉 CGRP 단클론항체 / Gepant 계열 (신약)",
+              "items": [
+                "CGRP 단클론항체: Galcanezumab·Fremanezumab·Erenumab·Eptinezumab (월 1회 피하 또는 정맥주사)",
+                "Gepant 계열(CGRP 수용체 길항제): Atogepant(아큅타 10·60mg) 1일 1회 / Rimegepant(너텍 75mg) 이틀에 1회(EOD)",
+                "Rimegepant: PRN 급성기 + 예방 동시 가능. 혈관 수축 작용 없어 심혈관 질환자에도 비교적 안전",
+                "부작용: 오심, 변비, 졸음. 중증 간장애 환자 권장 X",
+                "금기: 심혈관질환·심근경색·조절되지 않는 고혈압·임신"
+              ]
+            },
+            {
+              "title": "⚠️ Triptan 금기·주의",
+              "items": [
+                "금기: 급성 심근경색, 관상동맥질환, 말초혈관질환, 레이노 증후군, 장허혈성질환, 뇌출혈, 뇌경색",
+                "Ergotamine과 병용 금기(크레밍정: Ergotamine+Caffeine)",
+                "MAO 억제제 복용 중인 경우 병용 금기",
+                "부작용: 감각이상, 졸음, 어지럼, 열감·냉감, 무력증, 피로, 트립탄감각(저림·옥씬거림·이상한 느낌·온열감·작열감·냉감·목과 가슴 압박감)"
+              ]
+            },
+            {
+              "title": "💊 약물과용두통 치료",
+              "items": [
+                "과용 약물을 단번에 중단 (점진적 감량 X)",
+                "최소 1개월 이상 중단",
+                "중단 후 일시적 두통 악화·금단증상 발생 가능 — 미리 조언",
+                "원발두통질환의 예방치료 병행 고려"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Topiramate (뇌전증약 — 예방)",
+              "brand": "토피론정 25·50·100mg",
+              "mechanism": "Na⁺·Ca²⁺ 통로 차단, GABA 활성 증가, 글루타메이트 억제 → 신경막 안정",
+              "dosage": "예방: 12.5~150mg/일. 삽화·만성 편두통 모두 강력 권고. 서서히 증량",
+              "notes": "부작용: 감각이상, 체중 감소, 기억장애, 신결석(수분 섭취↑), 대사성 산증, 핍한증. 금기: 약물과민, 신장질환, 요로결석. 임신·가임기 여성 권고 X"
+            },
+            {
+              "name": "Propranolol (β-차단제 — 예방)",
+              "brand": "인데놀정",
+              "mechanism": "중추 β-수용체 차단 → NE 억제, 세로토닌 시스템 조절, 신경막 안정",
+              "dosage": "20~160mg/일. 보험급여 인정. 삽화 편두통 강력 권고",
+              "notes": "부작용: 피로, 어지럼, 우울, 생생한 꿈. 금기: 심한 천식, 당뇨, 말초혈관병, 심장전도장애, 울혈성심부전"
+            },
+            {
+              "name": "Triptan 계열 (급성기)",
+              "brand": "Sumatriptan(이미그란) / Frovatriptan(미가드) / Naratriptan(나그란) / Zolmitriptan / Eletriptan / Rizatriptan",
+              "mechanism": "5-HT1B/1D 수용체 작용 → 두개내 혈관 수축 + 삼차신경 말단 통증 전달 억제",
+              "dosage": "Frovatriptan 2.5mg, Naratriptan 1-2mg, Zolmitriptan 2.5-7.5mg. 구입 비용 저렴한 것부터 시작 권고",
+              "notes": "금기: 관상동맥질환·뇌혈관질환·말초혈관질환·조절 안 되는 고혈압·임신. Ergotamine 병용 금기"
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Flunarizine (CCB — 예방)",
+              "brand": "씨베리움캡슐 5mg",
+              "mechanism": "T형 Ca 통로 차단 + 항히스타민·항도파민·항세로토닌 효과. 혈압강하 효과 없음",
+              "dosage": "5~10mg/일. 삽화 편두통 예방",
+              "notes": "부작용: 체중증가, 졸림, 입마름, 어지럼, 저혈압, 우울. 금기: 심한 우울, 파킨슨병 기타 피라미드외 증상"
+            },
+            {
+              "name": "Amitriptyline (항우울제 — 예방)",
+              "brand": "에나폰정 10·25mg",
+              "mechanism": "시냅스 세로토닌·NE 농도 증가 + 내인성 통증 기전 활성화",
+              "dosage": "2.5~50mg/일. 삽화 편두통 예방 권고",
+              "notes": "부작용: 체중증가, 변비, 무력증, 어지럼, 졸림, 시야호림, 입마름. 금기: 심근경색 급성기, Cisapride·MAO억제제 병용"
+            },
+            {
+              "name": "Botulinum toxin (만성 편두통 예방)",
+              "brand": "보톡스주(Onabotulinumtoxin A) 155~195units",
+              "mechanism": "신경근 접합부 Ach 분비 억제 → 근육 이완, 말초 통증 신호 차단",
+              "dosage": "155units(1분기에 한 번 근육주사, 31군데). 만성 편두통 강력 권고",
+              "notes": "부작용: 주사부위 통증·불편감, 경부통증, 근육통, 근력저하, 안검하수. 금기: 약물과민, 신경근육질환(중증근무력증 등), 임신, 수유, 근이완제 복용"
+            }
+          ],
+          "sideEffects": [
+            "Topiramate: 감각이상, 체중 감소, 기억장애, 신결석, 대사성 산증, 핍한증(체온↑)",
+            "Propranolol: 피로, 어지럼, 우울, 생생한 꿈, 숨참, 서맥",
+            "Valproic acid: 오심·구토, 탈모, 체중증가, 간독성, 췌장염. 최기성 높음",
+            "Triptan: 트립탄감각(저림·압박감·온열감), 졸음, 어지럼",
+            "Flunarizine: 체중증가, 졸림, 우울, 추체외로 증상(장기 사용 시)"
+          ],
+          "contraindications": [
+            "Valproic acid: 임신 중·임신 가능성 있는 여성 금기(최기성)",
+            "Topiramate: 임신 권고 X. 신장질환·요로결석",
+            "Triptan: 관상동맥질환·뇌혈관질환·말초혈관질환·조절 안 되는 고혈압·임신·MAO억제제 병용",
+            "Triptan + Ergotamine: 병용 금기(크레밍정)",
+            "β-차단제: 심한 천식·COPD, 2-3도 방실전도장애, 당뇨",
+            "Flunarizine: 심한 우울, 파킨슨병·피라미드외 증상",
+            "CGRP 단클론항체: 심혈관질환, 조절 안 되는 고혈압, 임신"
+          ],
+          "combos": [
+            "급성기: Triptan + NSAID 또는 Triptan + AAP 병용",
+            "예방(삽화): β-차단제(Propranolol) 또는 Topiramate 1차",
+            "예방(만성): Topiramate + Botulinum toxin",
+            "월경 편두통 단기예방: Frovatriptan 또는 Naratriptan",
+            "고혈압 동반: Candesartan 또는 Lisinopril 고려"
+          ]
+        },
+        {
+          "id": "epilepsy",
+          "name": "뇌전증",
+          "guideline": "2015 뇌전증 약물치료지침 / 2021 약물난치성 뇌전증 약물치료 권고사항 / 약물치료학",
+          "tags": [
+            "뇌전증",
+            "발작",
+            "Valproic acid",
+            "Lamotrigine",
+            "Levetiracetam",
+            "Topiramate",
+            "항경련제"
+          ],
+          "overview": "뇌졸중·치매와 함께 3대 뇌신경질환. 서서히 증량·서서히 감량이 원칙. Valproic acid는 모든 발작의 1차 치료제(최기성 주의). Lamotrigine·Zonisamide는 광범위하게 사용. 결신발작 1차: Ethosuximide.",
+          "criteria": [
+            {
+              "label": "국소 발생 의식유지 발작",
+              "sbp": "의식 유지된 채 국소 증상",
+              "dbp": ""
+            },
+            {
+              "label": "국소 발생 의식소실 발작",
+              "sbp": "의식 소실",
+              "dbp": ""
+            },
+            {
+              "label": "결신 발작",
+              "sbp": "갑자기 멈추고 멍하니 응시 5~15초",
+              "dbp": "Ethosuximide 1차"
+            },
+            {
+              "label": "근간대 발작",
+              "sbp": "움찔하듯 발작",
+              "dbp": ""
+            },
+            {
+              "label": "강직간대 발작",
+              "sbp": "온몸 뻣뻣 + 팔다리 규칙적 경련",
+              "dbp": ""
+            },
+            {
+              "label": "무긴장 발작",
+              "sbp": "근육 긴장 풀리는 발작",
+              "dbp": ""
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "💊 발작 유형별 1차 약물",
+              "items": [
+                "모든 발작: Valproic acid(데파코트·오르필) ★ — 단, 최기성으로 가임기 여성 주의",
+                "국소 발작: Carbamazepine(카마제핀), Lamotrigine(라믹탈), Oxcarbazepine(옥사제핀·트리렙탈), Levetiracetam(케프라), Topiramate, Zonisamide(엑세그란)",
+                "국소 발작 2차: Phenobarbital(하나페노바르비탈정), Phenytoin(명인페니토인정)",
+                "강직간대·국소발작: Phenytoin (enzyme inducer 역할)",
+                "결신 발작 1차: Ethosuximide (주로 오심·구토 부작용)",
+                "광범위하게 사용★: Lamotrigine(라믹탈, DDI 적음·발진 주의), Zonisamide(엑세그란)"
+              ]
+            },
+            {
+              "title": "📋 주요 항뇌전증제 핵심 특성",
+              "items": [
+                "Valproic acid: Enzyme inhibitor. 모든 발작 1차. 오심·구토·탈모·체중증가·간독성·췌장염. 임신·가임기 금기(최기성 높음)",
+                "Carbamazepine: 항바이러스제 병용 금기. 저나트륨혈증, 복시, 발진. 효과 서서히 나타남",
+                "Oxcarbazepine: 뇌전증 약 중 저나트륨혈증 위험 가장 높음",
+                "Topiramate: 신결석(수분 섭취↑), 대사성 산증, 핍한증, 체중 감소, 감각이상",
+                "Zonisamide: Topiramate와 유사(신결석, 핍한증, 대사성 산증, 체중 감소)",
+                "Lamotrigine: 발진 확률 높음. DDI 적어 사용 편의성 좋음",
+                "Levetiracetam(케프라): SV2A 결합. 신장으로 배설. 우울·과민성·졸음. 비교적 순한 편",
+                "Phenytoin: 치은비대증, 비타민 D 부족, 골연화증, 다모증. 제형 간 약효 동등하지 않음",
+                "Phenobarbital: 진정·인지기능 저하·골연화증. 2차 치료",
+                "Gabapentin: 신장 배설. 체중 증가·말초 부종",
+                "Pregabalin(리리카): Ca 채널 α2δ 소단위 결합. 어지럼·진정·말초 부종·체중 증가",
+                "Lacosamide(빔스크): 전압의존성 Na 통로 저속 비활성화 촉진. PR 간격 연장 주의"
+              ]
+            },
+            {
+              "title": "💊 난치성 뇌전증 부가요법",
+              "items": [
+                "난치성 전신 강직간대: Topiramate, Lamotrigine, Levetiracetam",
+                "레녹스-가스토증후군: Lamotrigine, Topiramate, Clobazam(센틸), Rufinamide(이노베론)",
+                "드라베증후군 소아: Cannabidiol",
+                "난치성 국소(성인 단독): Lamotrigine, Oxcarbazepine, Topiramate, Eslicarbazepine(제비닉스)",
+                "Vigabatrin(사브릴): GABA aminotransferase 비가역적 억제. 3개월마다 시야검사 필수(비가역적 양측 시야 협착)",
+                "Perampanel(파이콤파): AMPA 선택적 길항제. 정신계 부작용 심함(신경과민·공격적 행동)"
+              ]
+            },
+            {
+              "title": "👩 여성 뇌전증 치료",
+              "items": [
+                "항뇌전증제는 최기성 가짐 → 가능하면 단일 약물, 최소 유효 용량 사용",
+                "엽산 복용 필수(신경관 결손 예방)",
+                "Valproic acid: 가임기 여성 특히 주의(최기성 가장 높음)"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Valproic acid / Divalproex Sodium",
+              "brand": "데파코트정·오르필서방정 / 디발프로엑스나트륨(250~1500mg)",
+              "mechanism": "Na⁺ 통로 차단 + GABA aminotransferase 억제 → GABA 증가 + Enzyme inhibitor",
+              "dosage": "600~2000mg/일 분복. 서서히 증량. 모든 발작 유형 1차 치료(편두통 예방·양극성 장애에도 사용)",
+              "notes": "간질환·췌장염·임신·요로순환질환·저혈소판 금기. 최기성 높음 — 가임기 여성 사용 주의. Enzyme inhibitor"
+            },
+            {
+              "name": "Lamotrigine",
+              "brand": "라믹탈정 25·50·100mg",
+              "mechanism": "전압의존성 Na⁺ 통로 차단 → 글루타메이트 방출 억제",
+              "dosage": "광범위 사용★. 서서히 증량(발진 예방). DDI 적어 병용 편리",
+              "notes": "부작용: 발진(Stevens-Johnson 증후군 가능 — 서서히 증량으로 예방), 어지럼, 두통. Valproic acid 병용 시 용량 절반으로 감량"
+            },
+            {
+              "name": "Levetiracetam",
+              "brand": "케프라정·큐팜·케파베아 500·1000mg",
+              "mechanism": "SV2A(시냅스 소포 단백질) 결합 → 신경전달물질 분비 조절",
+              "dosage": "500~2000mg/일 1일 2회. 대부분 신장 배설(신부전 시 용량 조절)",
+              "notes": "부작용: 우울, 과민성, 졸음, 비인두염. 비교적 순한 편. 중증신질환·이전 과민반응 금기"
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Topiramate",
+              "brand": "토피론정 25·50·100·200mg",
+              "mechanism": "Na⁺·Ca²⁺ 통로 차단 + GABA 활성 증가 + AMPA/kainate 글루타메이트 억제",
+              "dosage": "12.5~150mg/일. 단독요법(4세↑, 부분발작·GTCS). 부가요법(근간대·LGS)",
+              "notes": "신결석(수분 섭취 증가 필수), 핍한증, 대사성 산증, 체중 감소, 감각이상. 약물과민·신장질환·요로결석 금기"
+            },
+            {
+              "name": "Carbamazepine",
+              "brand": "카마제핀정 100·200mg",
+              "mechanism": "Na⁺ 통로 차단(불활성 상태 안정화) → 신경세포 흥분 억제",
+              "dosage": "국소 발작 치료. 서서히 증량. 약효 서서히 나타남",
+              "notes": "항바이러스제 병용 금기. 부작용: 저나트륨혈증, 어지럼, 복시, 발진, 혈액 부작용. Enzyme inducer"
+            },
+            {
+              "name": "Lacosamide",
+              "brand": "빔스크정 50·100·150·200mg",
+              "mechanism": "전압의존성 Na 통로 선택적 저속 비활성화 촉진 → 신경세포 흥분성 억제",
+              "dosage": "16세 이상 부분발작 부가요법. 100~400mg/일",
+              "notes": "부작용: 두통, 어지럼, 졸음, 오심, 구토(용량 의존적). PR 간격 연장(심계항진·어지럼·실신 주의)"
+            }
+          ],
+          "sideEffects": [
+            "Valproic acid: 오심·구토, 탈모, 체중증가, 간독성, 췌장염, 혈소판감소증",
+            "Carbamazepine: 저나트륨혈증, 어지럼, 복시, 발진(심하면 SJS), 혈액 부작용",
+            "Oxcarbazepine: 저나트륨혈증(뇌전증약 중 가장 높음), 어지럼, 두통",
+            "Topiramate/Zonisamide: 신결석, 핍한증·체온↑, 대사성 산증, 체중감소, 감각이상",
+            "Lamotrigine: 발진(서서히 증량 시 감소), 어지럼",
+            "Phenytoin: 치은비대증, 다모증, 골연화증, 비타민D 결핍",
+            "Vigabatrin: 비가역적 양측 시야 협착(축적 용량 의존) — 3개월마다 시야검사",
+            "Perampanel: 어지럼, 신경과민, 공격적 행동 등 정신계 부작용 심함"
+          ],
+          "contraindications": [
+            "Valproic acid: 임신·가임기 여성(최기성 높음), 간질환, 췌장염",
+            "Carbamazepine: 항바이러스제 병용 금기",
+            "Topiramate/Zonisamide: 신장질환, 요로결석",
+            "Levetiracetam: 중증신질환, 이전 과민반응",
+            "Lacosamide: PR 간격 연장 유발 — 심장전도장애 환자 주의",
+            "Vigabatrin: 시야 협착 — 정기 시야검사 없이 장기 투여 금지",
+            "여성 환자: 항뇌전증제 최기성 → 단일약물·최소 유효 용량 + 엽산 필수 복용"
+          ],
+          "combos": [
+            "모든 발작 1차: Valproic acid(가임기 외)",
+            "국소 발작: Lamotrigine 또는 Levetiracetam 또는 Carbamazepine",
+            "결신 발작 1차: Ethosuximide",
+            "LGS 부가: Lamotrigine + Topiramate + Clobazam + Rufinamide 중 선택",
+            "Valproic acid + Lamotrigine 병용: Lamotrigine 용량 절반으로 감량 필수"
+          ]
+        },
+        {
+          "id": "alzheimer",
+          "name": "알츠하이머 (치매)",
+          "guideline": "2021 치매 임상 진료지침",
+          "tags": [
+            "알츠하이머",
+            "치매",
+            "Donepezil",
+            "Memantine",
+            "콜린에스터분해효소억제제",
+            "AChEI"
+          ],
+          "overview": "베타-아밀로이드 플라그 + 타우 단백질 축적으로 신경세포 퇴행. 콜린에스터분해효소 억제제(AChEI): 경증~중증 알츠하이머·혈관치매·루이소체치매·파킨슨병치매에 효과. Memantine: 중등도~중증 알츠하이머, 경증 치매 적응증 없음.",
+          "criteria": [
+            {
+              "label": "AChEI 적응증",
+              "sbp": "경증~중증 알츠하이머치매",
+              "dbp": "혈관·루이소체·파킨슨병 치매에도 효과"
+            },
+            {
+              "label": "Memantine 적응증",
+              "sbp": "중등도~중증 알츠하이머치매",
+              "dbp": "경증 치매 적응증 없음"
+            },
+            {
+              "label": "Donepezil 용량(경증~중등도)",
+              "sbp": "5mg qd → 4-6주 후 10mg qd",
+              "dbp": ""
+            },
+            {
+              "label": "Donepezil 용량(중등도~중증)",
+              "sbp": "10mg qd → 23mg qd",
+              "dbp": ""
+            },
+            {
+              "label": "Memantine 용량",
+              "sbp": "5mg/day 시작 → 10mg bid 유지",
+              "dbp": ""
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "💊 콜린에스터분해효소 억제제 (AChEI) 비교",
+              "items": [
+                "Donepezil(아리셉트): 식사 무관. 아침 또는 자기 전. 초기 5mg → 4-6주 후 증량. 하루 1회",
+                "Galantamine(레미닐피알서방·타미린서방): ER 8mg qd 또는 4mg bid 시작. 4주 간격 증량. 식사와 함께 복용",
+                "Rivastigmine(엑셀론): 반감기 짧아 1일 2회(경구). 패취 1일 1회 부착. 식사와 함께(공복 시 소화기 자극 큼)",
+                "부작용 공통: 오심·구토·설사·식욕감소·체중감소(위장관계), 불면·악몽, 어지럼·실신"
+              ]
+            },
+            {
+              "title": "💊 Rivastigmine 패취 용량 환산",
+              "items": [
+                "경구 < 6mg/day → 패취 5(4.6mg/24h) 변경",
+                "경구 6~12mg/day → 패취 10(9.5mg/24h) 변경",
+                "패취 15(13.3mg/24h): 중증 알츠하이머에 사용",
+                "패취는 매일 다른 부위에 부착, 같은 부위 14일 이내 재사용 금지"
+              ]
+            },
+            {
+              "title": "💊 Memantine (NMDA 수용체 길항제)",
+              "items": [
+                "뇌의 글루타메이트 과도한 자극 억제(NMDA 수용체 차단)",
+                "중등도~중증 알츠하이머에 인지·일상활동·중증도 개선",
+                "경도~중등도 루이소체치매: 전반적 기능 유효성 기대 가능",
+                "파킨슨병 치매 또는 전두측두엽 치매: 이득 확인 X",
+                "루이소체·파킨슨병 치매에서 REM 수면 장애 증상 호전 가능",
+                "초기 5mg/day → 주 5mg씩 증량 → 유지 10mg bid"
+              ]
+            },
+            {
+              "title": "💊 행동심리증상(BPSD) 동반 치매 약물",
+              "items": [
+                "초조·공격성: Risperidone 0.5~2mg/day",
+                "우울·초조·공격성: 항우울제(Mirtazapine(멀타핀·레메론·미르탁스), SSRI) 사용 가능",
+                "무감동·전반적 BPSD: 항우울제 사용 권장 X",
+                "정신병 증상: Pimavanserin 사용 가능",
+                "인지기능: AChEI + Memantine 사용 가능(전반적 BPSD 호전)",
+                "SSRI 부작용: 설사, 소화불량, 입마름, 어지러움"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Donepezil",
+              "brand": "아리셉트·아리도네·하이페질·디멘셉트 등 5·10·23mg",
+              "mechanism": "AChE 억제 → 시냅스 Acetylcholine 농도 증가 → 콜린성 신경전달 향상",
+              "dosage": "초기 5mg qd → 4-6주 후 10mg qd(경증~중등도). 중등도~중증 10~23mg qd. 식사 무관. 아침 또는 자기 전",
+              "notes": "위장관 부작용(오심·구토) 시 자기 전 복용으로 전환. 서맥·실신 주의(심장질환 환자)"
+            },
+            {
+              "name": "Memantine",
+              "brand": "에빅사정·메만틴오디·메멘틴 5·10·20mg",
+              "mechanism": "NMDA 수용체 비경쟁적 길항제 → 글루타메이트 과흥분 억제 → 신경세포 보호",
+              "dosage": "초기 5mg/day → 1주마다 5mg씩 증량 → 유지 10mg bid. 경증 치매 적응증 없음",
+              "notes": "부작용: 현기증, 혼란, 두통, 소화기 증상. 중등도~중증에만 급여. AChEI와 병용 시 추가 효과"
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Rivastigmine",
+              "brand": "엑셀론캡슐·엑셀씨·원드론 / 엑셀론패취 5·10·15",
+              "mechanism": "AChE + BuChE 이중 억제 → 더 광범위한 콜린성 보강",
+              "dosage": "경구: 1.5mg bid 시작 → 3~6mg bid 유지(2주마다 증량). 패취: 4.6mg/24h 시작 → 9.5 → 13.3mg/24h",
+              "notes": "반감기 짧아 경구는 1일 2회. 식사와 함께(공복 소화기 자극↑). 패취로 전환 시 용량 환산 필요"
+            },
+            {
+              "name": "Galantamine",
+              "brand": "레미닐피알서방캡슐·타미린서방 8·16·24mg",
+              "mechanism": "AChE 억제 + 니코틴 수용체 알로스테릭 조절 → 이중 기전",
+              "dosage": "ER: 8mg qd 시작 → 4주마다 증량 → 16~24mg qd 유지. 식사와 함께",
+              "notes": "부작용 프로파일 Donepezil과 유사. 신기능 저하 시 용량 조절"
+            }
+          ],
+          "sideEffects": [
+            "AChEI 공통: 오심·구토·설사·식욕감소(가장 흔함), 불면·악몽, 어지럼·실신",
+            "Donepezil: 위장관 부작용(자기 전 복용으로 완화). 서맥",
+            "Rivastigmine: 위장관 부작용 패취형이 경구보다 적음. 패취 부위 피부 자극",
+            "Memantine: 현기증, 혼란, 두통, 소화기 증상",
+            "Risperidone(BPSD용): 추체외로 증상, 졸음, 대사 부작용"
+          ],
+          "contraindications": [
+            "AChEI: 서맥·심장전도장애 환자 주의(Acetylcholine 심장 억제 효과)",
+            "Memantine: 경증 치매 적응증 없음",
+            "항정신병약물(BPSD): 루이소체치매 환자에서 심한 부작용 가능 — 극도 주의"
+          ],
+          "combos": [
+            "중등도~중증 알츠하이머: AChEI + Memantine 병용(추가 효과)",
+            "BPSD 동반: AChEI ± Memantine + 필요 시 Risperidone(초조·공격성)",
+            "루이소체치매 REM 수면 장애: Memantine 사용 가능"
+          ]
+        },
+        {
+          "id": "parkinsons",
+          "name": "파킨슨병",
+          "guideline": "2010·2019 파킨슨병의 약물요법 / 약물치료학 교재",
+          "tags": [
+            "파킨슨",
+            "Levodopa",
+            "도파민",
+            "MAO-B억제제",
+            "도파민작용제",
+            "COMT억제제"
+          ],
+          "overview": "중뇌 흑색질 도파민 현저히 감소로 발생하는 신경퇴행질환. 운동증상 TRAP(Tremor·Rigidity·Akinesia·Postural Instability), 비운동증상 SOAP. Levodopa가 가장 효과적이나 단독 투여 불가(반드시 Carbidopa 또는 Benserazide 병용). 치료 알고리즘은 운동장애 중증도에 따라 단계적.",
+          "criteria": [
+            {
+              "label": "운동이상 없음",
+              "sbp": "치료 안 하거나 MAO-B 억제제",
+              "dbp": ""
+            },
+            {
+              "label": "Minor 운동이상",
+              "sbp": "MAO-B 억제제 또는 Dopamine agonist",
+              "dbp": ""
+            },
+            {
+              "label": "주요한 운동이상",
+              "sbp": "Dopamine agonist",
+              "dbp": ""
+            },
+            {
+              "label": "심각한 운동이상",
+              "sbp": "Levodopa + Dopamine agonist",
+              "dbp": ""
+            },
+            {
+              "label": "75세 이상 또는 인지 장애",
+              "sbp": "운동이상 정도 무관 — Levodopa",
+              "dbp": ""
+            },
+            {
+              "label": "Wearing-off 또는 이상운동증",
+              "sbp": "Amantadine 추가 또는 COMT 억제제 추가",
+              "dbp": ""
+            }
+          ],
+          "guidelines": [
+            {
+              "title": "💊 Levodopa 계열",
+              "items": [
+                "Levodopa: 도파민 전구물질. 단독 투여 절대 금지 — 반드시 DOPA decarboxylase 억제제와 병용",
+                "명도파·마도파: Levodopa + Benserazide",
+                "퍼킨: Levodopa + Carbidopa",
+                "트리레보: Levodopa + Carbidopa + Entacapone(COMT 억제제)",
+                "부작용: 오심·구토(흔함), 환각·정신증상·수면장애. 고지방 식이 섭취 시 흡수 감소",
+                "단백질 성분과 경쟁적 흡수(최대 70% 흡수율 저하) → 식사 30분 전 또는 식후 1시간 복용 권장"
+              ]
+            },
+            {
+              "title": "💊 MAO-B 억제제",
+              "items": [
+                "1세대 Selegiline(마오비정 5mg): 초기 단독 또는 Levodopa 보조. 1일 5~10mg 아침·점심 분복. 불면·환각·교감신경 흥분 부작용",
+                "2세대 Rasagiline(아질렉트정): 1mg/day(단독) 또는 0.5mg/day(부가). 불면·교감신경 흥분 덜함",
+                "3세대 Safinamide(에퀴피나 필름코팅정)",
+                "주의: Tyramine 증가로 악성 고혈압 발생 가능. 세로토닌 증후군 주의 — SSRI·TCA·Opioid와 병용 주의",
+                "신경보호 작용: Free radical 억제, 도파민 대사효소 억제 → 뇌 DA 농도 오래 유지"
+              ]
+            },
+            {
+              "title": "💊 도파민 작용제 (Dopamine Agonists)",
+              "items": [
+                "Levodopa 유발 이상운동증(dyskinesia) 발생 적음",
+                "비Ergot 계열(권장): Pramipexole(피디펙솔·프라펙솔서방), Ropinirole(로피맥스·리큅피디), Apomorphine, Piribedil",
+                "속방형 하루 3번, 서방형 하루 1번. 반드시 Titration(서서히 증량) 필요",
+                "하지불안증후군에도 적응증",
+                "Ergot 계열(비권장): Bromocriptine·Cabergoline·Pergolide — 심장판막·폐·후복막 섬유화 부작용",
+                "부작용: 오심·구토, 기립저혈압, 다리 부종, 주간졸림, 환각(L-Dopa보다 높음), 충동조절장애",
+                "고령: 인지저하·환시·혼돈·저혈압 위험 높음"
+              ]
+            },
+            {
+              "title": "💊 COMT 억제제 + 기타",
+              "items": [
+                "Entacapone(명인엔타카폰)·Tolcapone·Opicapone(온젠티스): Levodopa 대사 억제 → 효과 연장. 단독 사용 안 함",
+                "Opicapone: L-Dopa와 함께 복용 시 흡수 감소 → 1시간 간격",
+                "부작용: 어지럼, 오심, 소변·땀 적갈색 변색(무해)",
+                "항콜린성(Trihexyphenidyl·Benztropine·Procyclidine): 진전 심할 때 효과적. 구갈·변비·시야흐림·요저류. 폐쇄각녹내장·빈맥·전립샘비대증 주의",
+                "Amantadine(피케이멜즈): NMDA 수용체 차단. 이상운동증(dyskinesia) 치료에 추가. 그물울혈반(특이적 부작용)"
+              ]
+            },
+            {
+              "title": "🔧 합병증 관리",
+              "items": [
+                "이상운동증(dyskinesia): L-Dopa 용량 감소, 서방형 전환, 분획화, Amantadine 추가, Clozapine 소규모 효과",
+                "정신증상(환각·망상): 도파민 약물 감량. Clozapine(클로자릴, 무과립구증 주의). Quetiapine(쎄로켈). 인지저하: Donepezil·Rivastigmine",
+                "기립저혈압: 생활교정 우선(염분↑, 수분↑, 압박스타킹). 도파민작용제 감량. 승압제(Fludrocortisone·Midodrine) 고려",
+                "주간졸림증: 도파민 작용제·Levodopa 감량. Modafinil",
+                "충동조절장애(강박 쇼핑·도박·과식·성충동): 도파민 작용제 감량·중단"
+              ]
+            }
+          ],
+          "firstLine": [
+            {
+              "name": "Levodopa + Carbidopa (또는 Benserazide)",
+              "brand": "퍼킨정(Levodopa/Carbidopa) / 마도파정(Levodopa/Benserazide) / 트리레보정(Levodopa/Carbidopa/Entacapone)",
+              "mechanism": "Levodopa: BBB 통과 → 뇌에서 도파민으로 전환. Carbidopa/Benserazide: 말초 DOPA decarboxylase 억제 → 말초 부작용 감소 + 뇌 도파민 공급 증가",
+              "dosage": "심각한 운동이상 또는 75세↑·인지 장애 시 사용. 초기 저용량 시작. 고지방·고단백 식사와 분리",
+              "notes": "단독 투여 절대 금지. 단백질 경쟁 흡수로 식전 30분 또는 식후 1시간 권장. 장기 사용 시 Wearing-off·On-Off dyskinesia 발생"
+            },
+            {
+              "name": "Pramipexole (비Ergot 도파민 작용제)",
+              "brand": "피디펙솔정 / 프라펙솔서방정",
+              "mechanism": "D2/D3 도파민 수용체 작용 → Levodopa보다 이상운동증 발생 적음",
+              "dosage": "서서히 Titration 필수. 속방형 하루 3번, 서방형 하루 1번. 하지불안증후군에도 적응증",
+              "notes": "기립저혈압, 오심, 주간졸림, 환각(L-Dopa보다 높음), 충동조절장애. 고령에서 환각·혼돈·저혈압 위험"
+            }
+          ],
+          "secondLine": [
+            {
+              "name": "Rasagiline (MAO-B 억제제 2세대)",
+              "brand": "아질렉트정 0.5·1mg",
+              "mechanism": "MAO-B 선택적 억제 → 도파민 분해 억제 + Free radical 억제(신경보호)",
+              "dosage": "단독: 1mg/day. 부가요법: 0.5mg/day",
+              "notes": "Selegiline보다 불면·교감신경 흥분 덜함. Tyramine 식품 주의(악성 고혈압). 세로토닌 증후군 주의"
+            },
+            {
+              "name": "Amantadine",
+              "brand": "피케이멜즈정 100mg",
+              "mechanism": "NMDA 수용체 차단(주된 기전) + 항콜린 작용 + 도파민 분비 촉진",
+              "dosage": "이상운동증(dyskinesia) 발생 시 또는 Wearing-off 보조. 주치료보다 대체·보조",
+              "notes": "특이적 부작용: 그물울혈반(Livedo reticularis). 두통, 오심, 불면, 혼돈, 구갈"
+            }
+          ],
+          "sideEffects": [
+            "Levodopa: 오심·구토, 환각·정신증상, 수면장애. 장기: Wearing-off, On-Off dyskinesia",
+            "도파민 작용제: 기립저혈압, 오심, 주간졸림, 환각, 충동조절장애, 다리 부종",
+            "MAO-B 억제제: 불면, 교감신경 흥분(Selegiline↑), 악성 고혈압(Tyramine 음식)",
+            "COMT 억제제: 오심, 어지럼, 소변·땀 적갈색(무해)",
+            "항콜린성: 구갈, 변비, 시야흐림, 요저류, 혼돈(고령)",
+            "Amantadine: 그물울혈반, 두통, 불면, 혼돈"
+          ],
+          "contraindications": [
+            "Levodopa 단독 투여: 절대 금기(반드시 DOPA decarboxylase 억제제 병용)",
+            "MAO-B 억제제: SSRI·TCA·Opioid·Meperidine 병용 금기(세로토닌 증후군)",
+            "Ergot 계열 도파민 작용제: 심장판막질환·폐·후복막 섬유화 위험으로 사용 자제",
+            "항콜린성: 폐쇄각녹내장, 빈맥, 전립샘비대증 환자 금기·주의",
+            "항정신병약물(Haloperidol·Metoclopramide 등): D2 차단으로 파킨슨 증상 악화"
+          ],
+          "combos": [
+            "기본: Levodopa + Carbidopa(Benserazide) — 단독 투여 금지",
+            "트리레보: Levodopa + Carbidopa + Entacapone (Wearing-off 개선)",
+            "이상운동증: Levodopa 감량 + Amantadine 추가",
+            "정신증상: 도파민 약물 감량 + Clozapine 또는 Quetiapine",
+            "인지저하: + Donepezil 또는 Rivastigmine"
+          ]
+        }
+      ]
+    }
+  ]
+}
