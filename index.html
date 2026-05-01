@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💊 PharmNote — 전문약 사전</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #F7F8FC; --bg-card: #FFFFFF; --bg-sidebar: #FFFFFF;
+      --sidebar-width: 270px;
+      --primary: #6C9FE8; --primary-light: #EAF1FD; --primary-dark: #4A7CC8;
+      --mint: #5DC8B8; --mint-light: #E6F7F5;
+      --rose: #F97FA3; --rose-light: #FEF0F5;
+      --amber: #F9C74F; --amber-light: #FEF9E7;
+      --purple: #A78BFA; --purple-light: #F0EBFF;
+      --green: #6BCB77; --green-light: #EDF7EE;
+      --text-primary: #1A1D2E; --text-secondary: #6B7280; --text-muted: #9CA3AF;
+      --border: #E8ECEF;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+      --radius-sm: 10px; --radius-md: 16px; --radius-lg: 22px;
+      --transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; }
+    body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg-base); color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* TOP NAV */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 62px; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border);
+      display: flex; align-items: center; padding: 0 24px; gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .topnav-logo { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); white-space: nowrap; text-decoration: none; }
+    .topnav-logo .logo-icon { font-size: 1.4rem; background: var(--primary-light); border-radius: 10px; padding: 4px 7px; }
+    .search-wrapper { flex: 1; max-width: 520px; margin: 0 auto; position: relative; }
+    .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+    #searchInput {
+      width: 100%; height: 40px; background: var(--bg-base);
+      border: 2px solid var(--border); border-radius: 40px;
+      padding: 0 16px 0 40px; font-size: 0.9rem;
+      font-family: 'Noto Sans KR', sans-serif; color: var(--text-primary); outline: none; transition: var(--transition);
+    }
+    #searchInput:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 4px rgba(108,159,232,0.12); }
+    #searchInput::placeholder { color: var(--text-muted); }
+    .search-dropdown {
+      position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+      background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg); max-height: 320px; overflow-y: auto; display: none; z-index: 500;
+    }
+    .search-dropdown.show { display: block; }
+    .search-item { padding: 10px 16px; cursor: pointer; border-bottom: 1px solid var(--border); transition: var(--transition); }
+    .search-item:last-child { border-bottom: none; }
+    .search-item:hover { background: var(--primary-light); }
+    .search-item-name { font-weight: 600; font-size: 0.9rem; }
+    .search-item-meta { font-size: 0.78rem; color: var(--text-secondary); margin-top: 2px; }
+    .search-highlight { background: #ffe066; border-radius: 3px; padding: 0 2px; }
+    .topnav-right { display: flex; align-items: center; gap: 8px; margin-left: auto; white-space: nowrap; }
+    .badge-guide { font-size: 0.75rem; font-weight: 600; background: var(--mint-light); color: #0f9b8e; border-radius: 20px; padding: 4px 12px; }
+
+    /* 모바일 버튼 (기본 숨김) */
+    .mobile-menu-btn, .mobile-back-btn { display: none; }
+
+    /* LAYOUT */
+    .app-layout { display: flex; margin-top: 62px; min-height: calc(100vh - 62px); }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: var(--sidebar-width); min-width: var(--sidebar-width);
+      background: var(--bg-sidebar); border-right: 1.5px solid var(--border);
+      height: calc(100vh - 62px); position: sticky; top: 62px; overflow-y: auto; padding: 20px 0 40px;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .sidebar-section-label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 20px 8px; }
+    .category-item { margin-bottom: 4px; }
+    .category-header { display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 20px; cursor: pointer; transition: var(--transition); user-select: none; }
+    .category-header:hover { background: var(--primary-light); }
+    .category-icon { font-size: 1.1rem; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: var(--primary-light); }
+    .category-name { font-size: 0.88rem; font-weight: 700; flex: 1; }
+    .category-chevron { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.22s; }
+    .category-item.open .category-chevron { transform: rotate(180deg); }
+    .disease-list { max-height: 0; overflow: hidden; transition: max-height 0.32s cubic-bezier(0.4,0,0.2,1); }
+    .category-item.open .disease-list { max-height: 1000px; }
+    .disease-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 16px 8px 56px; cursor: pointer;
+      font-size: 0.84rem; color: var(--text-secondary);
+      transition: var(--transition); border-left: 3px solid transparent;
+    }
+    .disease-item:hover { background: var(--primary-light); color: var(--primary-dark); border-left-color: var(--primary); }
+    .disease-item.active { background: var(--primary-light); color: var(--primary-dark); font-weight: 700; border-left-color: var(--primary-dark); }
+
+    /* MAIN CONTENT */
+    .main-content { flex: 1; padding: 32px 36px 60px; min-width: 0; overflow-y: auto; }
+
+    /* WELCOME / MIND MAP */
+    .welcome-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: calc(100vh - 62px); gap: 24px; overflow: visible; }
+
+    .mindmap-wrapper { position: relative; width: 740px; height: 720px; flex-shrink: 0; overflow: visible; }
+    .mindmap-center {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 130px; height: 130px; border-radius: 50%;
+      background: linear-gradient(135deg, #4A7CC8, #2563EB);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 10; pointer-events: none;
+      box-shadow: 0 0 0 14px rgba(74,124,200,0.11), 0 0 0 28px rgba(74,124,200,0.055);
+    }
+    .mindmap-center-emoji { font-size: 2.4rem; }
+    .mindmap-center-label { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.92); margin-top: 4px; letter-spacing: 0.04em; }
+    .mindmap-center-sub { font-size: 0.58rem; color: rgba(255,255,255,0.65); margin-top: 2px; text-align: center; padding: 0 8px; line-height: 1.4; }
+
+    .mindmap-node {
+      position: absolute; display: flex; flex-direction: column; align-items: center; gap: 6px;
+      cursor: pointer; z-index: 5;
+    }
+    .mindmap-node:hover .mn-icon { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.14); }
+    .mn-icon {
+      width: 60px; height: 60px; border-radius: 18px;
+      background: #fff; border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.55rem; transition: all 0.22s;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+    .mindmap-node.active .mn-icon { background: var(--primary); border-color: var(--primary); box-shadow: 0 6px 20px rgba(74,124,200,0.35); }
+    .mn-label { font-size: 0.73rem; font-weight: 700; color: var(--text-secondary); text-align: center; white-space: nowrap; }
+
+    .mn-sub-popup {
+      position: fixed; z-index: 9999;
+      background: #fff; border-radius: 14px; border: 1.5px solid var(--border);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+      padding: 6px; display: none; min-width: 130px; max-width: 220px;
+    }
+    .mn-sub-popup.show { display: flex; flex-direction: column; gap: 3px; animation: fadeInUp 0.16s ease; }
+    .mn-sub-btn {
+      display: flex; align-items: center; padding: 7px 11px; border-radius: 9px; cursor: pointer;
+      font-size: 0.79rem; font-weight: 600; color: var(--text-primary);
+      border: none; background: transparent; font-family: 'Noto Sans KR', sans-serif;
+      white-space: nowrap; transition: all 0.15s; text-align: left; width: 100%;
+    }
+    .mn-sub-btn:hover { background: var(--primary-light); color: var(--primary-dark); }
+
+    .mindmap-svg { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: visible; width: 100%; height: 100%; }
+
+    .disclaimer-banner {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: #fffbeb; border: 1.5px solid #fde68a;
+      border-radius: var(--radius-md); padding: 14px 18px;
+      max-width: 640px; width: calc(100% - 32px); margin: 4px 16px 20px;
+    }
+    .disclaimer-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .disclaimer-text { font-size: 0.82rem; line-height: 1.75; color: #92400e; }
+    .disclaimer-text b { color: #78350f; }
+
+    /* DISEASE HEADER */
+    .disease-header { margin-bottom: 28px; animation: fadeInUp 0.32s ease; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .disease-name { font-size: 1.9rem; font-weight: 800; line-height: 1.2; }
+    .disease-guideline { display: inline-block; margin-top: 6px; font-size: 0.78rem; font-weight: 600; background: var(--mint-light); color: #0f9b8e; border-radius: 20px; padding: 4px 12px; }
+    .disease-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .disease-tag { font-size: 0.75rem; font-weight: 600; background: var(--primary-light); color: var(--primary-dark); border-radius: 20px; padding: 3px 10px; }
+
+    /* GRID & CARDS */
+    .section-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; animation: fadeInUp 0.38s ease; }
+    .section-full { grid-column: 1 / -1; }
+    .card { background: var(--bg-card); border-radius: var(--radius-lg); border: 1.5px solid var(--border); box-shadow: var(--shadow-sm); overflow: hidden; transition: box-shadow 0.22s, transform 0.22s; }
+    .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .card-header { display: flex; align-items: center; gap: 10px; padding: 16px 20px 14px; border-bottom: 1.5px solid var(--border); }
+    .card-header-icon { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .card-header-title { font-size: 0.95rem; font-weight: 700; }
+    .card-body { padding: 18px 20px; }
+    .overview-text { font-size: 0.9rem; line-height: 1.85; color: var(--text-secondary); }
+    .criteria-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    .criteria-table th { background: var(--bg-base); padding: 8px 12px; text-align: left; font-weight: 700; font-size: 0.78rem; color: var(--text-secondary); border-bottom: 2px solid var(--border); }
+    .criteria-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+    .criteria-table tr:last-child td { border-bottom: none; }
+    .criteria-table tr:hover td { background: var(--primary-light); }
+    .criteria-label { font-weight: 700; color: var(--text-primary); }
+    .guideline-section { margin-bottom: 18px; }
+    .guideline-section:last-child { margin-bottom: 0; }
+    .guideline-title { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px dashed var(--border); }
+    .guideline-item { display: flex; gap: 10px; font-size: 0.84rem; line-height: 1.7; color: var(--text-secondary); padding: 5px 0; border-bottom: 1px solid #f3f4f6; }
+    .guideline-item:last-child { border-bottom: none; }
+    .guideline-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--primary); flex-shrink: 0; margin-top: 7px; }
+    .guideline-item.warning .guideline-dot { background: #f59e0b; }
+    .guideline-item.warning { color: #92400e; }
+    .drug-card { background: var(--bg-base); border-radius: var(--radius-md); border: 1.5px solid var(--border); padding: 16px; margin-bottom: 12px; transition: var(--transition); }
+    .drug-card:last-child { margin-bottom: 0; }
+    .drug-card:hover { border-color: var(--primary); background: var(--primary-light); }
+    .drug-card-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+    .drug-badge { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800; flex-shrink: 0; }
+    .drug-name { font-size: 0.93rem; font-weight: 700; color: var(--text-primary); }
+    .drug-brand { font-size: 0.77rem; color: var(--text-muted); margin-top: 2px; }
+    .drug-rows { display: flex; flex-direction: column; gap: 6px; }
+    .drug-row { display: flex; gap: 8px; font-size: 0.82rem; }
+    .drug-row-label { min-width: 58px; font-weight: 700; font-size: 0.75rem; color: var(--text-secondary); padding-top: 1px; }
+    .drug-row-value { color: var(--text-primary); line-height: 1.6; flex: 1; }
+    .drug-note { margin-top: 10px; padding: 8px 12px; background: rgba(108,159,232,0.07); border-radius: 8px; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; border-left: 3px solid var(--primary); }
+    .list-item { display: flex; gap: 10px; font-size: 0.84rem; line-height: 1.7; padding: 6px 0; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+    .list-item:last-child { border-bottom: none; }
+    .list-bullet { flex-shrink: 0; margin-top: 8px; width: 5px; height: 5px; background: var(--rose); border-radius: 50%; }
+    .list-bullet-contra { background: #ef4444; }
+    .list-bullet-combo { background: var(--mint); }
+    .theme-blue .card-header-icon { background: var(--primary-light); }
+    .theme-mint .card-header-icon { background: var(--mint-light); }
+    .theme-rose .card-header-icon { background: var(--rose-light); }
+    .theme-amber .card-header-icon { background: var(--amber-light); }
+    .theme-purple .card-header-icon { background: var(--purple-light); }
+    .theme-green .card-header-icon { background: var(--green-light); }
+    .no-result { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .no-result-emoji { font-size: 3rem; margin-bottom: 12px; }
+    .main-content::-webkit-scrollbar { width: 6px; }
+    .main-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+
+    /* ===== TABLET ===== */
+    @media (max-width: 900px) {
+      :root { --sidebar-width: 220px; }
+      .main-content { padding: 20px 18px 40px; }
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 680px) {
+      .sidebar { display: none; }
+      .topnav { padding: 0 10px; gap: 8px; height: 56px; }
+      .topnav-logo span:not(.logo-icon) { display: none; }
+      .topnav-right { display: none; }
+      .search-wrapper { max-width: 100%; }
+      .app-layout { margin-top: 56px; min-height: calc(100vh - 56px); }
+      .main-content { padding: 14px 14px 100px; }
+      .section-grid { grid-template-columns: 1fr; }
+      .disease-name { font-size: 1.3rem; }
+      .mobile-menu-btn { display: flex !important; }
+      .mobile-back-btn { display: flex !important; }
+      .bottom-nav { display: flex !important; }
+    }
+
+    /* 모바일 상단 버튼 */
+    .mobile-menu-btn {
+      display: none; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border: none;
+      background: var(--primary-light); border-radius: 12px;
+      cursor: pointer; font-size: 1.15rem; flex-shrink: 0; transition: var(--transition);
+    }
+    .mobile-menu-btn:active { transform: scale(0.9); background: var(--primary); }
+
+    .mobile-back-btn {
+      display: none; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border: 1.5px solid var(--border);
+      background: #fff; border-radius: 12px;
+      cursor: pointer; font-size: 1rem; flex-shrink: 0;
+      color: var(--primary-dark); font-weight: 700; transition: var(--transition);
+    }
+    .mobile-back-btn:active { transform: scale(0.9); }
+    .mobile-back-btn.hidden { opacity: 0; pointer-events: none; }
+
+    /* 드로어 오버레이 */
+    .drawer-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(2px);
+    }
+    .drawer-overlay.show { display: block; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* 드로어 */
+    .drawer {
+      position: fixed; top: 0; left: -300px; bottom: 0; width: 285px;
+      z-index: 400; background: #fff; box-shadow: var(--shadow-lg);
+      transition: left 0.3s cubic-bezier(0.4,0,0.2,1);
+      overflow-y: auto; padding-bottom: 40px;
+    }
+    .drawer.open { left: 0; }
+    .drawer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 18px 12px; border-bottom: 1.5px solid var(--border);
+      position: sticky; top: 0; background: #fff; z-index: 1;
+    }
+    .drawer-title { display: flex; align-items: center; gap: 8px; font-size: 1rem; font-weight: 800; color: var(--primary-dark); }
+    .drawer-close { width: 32px; height: 32px; border: none; background: var(--bg-base); border-radius: 10px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
+    .drawer-close:active { background: var(--border); }
+
+    /* 하단 탭바 */
+    .bottom-nav {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+      border-top: 1.5px solid var(--border);
+      padding: 6px 0 max(6px, env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    }
+    .bottom-nav-inner { display: flex; justify-content: space-around; align-items: center; }
+    .bottom-tab {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 5px 10px; border-radius: 14px; cursor: pointer;
+      border: none; background: transparent; font-family: 'Noto Sans KR', sans-serif;
+      transition: var(--transition); flex: 1; -webkit-tap-highlight-color: transparent;
+    }
+    .bottom-tab:active { transform: scale(0.9); }
+    .tab-icon-wrap { padding: 4px 12px; border-radius: 12px; transition: var(--transition); font-size: 1.25rem; }
+    .tab-label { font-size: 0.66rem; font-weight: 600; color: var(--text-muted); transition: var(--transition); }
+    .bottom-tab.active .tab-icon-wrap { background: var(--primary-light); }
+    .bottom-tab.active .tab-label { color: var(--primary-dark); font-weight: 700; }
+
+    /* 모바일 카테고리 선택 화면 */
+    .mobile-cat-screen { padding: 16px; }
+    .mobile-cat-title { font-size: 1rem; font-weight: 800; color: var(--text-muted); margin-bottom: 14px; letter-spacing: 0.05em; }
+    .mobile-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .mobile-cat-card {
+      background: #fff; border-radius: var(--radius-md); border: 1.5px solid var(--border);
+      padding: 18px 14px; cursor: pointer; text-align: center;
+      transition: var(--transition); box-shadow: var(--shadow-sm);
+    }
+    .mobile-cat-card:active { transform: scale(0.96); }
+    .mobile-cat-card .cat-emoji { font-size: 2rem; margin-bottom: 8px; }
+    .mobile-cat-card .cat-name { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); }
+    .mobile-cat-card .cat-count { font-size: 0.72rem; color: var(--text-muted); margin-top: 3px; }
+    .mobile-cat-card:hover, .mobile-cat-card.selected { border-color: var(--primary); background: var(--primary-light); }
+
+    .mobile-disease-list { margin-top: 6px; }
+    .mobile-disease-list-title { font-size: 0.85rem; font-weight: 800; color: var(--text-secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .mobile-disease-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: 14px 16px; margin-bottom: 8px;
+      background: #fff; border: 1.5px solid var(--border);
+      border-radius: var(--radius-md); cursor: pointer;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.9rem; font-weight: 600; color: var(--text-primary);
+      text-align: left; transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .mobile-disease-btn:active { transform: scale(0.98); background: var(--primary-light); border-color: var(--primary); }
+    .mobile-disease-btn .arrow { color: var(--text-muted); font-size: 0.8rem; }
+    .mobile-disease-btn .d-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+    .mobile-disease-btn .d-tag { font-size: 0.65rem; background: var(--primary-light); color: var(--primary-dark); border-radius: 10px; padding: 2px 7px; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="메뉴 열기">☰</button>
+  <button class="mobile-back-btn hidden" id="mobileBackBtn" aria-label="뒤로가기">← 목록</button>
+  <a class="topnav-logo" href="#" onclick="goHome(); return false;">
+    <span class="logo-icon">💊</span>
+    <span>PharmNote</span>
+  </a>
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input id="searchInput" type="text" placeholder="질환명 또는 성분명 검색..." autocomplete="off" />
+    <div class="search-dropdown" id="searchDropdown"></div>
+  </div>
+  <div class="topnav-right">
+    <span class="badge-guide">전문약 사전</span>
+  </div>
+</nav>
+
+<!-- 드로어 오버레이 -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+<!-- 드로어 (모바일 사이드바) -->
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <div class="drawer-title"><span>💊</span> PharmNote</div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div style="padding: 12px 0 0;">
+    <div class="sidebar-section-label" style="padding: 0 18px 8px;">질환 목록</div>
+    <div id="drawerCategoryList"></div>
+  </div>
+</div>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+  <!-- PC 사이드바 -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section-label">질환 목록</div>
+    <div id="categoryList"></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content" id="mainContent">
+    <!-- 웰컴 화면 (PC/모바일 공통) -->
+    <div id="welcomeScreen">
+      <div class="welcome-screen" id="welcomeInner">
+        <div class="mindmap-wrapper" id="mindmapWrapper">
+          <svg class="mindmap-svg" id="mindmapSvg"></svg>
+          <div class="mindmap-center">
+            <div class="mindmap-center-emoji">💊</div>
+            <div class="mindmap-center-label">전문약 사전</div>
+            <div class="mindmap-center-sub">계열을 눌러<br>탐색하세요</div>
+          </div>
+        </div>
+        <div class="disclaimer-banner">
+          <div class="disclaimer-icon">⚠️</div>
+          <div class="disclaimer-text">
+            본 자료는 <b>학습 목적</b>으로 제작된 요약본입니다. 실제 임상에서는 반드시 <b>최신 가이드라인 및 공식 허가사항</b>을 교차 검증하세요. 약물 용량·금기·적응증은 환자 상태에 따라 달라질 수 있으며, 본 내용만으로 처방·조제 결정을 내리지 마세요.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 질환 상세 화면 -->
+    <div id="diseaseView" style="display:none;"></div>
+  </main>
+</div>
+
+<!-- 하단 탭바 (모바일 전용) -->
+<nav class="bottom-nav" id="bottomNav">
+  <div class="bottom-nav-inner">
+    <button class="bottom-tab active" id="tabHome" onclick="switchTab('home')">
+      <div class="tab-icon-wrap">🏠</div>
+      <span class="tab-label">홈</span>
+    </button>
+    <button class="bottom-tab" id="tabBrowse" onclick="switchTab('browse')">
+      <div class="tab-icon-wrap">📋</div>
+      <span class="tab-label">질환목록</span>
+    </button>
+    <button class="bottom-tab" id="tabSearch" onclick="switchTab('search')">
+      <div class="tab-icon-wrap">🔍</div>
+      <span class="tab-label">검색</span>
+    </button>
+  </div>
+</nav>
+
+<script>
+let appData = null;
+let currentDiseaseId = null;
+let currentTab = 'home';
+let selectedCatId = null;
+
+// ── 데이터 로드 ──
+async function loadData() {
+  const resp = await fetch('data.json');
+  appData = await resp.json();
+  init();
+}
+
+function init() {
+  buildSidebar('categoryList');
+  buildSidebar('drawerCategoryList');
+  buildMindMap();
+  setupSearch();
+  setupMobileButtons();
+}
+
+// ── 사이드바 빌드 (PC + 드로어 공통) ──
+function buildSidebar(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  appData.categories.forEach(cat => {
+    const item = document.createElement('div');
+    item.className = 'category-item';
+    item.innerHTML = `
+      <div class="category-header" onclick="toggleCategory(this)">
+        <div class="category-icon">${cat.icon}</div>
+        <span class="category-name">${cat.name}</span>
+        <span class="category-chevron">▼</span>
+      </div>
+      <div class="disease-list">
+        ${cat.diseases.map(d => `
+          <div class="disease-item" data-id="${d.id}" onclick="showDisease('${d.id}'); closeDrawer();">
+            ${d.name}
+          </div>`).join('')}
+      </div>`;
+    container.appendChild(item);
+  });
+}
+
+function positionPopup(popup, node, angle) {
+  // 노드의 현재 뷰포트 위치를 getBoundingClientRect로 가져옴
+  var rect = node.getBoundingClientRect();
+  var popW = 170;
+  var popH = popup.querySelectorAll('.mn-sub-btn').length * 40 + 12;
+  var deg = angle * 180 / Math.PI;
+  var top, left;
+  var gap = 10;
+
+  if (deg > -45 && deg <= 45) {
+    // 우측
+    left = rect.right + gap;
+    top  = rect.top + rect.height / 2 - popH / 2;
+  } else if (deg > 45 && deg <= 135) {
+    // 하단
+    left = rect.left + rect.width / 2 - popW / 2;
+    top  = rect.bottom + gap;
+  } else if (deg > -135 && deg <= -45) {
+    // 상단
+    left = rect.left + rect.width / 2 - popW / 2;
+    top  = rect.top - popH - gap;
+  } else {
+    // 좌측
+    left = rect.left - popW - gap;
+    top  = rect.top + rect.height / 2 - popH / 2;
+  }
+
+  // 뷰포트 경계 보정
+  var vw = window.innerWidth, vh = window.innerHeight;
+  if (left < 8) left = 8;
+  if (left + popW > vw - 8) left = vw - popW - 8;
+  if (top < 70) top = 70;  // 탑바 아래
+  if (top + popH > vh - 8) top = vh - popH - 8;
+
+  popup.style.left = left + 'px';
+  popup.style.top  = top  + 'px';
+  popup.style.right = 'auto';
+  popup.style.bottom = 'auto';
+  popup.style.transform = 'none';
+}
+
+function buildMindMap() {
+  const wrapper = document.getElementById('mindmapWrapper');
+  const svg = document.getElementById('mindmapSvg');
+  if (!wrapper || !svg || !appData) return;
+
+  const W = 740, H = 720;
+  const cx = W / 2, cy = H / 2;
+  const cats = appData.categories;
+  const n = cats.length;
+  const radius = 255;
+
+  svg.innerHTML = '';
+  wrapper.querySelectorAll('.mindmap-node').forEach(el => el.remove());
+  document.querySelectorAll('.mn-sub-popup').forEach(el => el.remove());
+
+  cats.forEach((cat, i) => {
+    const angle = (i / n) * 2 * Math.PI - Math.PI / 2;
+    const nx = cx + radius * Math.cos(angle);
+    const ny = cy + radius * Math.sin(angle);
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+    line.setAttribute('x2', nx); line.setAttribute('y2', ny);
+    line.setAttribute('stroke', '#CBD5E1'); line.setAttribute('stroke-width', '1.5');
+    line.setAttribute('stroke-dasharray', '5 3');
+    svg.appendChild(line);
+
+    const node = document.createElement('div');
+    node.className = 'mindmap-node';
+    node.style.left = (nx - 30) + 'px';
+    node.style.top  = (ny - 30) + 'px';
+    node.innerHTML = '<div class="mn-icon">' + cat.icon + '</div><div class="mn-label">' + cat.name + '</div>';
+    wrapper.appendChild(node);
+
+    // 팝업은 body에 fixed로 붙임
+    const popup = document.createElement('div');
+    popup.className = 'mn-sub-popup';
+
+    cat.diseases.forEach(function(d) {
+      const btn = document.createElement('button');
+      btn.className = 'mn-sub-btn';
+      btn.textContent = d.name;
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeAllMnPopups();
+        showDisease(d.id);
+      });
+      popup.appendChild(btn);
+    });
+    document.body.appendChild(popup);
+
+    node.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = popup.classList.contains('show');
+      closeAllMnPopups();
+      if (!isOpen) {
+        positionPopup(popup, node, angle);
+        popup.classList.add('show');
+        node.classList.add('active');
+      }
+    });
+  });
+
+  // 스크롤 시 열린 팝업 위치 실시간 업데이트
+  var mainEl = document.getElementById('mainContent');
+  if (mainEl) {
+    mainEl.addEventListener('scroll', function() {
+      var openPopup = document.querySelector('.mn-sub-popup.show');
+      if (!openPopup) return;
+      var idx = Array.from(document.querySelectorAll('.mn-sub-popup')).indexOf(openPopup);
+      var activeNode = document.querySelectorAll('.mindmap-node')[idx];
+      if (activeNode) {
+        var ang = (idx / cats.length) * 2 * Math.PI - Math.PI / 2;
+        positionPopup(openPopup, activeNode, ang);
+      }
+    }, { passive: true });
+  }
+
+  document.addEventListener('click', closeAllMnPopups);
+}
+
+function closeAllMnPopups() {
+  document.querySelectorAll('.mn-sub-popup').forEach(function(p) { p.classList.remove('show'); });
+  var wrapper = document.getElementById('mindmapWrapper');
+  if (wrapper) wrapper.querySelectorAll('.mindmap-node').forEach(function(n) { n.classList.remove('active'); });
+}
+
+function toggleCategory(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+// ── 모바일 버튼 설정 ──
+function setupMobileButtons() {
+  document.getElementById('mobileMenuBtn').addEventListener('click', openDrawer);
+  document.getElementById('mobileBackBtn').addEventListener('click', () => {
+    if (currentTab === 'browse' && currentDiseaseId && selectedCatId) {
+      showMobileBrowse(selectedCatId); // 질환 목록으로
+    } else {
+      goHome();
+    }
+  });
+}
+
+// ── 드로어 열기/닫기 ──
+function openDrawer() {
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ── 홈으로 ──
+function goHome() {
+  currentDiseaseId = null;
+  selectedCatId = null;
+  document.getElementById('welcomeScreen').style.display = '';
+  document.getElementById('diseaseView').style.display = 'none';
+  document.querySelectorAll('.disease-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('mobileBackBtn').classList.add('hidden');
+  setActiveTab('home');
+  window.scrollTo(0, 0);
+}
+
+// ── 하단 탭 전환 ──
+function switchTab(tab) {
+  currentTab = tab;
+  setActiveTab(tab);
+  if (tab === 'home') {
+    goHome();
+  } else if (tab === 'browse') {
+    showMobileCategoryPicker();
+  } else if (tab === 'search') {
+    document.getElementById('searchInput').focus();
+    setActiveTab('search');
+  }
+}
+
+function setActiveTab(tab) {
+  ['home','browse','search'].forEach(t => {
+    const el = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+    if (el) el.classList.toggle('active', t === tab);
+  });
+}
+
+// ── 모바일: 카테고리 선택 화면 ──
+function showMobileCategoryPicker() {
+  document.getElementById('diseaseView').style.display = 'none';
+  const ws = document.getElementById('welcomeScreen');
+  ws.style.display = '';
+  ws.innerHTML = `
+    <div class="mobile-cat-screen">
+      <div class="mobile-cat-title">📚 계열 선택</div>
+      <div class="mobile-cat-grid">
+        ${appData.categories.map(cat => `
+          <div class="mobile-cat-card" onclick="showMobileBrowse('${cat.id}')">
+            <div class="cat-emoji">${cat.icon}</div>
+            <div class="cat-name">${cat.name}</div>
+            <div class="cat-count">${cat.diseases.length}개 질환</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  document.getElementById('mobileBackBtn').classList.add('hidden');
+  window.scrollTo(0, 0);
+}
+
+// ── 모바일: 질환 목록 화면 ──
+function showMobileBrowse(catId) {
+  selectedCatId = catId;
+  currentDiseaseId = null;
+  const cat = appData.categories.find(c => c.id === catId);
+  if (!cat) return;
+  const ws = document.getElementById('welcomeScreen');
+  ws.style.display = '';
+  document.getElementById('diseaseView').style.display = 'none';
+  ws.innerHTML = `
+    <div class="mobile-cat-screen">
+      <div class="mobile-disease-list-title">
+        <span>${cat.icon}</span> ${cat.name}
+      </div>
+      <div class="mobile-disease-list">
+        ${cat.diseases.map(d => `
+          <button class="mobile-disease-btn" onclick="showDisease('${d.id}')">
+            <div>
+              <div>${d.name}</div>
+              <div class="d-tags">${(d.tags||[]).slice(0,3).map(t => `<span class="d-tag">${t}</span>`).join('')}</div>
+            </div>
+            <span class="arrow">›</span>
+          </button>`).join('')}
+      </div>
+    </div>`;
+  document.getElementById('mobileBackBtn').classList.remove('hidden');
+  setActiveTab('browse');
+  window.scrollTo(0, 0);
+}
+
+// ── 질환 상세 표시 ──
+function showDisease(id) {
+  currentDiseaseId = id;
+  let disease = null;
+  appData.categories.forEach(cat => {
+    const found = cat.diseases.find(d => d.id === id);
+    if (found) { disease = found; if (!selectedCatId) selectedCatId = cat.id; }
+  });
+  if (!disease) return;
+
+  // 사이드바 활성화
+  document.querySelectorAll('.disease-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll(`.disease-item[data-id="${id}"]`).forEach(el => {
+    el.classList.add('active');
+    el.scrollIntoView({ block: 'nearest' });
+  });
+
+  document.getElementById('welcomeScreen').style.display = 'none';
+  const view = document.getElementById('diseaseView');
+  view.style.display = 'block';
+  view.innerHTML = renderDisease(disease);
+
+  // 모바일: 뒤로가기 버튼 표시
+  document.getElementById('mobileBackBtn').classList.remove('hidden');
+  setActiveTab('browse');
+  window.scrollTo(0, 0);
+
+  // 브라우저 히스토리에 상태 추가 (뒤로가기 지원)
+  history.pushState({ diseaseId: id }, '', '#' + id);
+}
+
+// ── 브라우저 뒤로가기 감지 ──
+window.addEventListener('popstate', (e) => {
+  if (e.state && e.state.diseaseId) {
+    showDisease(e.state.diseaseId);
+  } else {
+    goHome();
+  }
+});
+
+// ── 질환 렌더링 ──
+function renderDisease(d) {
+  return `
+    <div class="disease-header">
+      <div class="disease-name">${d.name}</div>
+      <span class="disease-guideline">📋 ${d.guideline}</span>
+      <div class="disease-tags">${(d.tags||[]).map(t => `<span class="disease-tag">${t}</span>`).join('')}</div>
+    </div>
+    <div class="section-grid">
+      ${d.overview ? `<div class="card section-full theme-blue">
+        <div class="card-header"><div class="card-header-icon">📖</div><div class="card-header-title">질환 개요</div></div>
+        <div class="card-body"><p class="overview-text">${d.overview}</p></div>
+      </div>` : ''}
+      ${d.criteria && d.criteria.length ? `<div class="card section-full theme-mint">
+        <div class="card-header"><div class="card-header-icon">📊</div><div class="card-header-title">진단 기준</div></div>
+        <div class="card-body">
+          <table class="criteria-table"><thead><tr><th>분류</th><th>주요 기준</th><th>세부 기준</th></tr></thead>
+          <tbody>${d.criteria.map(c => `<tr><td class="criteria-label">${c.label}</td><td>${c.sbp}</td><td>${c.dbp}</td></tr>`).join('')}</tbody></table>
+        </div>
+      </div>` : ''}
+      ${d.guidelines && d.guidelines.length ? `<div class="card section-full theme-amber">
+        <div class="card-header"><div class="card-header-icon">🏥</div><div class="card-header-title">임상 가이드라인</div></div>
+        <div class="card-body">${d.guidelines.map(g => `
+          <div class="guideline-section">
+            <div class="guideline-title">${g.title}</div>
+            ${g.items.map(item => `<div class="guideline-item${item.startsWith('⚠️') ? ' warning' : ''}"><div class="guideline-dot"></div><div>${item}</div></div>`).join('')}
+          </div>`).join('')}
+        </div>
+      </div>` : ''}
+      ${d.firstLine && d.firstLine.length ? `<div class="card theme-blue">
+        <div class="card-header"><div class="card-header-icon">💊</div><div class="card-header-title">대표 약물 ①</div></div>
+        <div class="card-body">${d.firstLine.map((drug,i) => renderDrugCard(drug,i)).join('')}</div>
+      </div>` : ''}
+      ${d.secondLine && d.secondLine.length ? `<div class="card theme-purple">
+        <div class="card-header"><div class="card-header-icon">🔬</div><div class="card-header-title">대표 약물 ②</div></div>
+        <div class="card-body">${d.secondLine.map((drug,i) => renderDrugCard(drug,i)).join('')}</div>
+      </div>` : ''}
+      ${d.sideEffects && d.sideEffects.length ? `<div class="card theme-rose">
+        <div class="card-header"><div class="card-header-icon">⚠️</div><div class="card-header-title">주요 부작용</div></div>
+        <div class="card-body">${d.sideEffects.map(s => `<div class="list-item"><div class="list-bullet"></div><div>${s}</div></div>`).join('')}</div>
+      </div>` : ''}
+      ${d.contraindications && d.contraindications.length ? `<div class="card theme-rose">
+        <div class="card-header"><div class="card-header-icon">🚫</div><div class="card-header-title">금기 및 주의사항</div></div>
+        <div class="card-body">${d.contraindications.map(c => `<div class="list-item"><div class="list-bullet list-bullet-contra"></div><div>${c}</div></div>`).join('')}</div>
+      </div>` : ''}
+      ${d.combos && d.combos.length ? `<div class="card section-full theme-mint">
+        <div class="card-header"><div class="card-header-icon">🔗</div><div class="card-header-title">병용요법 및 치료 전략</div></div>
+        <div class="card-body">${d.combos.map(c => `<div class="list-item"><div class="list-bullet list-bullet-combo"></div><div>${c}</div></div>`).join('')}</div>
+      </div>` : ''}
+    </div>`;
+}
+
+const drugColors = [
+  {bg:'#EAF1FD',text:'#4A7CC8'},{bg:'#E6F7F5',text:'#0f9b8e'},
+  {bg:'#FEF0F5',text:'#c4547e'},{bg:'#FEF9E7',text:'#c07c05'},
+  {bg:'#F0EBFF',text:'#7c3aed'},{bg:'#EDF7EE',text:'#166534'}
+];
+const drugEmojis = ['💊','🧪','💉','🔬','🧬','⚗️','🌿','🩺'];
+
+function renderDrugCard(drug, i) {
+  const col = drugColors[i % drugColors.length];
+  const emoji = drugEmojis[i % drugEmojis.length];
+  return `<div class="drug-card">
+    <div class="drug-card-header">
+      <div class="drug-badge" style="background:${col.bg};color:${col.text}">${emoji}</div>
+      <div><div class="drug-name">${drug.name}</div>${drug.brand ? `<div class="drug-brand">🏷 ${drug.brand}</div>` : ''}</div>
+    </div>
+    <div class="drug-rows">
+      ${drug.mechanism ? `<div class="drug-row"><span class="drug-row-label">작용기전</span><span class="drug-row-value">${drug.mechanism}</span></div>` : ''}
+      ${drug.dosage ? `<div class="drug-row"><span class="drug-row-label">용법·용량</span><span class="drug-row-value">${drug.dosage}</span></div>` : ''}
+    </div>
+    ${drug.notes ? `<div class="drug-note">💡 ${drug.notes}</div>` : ''}
+  </div>`;
+}
+
+// ── 검색 ──
+function setupSearch() {
+  const input = document.getElementById('searchInput');
+  const dropdown = document.getElementById('searchDropdown');
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    if (!q) { dropdown.classList.remove('show'); return; }
+    const results = [];
+    const seen = new Set();
+    appData.categories.forEach(cat => {
+      cat.diseases.forEach(d => {
+        const tryAdd = (matchText, meta, brand) => {
+          const key = d.id + matchText;
+          if (!seen.has(key)) { seen.add(key); results.push({ disease: d, matchText, meta, brand }); }
+        };
+        if (d.name.toLowerCase().includes(q)) tryAdd(d.name, cat.name + ' / ' + d.guideline);
+        [...(d.firstLine||[]), ...(d.secondLine||[])].forEach(drug => {
+          if (drug.name.toLowerCase().includes(q) || (drug.brand||'').toLowerCase().includes(q))
+            tryAdd(drug.name, cat.name + ' > ' + d.name, drug.brand);
+        });
+        (d.tags||[]).forEach(tag => { if (tag.toLowerCase().includes(q)) tryAdd(tag, cat.name + ' > ' + d.name); });
+      });
+    });
+    if (!results.length) {
+      dropdown.innerHTML = '<div class="search-item"><div class="search-item-name">검색 결과 없음</div></div>';
+    } else {
+      dropdown.innerHTML = results.slice(0,12).map(r => `
+        <div class="search-item" onclick="selectSearch('${r.disease.id}')">
+          <div class="search-item-name">${hl(r.matchText,q)}${r.brand ? ` <span style="color:var(--text-muted);font-size:0.78rem">(${r.brand})</span>` : ''}</div>
+          <div class="search-item-meta">${r.meta}</div>
+        </div>`).join('');
+    }
+    dropdown.classList.add('show');
+  });
+  input.addEventListener('keydown', e => { if (e.key === 'Escape') { dropdown.classList.remove('show'); input.blur(); } });
+  document.addEventListener('click', e => { if (!e.target.closest('.search-wrapper')) dropdown.classList.remove('show'); });
+}
+
+function hl(text, q) {
+  const idx = text.toLowerCase().indexOf(q);
+  if (idx === -1) return text;
+  return text.slice(0,idx) + `<span class="search-highlight">${text.slice(idx,idx+q.length)}</span>` + text.slice(idx+q.length);
+}
+
+function selectSearch(id) {
+  document.getElementById('searchDropdown').classList.remove('show');
+  document.getElementById('searchInput').value = '';
+  showDisease(id);
+}
+
+// ── 부팅 ──
+loadData().catch(() => {
+  document.getElementById('mainContent').innerHTML = `
+    <div class="no-result"><div class="no-result-emoji">⚠️</div>
+    <div><b>data.json을 불러올 수 없습니다.</b><br/>Vercel 또는 로컬 서버로 실행하세요.</div></div>`;
+});
+</script>
+</body>
+</html>
